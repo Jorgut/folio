@@ -32,14 +32,15 @@
   --font-zh: 'Noto Serif SC', 'Source Han Serif SC', Georgia, serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
 
-  /* 字号阶梯 — 杂志级对比 */
-  --text-hero: min(9.4vw, 16.9vh);
-  --text-display: min(5.6vw, 10.1vh);
-  --text-title: min(3.2vw, 5.8vh);
-  --text-lead: min(1.6vw, 2.9vh);
-  --text-body: clamp(14px, 1.2vw, 18px);
-  --text-caption: clamp(11px, 0.9vw, 13px);
-  --text-meta: clamp(10px, 0.75vw, 11px);
+  /* 字号阶梯 — 杂志级对比
+     流体：clamp(最小, 首选, 最大) 消除对媒体查询的依赖 */
+  --text-hero:   clamp(2.5rem, min(9.4vw, 16.9vh), 7rem);
+  --text-display: clamp(1.5rem, min(5.6vw, 10.1vh), 4rem);
+  --text-title:  clamp(1.125rem, min(3.2vw, 5.8vh), 2.5rem);
+  --text-lead:   clamp(0.875rem, min(1.6vw, 2.9vh), 1.35rem);
+  --text-body:   clamp(0.875rem, min(1.2vw, 2.2vh), 1.125rem);
+  --text-caption: clamp(0.75rem, min(0.9vw, 1.6vh), 0.875rem);
+  --text-meta:   clamp(0.625rem, min(0.75vw, 1.4vh), 0.75rem);
 
   /* 行高 */
   --lh-tight: 1.05;
@@ -47,27 +48,27 @@
   --lh-lead: 1.4;
   --lh-body: 1.7;
 
-  /* 间距系统 (8px base) */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 24px;
-  --sp-6: 32px;
-  --sp-7: 40px;
-  --sp-8: 48px;
-  --sp-9: 64px;
-  --sp-10: 80px;
-  --sp-11: 96px;
-  --sp-12: 128px;
+  /* 间距系统 — 流体版 (相对视口宽度等比缩放) */
+  --sp-1:  clamp(2px,  0.31vw, 4px);
+  --sp-2:  clamp(4px,  0.62vw, 8px);
+  --sp-3:  clamp(8px,  0.94vw, 12px);
+  --sp-4:  clamp(12px, 1.25vw, 16px);
+  --sp-5:  clamp(14px, 1.56vw, 24px);
+  --sp-6:  clamp(18px, 2.08vw, 32px);
+  --sp-7:  clamp(22px, 2.6vw,  40px);
+  --sp-8:  clamp(26px, 3.12vw, 48px);
+  --sp-9:  clamp(30px, 4.16vw, 64px);
+  --sp-10: clamp(36px, 5.2vw,  80px);
+  --sp-11: clamp(42px, 6.25vw, 96px);
+  --sp-12: clamp(48px, 8.33vw, 128px);
 
-  /* 幻灯片尺寸 (16:9) */
-  --slide-w: 1280px;
-  --slide-h: 720px;
+  /* 幻灯片尺寸 (16:9) — 仅做参考，实际由视口决定 */
+  --slide-w: 100vw;
+  --slide-h: 100vh;
 
-  /* 安全区 */
-  --safe-x: 64px;
-  --safe-y: 56px;
+  /* 安全区 — 流体：小屏紧、大屏松 */
+  --safe-x: clamp(16px, 5vw, 80px);
+  --safe-y: clamp(12px, 4.44vh, 64px);
 
   /* 过渡/动效 */
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
@@ -141,9 +142,21 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
 .full-bleed { grid-column: bleed-start / bleed-end; grid-row: bleed-top / bleed-bottom; }
 
 /* 内容区 */
-.content { grid-column: content-start / content-end; grid-row: content-top / content-bottom; }
-.content-v { grid-column: content-start / content-end; grid-row: bleed-top / bleed-bottom; }
-.content-h { grid-column: bleed-start / bleed-end; grid-row: content-top / content-bottom; }
+.content {
+  grid-column: content-start / content-end;
+  grid-row: content-top / content-bottom;
+  padding-bottom: 72px; /* 避开固定导航 */
+}
+.content-v {
+  grid-column: content-start / content-end;
+  grid-row: bleed-top / bleed-bottom;
+  padding-bottom: 72px;
+}
+.content-h {
+  grid-column: bleed-start / bleed-end;
+  grid-row: content-top / content-bottom;
+  padding-bottom: 72px;
+}
 
 /* -------- 6. Grid 系统 -------- */
 .grid {
@@ -256,8 +269,11 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
 }
 .layout-overlay .overlay-panel {
   position: relative; z-index: 2;
+  grid-column: content-start / content-end;
+  grid-row: content-top / content-bottom;
   align-self: center; justify-self: start;
   background: var(--paper); padding: var(--sp-7) var(--sp-8);
+  padding-bottom: calc(var(--sp-7) + 56px);
   max-width: 520px;
   box-shadow: 0 4px 40px rgba(0,0,0,0.12);
 }
@@ -281,11 +297,12 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
 }
 .layout-bleed-quote .quote-block {
   position: absolute;
-  bottom: var(--sp-9); left: var(--sp-9);
+  bottom: calc(var(--sp-9) + 56px); left: var(--sp-9); /* 避开固定导航 */
   max-width: 50%;
 }
 .layout-bleed-quote .quote-block .pull-quote {
   border-left: none; padding-left: 0;
+  font-size: var(--text-display);
   color: white; text-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 .layout-bleed-quote .quote-block .attribution {
@@ -306,27 +323,7 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
   break-inside: avoid;
 }
 
-/* Pattern 6: 图片网格 (gallery) */
-.layout-gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--sp-3);
-  grid-template-rows: 1fr 1fr;
-}
-.layout-gallery .img-gallery-item:nth-child(1) {
-  grid-column: 1 / span 2; grid-row: 1 / span 2;
-}
-.layout-gallery .img-gallery-item { overflow: hidden; }
-.layout-gallery .img-gallery-item img {
-  width: 100%; height: 100%; object-fit: cover;
-}
-.layout-gallery .img-gallery-item .img-cap {
-  position: absolute; bottom: var(--sp-2); left: var(--sp-3);
-  color: white; font-size: var(--text-caption);
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-  z-index: 2;
-}
-.layout-gallery .img-gallery-item { position: relative; }
+/* Pattern 6: 图片网格 (gallery) — 定义移至 13a Auto-Layout */
 
 /* Pattern 7: 数字大字报 */
 .layout-stats {
@@ -360,10 +357,124 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
 #nav {
   position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
   display: flex; align-items: center; gap: 8px;
-  background: rgba(0,0,0,0.35); backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(18, 18, 18, 0.82);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
   padding: 8px 16px; border-radius: 24px;
   z-index: 100; user-select: none;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.25);
+  border: 0.5px solid rgba(255,255,255,0.08);
+}
+
+/* 进度条 */
+#progress {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--accent); z-index: 200;
+  transition: width 400ms var(--ease-out-expo);
+  box-shadow: 0 0 8px rgba(148,53,43,0.4);
+}
+
+/* 交互按钮 */
+.nav-btn {
+  color: rgba(255,255,255,0.5); cursor: pointer;
+  padding: 4px 6px; font-size: 13px; transition: color 200ms;
+  font-family: var(--font-mono); line-height: 1;
+  border: none; background: none;
+  display: flex; align-items: center; gap: 3px;
+}
+.nav-btn:hover { color: white; }
+#nav-copied {
+  font-size: 9px; color: rgba(255,255,255,0.5);
+  font-family: var(--font-mono);
+  opacity: 0; transition: opacity 300ms;
+  position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+  white-space: nowrap;
+}
+#nav-copied.show { opacity: 1; }
+
+/* -------- 11. 交互式模式 (Overview / Presenter) -------- */
+
+/* Grid overview 遮罩 */
+#overview {
+  display: none;
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(18,18,18,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 40px; overflow-y: auto;
+}
+#overview.open { display: block; }
+#overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 1200px; margin: 0 auto;
+}
+#overview-grid .thumb {
+  aspect-ratio: 16 / 9;
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
+  transition: border-color 200ms, transform 200ms;
+}
+#overview-grid .thumb:hover {
+  border-color: var(--accent);
+  transform: scale(1.02);
+}
+#overview-grid .thumb.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(148,53,43,0.3);
+}
+#overview-grid .thumb iframe {
+  width: 100%; height: 100%; border: none;
+  pointer-events: none;
+}
+#overview-grid .thumb .thumb-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.6);
+  color: white; font-size: 11px;
+  font-family: var(--font-mono);
+}
+
+/* 快捷键提示 */
+#shortcuts {
+  position: fixed; bottom: 16px; right: 16px;
+  z-index: 60;
+}
+#shortcuts-toggle {
+  background: rgba(18,18,18,0.7);
+  backdrop-filter: blur(8px);
+  color: rgba(255,255,255,0.5);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  padding: 6px 12px; border-radius: 16px;
+  cursor: pointer; font-size: 11px;
+  font-family: var(--font-mono);
+}
+#shortcuts-panel {
+  display: none;
+  position: absolute; bottom: 36px; right: 0;
+  background: rgba(18,18,18,0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 16px 20px;
+  min-width: 200px;
+  border: 0.5px solid rgba(255,255,255,0.1);
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-mono);
+  line-height: 1.8;
+}
+#shortcuts-panel.open { display: block; }
+#shortcuts-panel kbd {
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  padding: 1px 6px; border-radius: 4px;
+  font-size: 11px; min-width: 20px; text-align: center;
+  color: white;
 }
 #nav .dot {
   width: 6px; height: 6px; border-radius: 50%;
@@ -419,24 +530,176 @@ body.low-power .slide [data-anim],
 body.low-power .anim-scale { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
 body.low-power #webgl-bg { display: none; }
 
-/* -------- 13. 响应式 -------- */
-@media (max-width: 768px) {
-  :root {
-    --safe-x: 24px;
-    --safe-y: 24px;
-    --text-hero: 13vw;
-    --text-display: 8vw;
-    --text-title: 5vw;
-    --sp-7: 24px;
+/* ============================================================
+   13. ADAPTIVE + RESPONSIVE DESIGN
+   ────────────────────────────────────────────────────────────
+   原则：
+   ① 布局断点 — 只在内容坍塌处打断，不用设备尺寸命名
+   ② Fluid 缩放 — 字号/间距由 :root 的 clamp() 自动处理
+   ③ 自适应 — 根据指针类型、方向、屏幕能力调整
+   ④ Auto 布局 — 优先 auto-fill / minmax 而非硬编码列数
+   ============================================================ */
+
+/* ── 13a. AUTO-LAYOUT GRIDS ────────────────────────────── */
+/* .grid-auto：自动填充列，每列至少 N px */
+.grid-auto-sm { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.grid-auto-md { display: grid; gap: var(--sp-5); grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.grid-auto-lg { display: grid; gap: var(--sp-6); grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+/* Gallery：自动填充列数 */
+.layout-gallery {
+  display: grid;
+  gap: var(--sp-3);
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-auto-rows: minmax(120px, 1fr);
+  grid-auto-flow: dense;
+}
+.layout-gallery .img-gallery-item { overflow: hidden; position: relative; }
+.layout-gallery .img-gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.layout-gallery .img-gallery-item .img-cap {
+  position: absolute; bottom: var(--sp-2); left: var(--sp-3);
+  color: white; font-size: var(--text-caption);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+/* 首图双倍宽 — 空间允许时生效 */
+.layout-gallery .img-gallery-item:first-child {
+  grid-column: span 2; grid-row: span 2;
+}
+
+/* ── 13b. LAYOUT BREAKPOINTS ───────────────────────────── */
+
+/* 中屏（平板竖屏 / 小窗口） */
+@media (max-width: 1023px) {
+  .layout-editorial .article-header { max-width: 80%; }
+  .layout-overlay .overlay-panel { max-width: min(400px, 60%); }
+  .layout-bleed-quote .quote-block { max-width: 60%; }
+  .layout-closing .closing-quote { max-width: 85%; }
+  .layout-gallery { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .layout-gallery .img-gallery-item:first-child {
+    grid-column: span 2; grid-row: span 2;
   }
-  .split { grid-template-columns: 1fr !important; }
-  .grid-12 { grid-template-columns: 1fr 1fr; }
-  .layout-gallery { grid-template-columns: 1fr 1fr; }
+}
+
+/* 窄屏（手机）— 布局从并排切换为堆叠 */
+@media (max-width: 767px) {
+  /* 全部 split → 单列 */
+  .split { grid-template-columns: 1fr !important; gap: var(--sp-4); }
+  .split .img { aspect-ratio: 16 / 9; height: auto; }
+  .split .text-panel { padding: 0; }
+
+  /* 固定列数 grids → 自动填充 */
+  .grid-12 { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .grid-3  { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .grid-4  { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+
+  /* gallery → auto-fill 紧凑模式 */
+  .layout-gallery { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .layout-gallery .img-gallery-item:first-child {
+    grid-column: span 1; grid-row: span 1;
+  }
+
+  /* stats → 单列 */
   .layout-stats { grid-template-columns: 1fr; }
+
+  /* editorial → 单栏 */
   .layout-editorial .article-header { max-width: 100%; }
-  .layout-bleed-quote .quote-block { max-width: 80%; bottom: var(--sp-6); left: var(--sp-5); }
-  .layout-overlay .overlay-panel { max-width: 80%; padding: var(--sp-5); }
+  .layout-editorial .article-body { column-count: 1; }
   .columns-2 { column-count: 1; }
+
+  /* overlay → 全宽透明浮层，嵌在 grid 内容区底部 */
+  .layout-overlay .overlay-panel {
+    position: relative; z-index: 2;
+    grid-column: content-start / content-end;
+    grid-row: content-top / content-bottom;
+    align-self: flex-end; justify-self: stretch;
+    max-width: 100%; background: transparent;
+    color: white; padding: var(--sp-5);
+    padding-bottom: calc(var(--sp-5) + 64px);
+    box-shadow: none;
+  }
+  .layout-overlay .overlay-panel .lead,
+  .layout-overlay .overlay-panel .body { color: rgba(255,255,255,0.75); }
+  .layout-overlay .overlay-panel .caption { color: var(--accent); }
+
+  /* bleed-quote → 文字嵌在 grid 内容区，图片加暗 */
+  .layout-bleed-quote .quote-block {
+    position: relative;
+    grid-column: content-start / content-end;
+    grid-row: content-top / content-bottom;
+    bottom: auto; left: auto; max-width: 100%;
+    padding: var(--sp-5);
+    padding-bottom: calc(var(--sp-5) + 64px);
+    align-self: flex-end;
+  }
+  .layout-bleed-quote .quote-block .pull-quote {
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .layout-bleed-quote .img-full img { filter: brightness(0.4); }
+
+  /* closing / cover 微调 */
+  .layout-closing .closing-quote { max-width: 100%; }
+  .layout-cover .subtitle { letter-spacing: 0.15em; }
+
+  /* 引用线 */
+  .pull-quote { padding-left: var(--sp-3); }
+
+  /* 导航触屏友好 */
+  #nav { bottom: 16px; padding: 8px 12px; gap: 10px; }
+  #nav .dot { width: 10px; height: 10px; }
+  #nav .arrow { padding: 8px 10px; font-size: 16px; }
+}
+
+/* ── 13c. ADAPTIVE — 触屏设备 ─────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  /* 更大触控热区 */
+  #nav { gap: 12px; }
+  #nav .dot { width: 14px; height: 14px; }
+  #nav .arrow { padding: 10px 14px; font-size: 18px; }
+  /* 禁用 hover 效果（触屏无意义） */
+  #nav .dot:hover { background: rgba(255,255,255,0.35); }
+  #nav .arrow:hover { color: rgba(255,255,255,0.6); }
+}
+
+/* ── 13d. ORIENTATION — 手机横屏 ──────────────────────── */
+@media (orientation: landscape) and (max-height: 500px) {
+  /* 压缩垂直空间，slide 可滚动 */
+  :root { --safe-y: 8px; }
+  .slide { overflow-y: auto; }
+  #nav { bottom: 6px; padding: 4px 10px; }
+  #nav .dot { width: 8px; height: 8px; }
+}
+
+/* ── 13e. LARGE SCREEN — >1600px ───────────────────────── */
+@media (min-width: 1600px) {
+  :root { --safe-x: clamp(80px, 6vw, 120px); --safe-y: clamp(64px, 5vh, 80px); }
+  .layout-overlay .overlay-panel { max-width: 600px; padding: var(--sp-8) var(--sp-9); }
+  .layout-editorial .article-header { max-width: 55%; }
+}
+
+/* ── 13f. PRINT — 导出为 PDF ──────────────────────────── */
+@media print {
+  #nav { display: none !important; }
+  #deck { transform: none !important; transition: none !important; }
+  .slide {
+    opacity: 1 !important; break-after: page;
+    height: 100vh; overflow: hidden;
+  }
+  .slide [data-anim] {
+    opacity: 1 !important; transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── 13g. ACCESSIBILITY — 减弱动效 ────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #deck { transition: none; }
+  .slide, .slide [data-anim] {
+    opacity: 1 !important; transform: none !important;
+    transition: none !important; animation: none !important;
+  }
 }
 </style>
 </head>
@@ -495,7 +758,7 @@ body.low-power #webgl-bg { display: none; }
       <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1400&q=80" alt="Workspace" style="filter:brightness(0.5);">
     </div>
     <div class="quote-block" data-anim data-delay="2">
-      <div class="pull-quote" style="border-left:none;padding-left:0;font-size:var(--text-display);color:white;font-style:italic;">
+      <div class="pull-quote" style="font-style:italic;">
         "The best way to predict the future is to invent it."
       </div>
       <p class="attribution meta" style="margin-top:var(--sp-5);">— Alan Kay</p>
@@ -541,7 +804,7 @@ body.low-power #webgl-bg { display: none; }
 
   <!-- --- Slide 7: Image Gallery --- -->
   <section class="slide" data-layout="gallery">
-    <div class="content-v" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp-5);padding-top:var(--safe-y);padding-bottom:var(--safe-y);">
+    <div class="content-v" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp-5);padding-top:var(--safe-y);">
       <div data-anim>
         <div class="caption" style="color:var(--accent);">Gallery</div>
         <h2 class="display-2">场景实录</h2>
@@ -571,64 +834,203 @@ body.low-power #webgl-bg { display: none; }
 <!-- /#deck -->
 
 <!-- ==================== NAVIGATION ==================== -->
+<div id="progress"></div>
+
 <div id="nav">
   <span class="arrow" id="nav-prev">←</span>
   <span id="nav-dots"></span>
   <span class="page-nb" id="nav-count">1 / 8</span>
+  <button class="nav-btn" id="nav-share" title="复制当前页链接">🔗</button>
   <span class="arrow" id="nav-next">→</span>
+  <span id="nav-copied">✓ 已复制链接</span>
+</div>
+
+<!-- ==================== OVERVIEW ==================== -->
+<div id="overview">
+  <div style="text-align:center;margin-bottom:24px;">
+    <span style="color:rgba(255,255,255,0.5);font-family:var(--font-mono);font-size:12px;">按 <kbd style="background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:4px;">G</kbd> 返回</span>
+  </div>
+  <div id="overview-grid"></div>
+</div>
+
+<!-- ==================== SHORTCUTS ==================== -->
+<div id="shortcuts">
+  <button id="shortcuts-toggle">⌘ 快捷键</button>
+  <div id="shortcuts-panel">
+    <kbd>→</kbd> <kbd>↓</kbd> <kbd>Space</kbd> 下一页<br>
+    <kbd>←</kbd> <kbd>↑</kbd> 上一页<br>
+    <kbd>G</kbd> 缩略图概览<br>
+    <kbd>F</kbd> 全屏<br>
+    <kbd>Escape</kbd> 回到首页 / 关闭概览<br>
+    <kbd>B</kbd> 低功耗模式<br>
+    <kbd>?</kbd> 切换本面板
+  </div>
 </div>
 
 <script>
 (function() {
   'use strict';
 
-  const deck = document.getElementById('deck');
+  /* ==================== 状态 ==================== */
+  const deck  = document.getElementById('deck');
   const slides = document.querySelectorAll('.slide');
   const dotContainer = document.getElementById('nav-dots');
   const countDisplay = document.getElementById('nav-count');
+  const progress     = document.getElementById('progress');
+  const overview     = document.getElementById('overview');
+  const overviewGrid = document.getElementById('overview-grid');
   const total = slides.length;
   let current = 0;
+  let overviewOpen = false;
+  let shortcutsOpen = false;
 
-  // 生成导航点
+  /* ==================== 导航核心 ==================== */
+  function goTo(index, { updateHash = true } = {}) {
+    if (index < 0 || index >= total) return;
+    if (index === current && index === 0) {
+      // force first render
+    }
+    current = index;
+    deck.style.transform = `translateX(-${current * 100}%)`;
+    slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    countDisplay.textContent = `${current + 1} / ${total}`;
+    progress.style.width = `${((current + 1) / total) * 100}%`;
+    if (updateHash) {
+      history.replaceState(null, '', `#${current + 1}`);
+    }
+    highlightOverviewThumb(current);
+  }
+
+  /* ==================== 生成导航点 ==================== */
   for (let i = 0; i < total; i++) {
     const dot = document.createElement('span');
     dot.className = 'dot' + (i === 0 ? ' active' : '');
     dot.dataset.index = i;
-    dot.addEventListener('click', () => goTo(i));
+    dot.addEventListener('click', () => { goTo(i); closeOverview(); });
     dotContainer.appendChild(dot);
   }
 
-  function goTo(index) {
-    if (index < 0 || index >= total) return;
-    current = index;
-    // 移动 deck
-    deck.style.transform = `translateX(-${current * 100}%)`;
-    // 更新 active slide
-    slides.forEach((s, i) => s.classList.toggle('active', i === current));
-    // 更新导航点
-    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    countDisplay.textContent = `${current + 1} / ${total}`;
+  /* ==================== URL Hash ==================== */
+  function handleHash() {
+    const hash = window.location.hash.replace('#', '');
+    const idx = parseInt(hash, 10);
+    if (!isNaN(idx) && idx >= 1 && idx <= total) {
+      goTo(idx - 1, { updateHash: false });
+    }
+  }
+  window.addEventListener('hashchange', handleHash);
+
+  /* ==================== 全屏 ==================== */
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
   }
 
-  // 键盘导航
+  /* ==================== 概览模式 ==================== */
+  function openOverview() {
+    overviewOpen = true;
+    overview.classList.add('open');
+    overviewGrid.innerHTML = '';
+    slides.forEach((s, i) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'thumb' + (i === current ? ' active' : '');
+      thumb.innerHTML = `<div class="thumb-label">${i + 1}</div>`;
+      // 用 clone 节点生成缩略图
+      const clone = s.cloneNode(true);
+      clone.style.width = '100%';
+      clone.style.height = '100%';
+      clone.style.borderRadius = '8px';
+      clone.style.overflow = 'hidden';
+      clone.style.transform = 'scale(0.25)';
+      clone.style.transformOrigin = 'top left';
+      clone.style.opacity = '1';
+      // 禁用动画
+      clone.querySelectorAll('[data-anim]').forEach(el => {
+        el.style.opacity = '1'; el.style.transform = 'none';
+      });
+      thumb.appendChild(clone);
+      thumb.addEventListener('click', () => {
+        goTo(i);
+        closeOverview();
+      });
+      overviewGrid.appendChild(thumb);
+    });
+  }
+
+  function closeOverview() {
+    overviewOpen = false;
+    overview.classList.remove('open');
+  }
+
+  function toggleOverview() {
+    if (overviewOpen) closeOverview();
+    else openOverview();
+  }
+
+  function highlightOverviewThumb(index) {
+    overviewGrid.querySelectorAll('.thumb').forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+  }
+
+  /* ==================== 分享链接 ==================== */
+  function copySlideLink() {
+    const url = `${window.location.origin}${window.location.pathname}#${current + 1}`;
+    navigator.clipboard?.writeText(url).then(() => {
+      const el = document.getElementById('nav-copied');
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2000);
+    }).catch(() => {
+      // fallback
+      const el = document.getElementById('nav-copied');
+      el.textContent = '复制失败，请手动复制地址栏';
+      el.classList.add('show');
+      setTimeout(() => {
+        el.classList.remove('show');
+        el.textContent = '✓ 已复制链接';
+      }, 2500);
+    });
+  }
+
+  /* ==================== 键盘导航 ==================== */
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
-      e.preventDefault(); goTo(current + 1);
+    // 概览模式下只响应 Escape
+    if (overviewOpen) {
+      if (e.key === 'Escape' || e.key === 'g' || e.key === 'G') {
+        e.preventDefault(); closeOverview();
+      }
+      return;
     }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      e.preventDefault(); goTo(current - 1);
-    }
-    // ESC — 回到第一页
-    if (e.key === 'Escape') { e.preventDefault(); goTo(0); }
-    // B — 低功耗模式
-    if (e.key === 'b' || e.key === 'B') {
-      document.body.classList.toggle('low-power');
+
+    switch (e.key) {
+      case 'ArrowRight': case 'ArrowDown': case ' ':
+        e.preventDefault(); goTo(current + 1); break;
+      case 'ArrowLeft': case 'ArrowUp':
+        e.preventDefault(); goTo(current - 1); break;
+      case 'Escape':
+        e.preventDefault(); goTo(0); break;
+      case 'f': case 'F':
+        e.preventDefault(); toggleFullscreen(); break;
+      case 'g': case 'G':
+        e.preventDefault(); toggleOverview(); break;
+      case 'b': case 'B':
+        document.body.classList.toggle('low-power'); break;
+      case '?':
+        e.preventDefault();
+        shortcutsOpen = !shortcutsOpen;
+        document.getElementById('shortcuts-panel').classList.toggle('open', shortcutsOpen);
+        break;
     }
   });
 
-  // 滚轮翻页
+  /* ==================== 滚轮翻页 ==================== */
   let wheelTimeout = false;
   document.addEventListener('wheel', (e) => {
+    if (overviewOpen) return;
     if (wheelTimeout) return;
     wheelTimeout = true;
     setTimeout(() => wheelTimeout = false, 600);
@@ -636,13 +1038,15 @@ body.low-power #webgl-bg { display: none; }
     else goTo(current - 1);
   }, { passive: true });
 
-  // 触屏支持
+  /* ==================== 触屏 ==================== */
   let touchStartX = 0, touchStartY = 0;
   document.addEventListener('touchstart', (e) => {
+    if (overviewOpen) return;
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
   }, { passive: true });
   document.addEventListener('touchend', (e) => {
+    if (overviewOpen) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
@@ -651,12 +1055,30 @@ body.low-power #webgl-bg { display: none; }
     }
   }, { passive: true });
 
-  // 按钮
+  /* ==================== 按钮绑定 ==================== */
   document.getElementById('nav-prev').addEventListener('click', () => goTo(current - 1));
   document.getElementById('nav-next').addEventListener('click', () => goTo(current + 1));
+  document.getElementById('nav-share').addEventListener('click', copySlideLink);
 
-  // 初始化第一页动画
-  slides[0].classList.add('active');
+  document.getElementById('shortcuts-toggle').addEventListener('click', () => {
+    shortcutsOpen = !shortcutsOpen;
+    document.getElementById('shortcuts-panel').classList.toggle('open', shortcutsOpen);
+  });
+
+  /* ==================== 点击概览外部关闭 ==================== */
+  overview.addEventListener('click', (e) => {
+    if (e.target === overview) closeOverview();
+  });
+
+  /* ==================== 初始化 ==================== */
+  // 处理 URL hash
+  handleHash();
+  // 如果 hash 不存在，确保第一页
+  if (!window.location.hash) {
+    goTo(0);
+  }
+  // 进度条初始
+  progress.style.width = `${(1 / total) * 100}%`;
 
 })();
 </script>
