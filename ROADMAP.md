@@ -244,4 +244,4 @@ slide 结构 → IDML 文档映射：
 
 ---
 
-*Folio 由 Jorgut 创建 · MIT 协议 · [github.com/Jorgut/folio](https://github.com/Jorgut/folio)*
+*Folio 由 Jorgut 创建 · MIT 协议 · [github.com/Jorgut/folio-ppt](https://github.com/Jorgut/folio-ppt)*

@@ -20,7 +20,7 @@
 > - 稳定性：实验性
 > - 贡献：欢迎反馈和建议，但暂不接受 PR（核心架构尚未定型）
 >
-> 如果你在使用过程中遇到问题或有改进建议，请在 [Issues](https://github.com/Jorgut/folio/issues) 中反馈。
+> 如果你在使用过程中遇到问题或有改进建议，请在 [Issues](https://github.com/Jorgut/folio-ppt/issues) 中反馈。
 
 ---
 
