@@ -34,11 +34,11 @@
 
   /* 字号阶梯 — 杂志级对比
      流体：clamp(最小, 首选, 最大) 消除对媒体查询的依赖 */
-  --text-hero:   clamp(2.5rem, min(9.4vw, 16.9vh), 7rem);
-  --text-display: clamp(1.5rem, min(5.6vw, 10.1vh), 4rem);
-  --text-title:  clamp(1.125rem, min(3.2vw, 5.8vh), 2.5rem);
-  --text-lead:   clamp(0.875rem, min(1.6vw, 2.9vh), 1.35rem);
-  --text-body:   clamp(0.875rem, min(1.2vw, 2.2vh), 1.125rem);
+  --text-hero:   clamp(2.5rem, min(12vw, 22vh), 8rem);
+  --text-display: clamp(1.5rem, min(6vw, 11vh), 4.5rem);
+  --text-title:  clamp(1.125rem, min(3.5vw, 6.5vh), 2.75rem);
+  --text-lead:   clamp(0.875rem, min(1.4vw, 2.5vh), 1.25rem);
+  --text-body:   clamp(0.8125rem, min(1.1vw, 2vh), 1rem);
   --text-caption: clamp(0.75rem, min(0.9vw, 1.6vh), 0.875rem);
   --text-meta:   clamp(0.625rem, min(0.75vw, 1.4vh), 0.75rem);
 
@@ -67,21 +67,35 @@
   --slide-h: 100vh;
 
   /* 安全区 — 流体：小屏紧、大屏松 */
-  --safe-x: clamp(16px, 5vw, 80px);
+  --safe-x: clamp(16px, 5vw, 96px);
   --safe-y: clamp(12px, 4.44vh, 64px);
 
   /* 过渡/动效 */
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --dur-slow: 800ms;
   --dur-fast: 400ms;
+  --dur-hero: 1000ms;
 }
 
 /* -------- 2. 主题色预设 -------- */
+.theme-default {
+  --ink: #1a1814;
+  --ink-rgb: 26, 24, 20;
+  --paper: #f7f4ef;
+  --paper-rgb: 247, 244, 239;
+  --paper-tint: #efece5;
+  --ink-tint: rgba(26, 24, 20, 0.06);
+  --accent: #94352b;
+  --accent-rgb: 148, 53, 43;
+  --accent-dim: rgba(148, 53, 43, 0.15);
+}
 .theme-indigo {
   --ink: #0f1a2e;
   --ink-rgb: 15, 26, 46;
   --paper: #f0f2f5;
   --paper-rgb: 240, 242, 245;
+  --paper-tint: #e7ebf1;
+  --ink-tint: rgba(15, 26, 46, 0.06);
   --accent: #2a5c8a;
   --accent-rgb: 42, 92, 138;
   --accent-dim: rgba(42, 92, 138, 0.12);
@@ -91,6 +105,8 @@
   --ink-rgb: 26, 46, 31;
   --paper: #f2efe8;
   --paper-rgb: 242, 239, 232;
+  --paper-tint: #e8e4d9;
+  --ink-tint: rgba(26, 46, 31, 0.06);
   --accent: #4a7c59;
   --accent-rgb: 74, 124, 89;
   --accent-dim: rgba(74, 124, 89, 0.15);
@@ -100,9 +116,55 @@
   --ink-rgb: 42, 30, 19;
   --paper: #f0e6d5;
   --paper-rgb: 240, 230, 213;
+  --paper-tint: #e5d8c3;
+  --ink-tint: rgba(42, 30, 19, 0.07);
   --accent: #b87333;
   --accent-rgb: 184, 115, 51;
   --accent-dim: rgba(184, 115, 51, 0.15);
+}
+.theme-mono {
+  --ink: #111111;
+  --ink-rgb: 17, 17, 17;
+  --paper: #f5f5f5;
+  --paper-rgb: 245, 245, 245;
+  --paper-tint: #ebebeb;
+  --ink-tint: rgba(17, 17, 17, 0.06);
+  --accent: #666666;
+  --accent-rgb: 102, 102, 102;
+  --accent-dim: rgba(102, 102, 102, 0.14);
+}
+.theme-neon {
+  --ink: #0a0a1a;
+  --ink-rgb: 10, 10, 26;
+  --paper: #1a0a2e;
+  --paper-rgb: 26, 10, 46;
+  --paper-tint: #281343;
+  --ink-tint: rgba(0, 255, 136, 0.08);
+  --accent: #00ff88;
+  --accent-rgb: 0, 255, 136;
+  --accent-dim: rgba(0, 255, 136, 0.18);
+}
+.theme-rose {
+  --ink: #2a1a1e;
+  --ink-rgb: 42, 26, 30;
+  --paper: #f5eef0;
+  --paper-rgb: 245, 238, 240;
+  --paper-tint: #ece3e6;
+  --ink-tint: rgba(42, 26, 30, 0.06);
+  --accent: #c44a6a;
+  --accent-rgb: 196, 74, 106;
+  --accent-dim: rgba(196, 74, 106, 0.14);
+}
+.theme-ocean {
+  --ink: #0a1a1e;
+  --ink-rgb: 10, 26, 30;
+  --paper: #eef5f7;
+  --paper-rgb: 238, 245, 247;
+  --paper-tint: #e2ecef;
+  --ink-tint: rgba(10, 26, 30, 0.06);
+  --accent: #0088aa;
+  --accent-rgb: 0, 136, 170;
+  --accent-dim: rgba(0, 136, 170, 0.15);
 }
 
 /* -------- 3. 基础重置 -------- */
@@ -240,6 +302,10 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
   place-items: center;
   text-align: center;
 }
+.layout-cover .content {
+  align-self: start;
+  padding-top: clamp(72px, 16vh, 180px);
+}
 .layout-cover .subtitle {
   font-family: var(--font-body); font-size: var(--text-lead);
   font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase;
@@ -312,7 +378,7 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
 /* Pattern 5: 多列正文 (editorial) */
 .layout-editorial .article-header {
   margin-bottom: var(--sp-7);
-  max-width: 65%;
+  max-width: 55%;
 }
 .layout-editorial .article-body {
   column-count: 2; column-gap: var(--sp-7);
@@ -353,9 +419,143 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
   margin-bottom: var(--sp-7);
 }
 
+/* Pattern 9: 时间线 */
+.layout-timeline {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) 1fr;
+  gap: var(--sp-9);
+  align-items: start;
+}
+.layout-timeline .timeline-intro {
+  position: sticky;
+  top: var(--safe-y);
+}
+.layout-timeline .timeline-events {
+  position: relative;
+  display: grid;
+  gap: var(--sp-7);
+  padding-left: var(--sp-8);
+  border-left: 2px solid var(--accent);
+}
+.layout-timeline .timeline-event {
+  position: relative;
+  padding-bottom: var(--sp-3);
+}
+.layout-timeline .timeline-event::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--sp-8) - 8px);
+  top: 0.45em;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-dim);
+}
+.layout-timeline .timeline-date {
+  display: block;
+  margin-bottom: var(--sp-2);
+  color: var(--accent);
+}
+.layout-timeline .timeline-title {
+  margin-bottom: var(--sp-2);
+}
+
+/* Pattern 10: 杂志跨页全出血 */
+.layout-spread {
+  position: relative;
+  color: white;
+}
+.layout-spread .spread-image {
+  position: absolute;
+  inset: 0;
+}
+.layout-spread .spread-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.55);
+}
+.layout-spread .spread-copy {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  bottom: calc(var(--safe-y) + 56px);
+  max-width: min(680px, 62%);
+  z-index: 2;
+}
+.layout-spread .spread-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+  color: rgba(255,255,255,0.72);
+}
+
+/* Pattern 11: 对比栏 */
+.layout-compare {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink-tint);
+  border-bottom: 1px solid var(--ink-tint);
+}
+.layout-compare .compare-item {
+  padding: var(--sp-6) var(--sp-5);
+}
+.layout-compare .compare-item + .compare-item {
+  border-left: 1px solid var(--ink-tint);
+}
+.layout-compare .compare-item .img {
+  margin-bottom: var(--sp-4);
+}
+.layout-compare .compare-item h3 {
+  margin-bottom: var(--sp-3);
+}
+
+/* Pattern 12: Listicle */
+.layout-list {
+  display: grid;
+  gap: var(--sp-5);
+}
+.layout-list .list-row {
+  display: grid;
+  grid-template-columns: minmax(64px, 96px) 1fr;
+  gap: var(--sp-5);
+  align-items: start;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--ink-tint);
+}
+.layout-list .list-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.layout-list .list-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, min(5vw, 9vh), 4.75rem);
+  line-height: 0.9;
+  color: var(--accent);
+}
+.layout-list .list-copy h3 {
+  margin-bottom: var(--sp-2);
+}
+
+/* Fluid hero background */
+.bg-fluid {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--paper) 50%, var(--ink) 100%);
+  background-size: 400% 400%;
+  animation: fluidMove 15s ease infinite;
+}
+@keyframes fluidMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* -------- 10. 导航 -------- */
 #nav {
-  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(16px);
   display: flex; align-items: center; gap: 8px;
   background: rgba(18, 18, 18, 0.82);
   backdrop-filter: blur(16px) saturate(1.2);
@@ -364,6 +564,12 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
   z-index: 100; user-select: none;
   box-shadow: 0 2px 24px rgba(0,0,0,0.25);
   border: 0.5px solid rgba(255,255,255,0.08);
+  opacity: 0;
+}
+body.loaded #nav {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 700ms var(--ease-out-expo), transform 700ms var(--ease-out-expo);
 }
 
 /* 进度条 */
@@ -383,6 +589,12 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
   display: flex; align-items: center; gap: 3px;
 }
 .nav-btn:hover { color: white; }
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
 #nav-copied {
   font-size: 9px; color: rgba(255,255,255,0.5);
   font-family: var(--font-mono);
@@ -506,8 +718,15 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
   opacity: 0; transform: translateY(20px);
   transition: opacity 600ms var(--ease-out-expo), transform 600ms var(--ease-out-expo);
 }
+.slide [data-anim].anim-fade-scale {
+  transform: translateY(18px) scale(0.9);
+  transition-duration: var(--dur-hero), var(--dur-hero);
+}
 .slide.active [data-anim] {
   opacity: 1; transform: translateY(0);
+}
+.slide.active [data-anim].anim-fade-scale {
+  transform: translateY(0) scale(1);
 }
 /* 入场延迟 */
 .slide [data-delay="1"] { transition-delay: 100ms; }
@@ -578,6 +797,8 @@ body.low-power #webgl-bg { display: none; }
   .layout-bleed-quote .quote-block { max-width: 60%; }
   .layout-closing .closing-quote { max-width: 85%; }
   .layout-gallery { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .layout-spread .spread-copy { max-width: 75%; }
+  .layout-compare { grid-template-columns: 1fr 1fr 1fr; }
   .layout-gallery .img-gallery-item:first-child {
     grid-column: span 2; grid-row: span 2;
   }
@@ -604,10 +825,44 @@ body.low-power #webgl-bg { display: none; }
   /* stats → 单列 */
   .layout-stats { grid-template-columns: 1fr; }
 
+  .layout-timeline {
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+  .layout-timeline .timeline-intro {
+    position: static;
+  }
+  .layout-timeline .timeline-events {
+    padding-left: var(--sp-5);
+  }
+  .layout-timeline .timeline-event::before {
+    left: calc(-1 * var(--sp-5) - 8px);
+  }
+
   /* editorial → 单栏 */
   .layout-editorial .article-header { max-width: 100%; }
   .layout-editorial .article-body { column-count: 1; }
   .columns-2 { column-count: 1; }
+
+  .layout-spread .spread-copy {
+    left: var(--safe-x);
+    right: var(--safe-x);
+    bottom: calc(var(--safe-y) + 72px);
+    max-width: 100%;
+  }
+
+  .layout-compare {
+    grid-template-columns: 1fr;
+  }
+  .layout-compare .compare-item + .compare-item {
+    border-left: none;
+    border-top: 1px solid var(--ink-tint);
+  }
+
+  .layout-list .list-row {
+    grid-template-columns: 56px 1fr;
+    gap: var(--sp-4);
+  }
 
   /* overlay → 全宽透明浮层，嵌在 grid 内容区底部 */
   .layout-overlay .overlay-panel {
@@ -677,6 +932,7 @@ body.low-power #webgl-bg { display: none; }
   :root { --safe-x: clamp(80px, 6vw, 120px); --safe-y: clamp(64px, 5vh, 80px); }
   .layout-overlay .overlay-panel { max-width: 600px; padding: var(--sp-8) var(--sp-9); }
   .layout-editorial .article-header { max-width: 55%; }
+  .layout-spread .spread-copy { max-width: 54%; }
 }
 
 /* ── 13f. PRINT — 导出为 PDF ──────────────────────────── */
@@ -705,22 +961,24 @@ body.low-power #webgl-bg { display: none; }
 </head>
 <body class="theme-sand">
 
+<canvas id="webgl-bg" style="position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0.3;"></canvas>
+
 <!-- ==================== SLIDE DECK ==================== -->
 <div id="deck">
 
   <!-- --- Slide 1: Cover --- -->
   <section class="slide active layout-cover dark" data-layout="cover">
-    <div class="full-bleed" style="position:absolute;inset:0;z-index:0;">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg, #1a1814 0%, #2a1e13 50%, #3d2c1a 100%);"></div>
+    <div class="full-bleed bg-fluid" style="position:absolute;inset:0;z-index:0;">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg, rgba(26,24,20,0.8) 0%, rgba(42,30,19,0.45) 50%, rgba(61,44,26,0.82) 100%);"></div>
     </div>
     <div class="content" style="position:relative;z-index:2;">
-      <div data-anim>
-        <div class="meta" data-delay="1" style="margin-bottom:var(--sp-4);color:var(--accent);">Issue № 01</div>
-        <h1 class="display-hero" data-delay="2" style="color:var(--paper);">
+      <div>
+        <div class="meta anim-fade-scale" data-anim data-delay="1" style="margin-bottom:var(--sp-4);color:var(--accent);">Issue № 02</div>
+        <h1 class="display-hero anim-fade-scale" data-anim data-delay="2" style="color:var(--paper);">
           新的工作<br>方式
         </h1>
-        <p class="subtitle" data-delay="3">How We Work · 2026</p>
-        <p class="meta meta-line" data-delay="4">Folio · Issue № 01</p>
+        <p class="subtitle anim-fade-scale" data-anim data-delay="3">How We Work · 2026</p>
+        <p class="meta meta-line anim-fade-scale" data-anim data-delay="4">Folio · Issue № 02</p>
       </div>
     </div>
   </section>
@@ -809,24 +1067,143 @@ body.low-power #webgl-bg { display: none; }
         <div class="caption" style="color:var(--accent);">Gallery</div>
         <h2 class="display-2">场景实录</h2>
       </div>
-      <div class="layout-gallery" data-anim data-delay="2" style="flex:1;">
-        <div class="img-gallery-item img"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Meeting"><span class="img-cap">协作工作坊</span></div>
-        <div class="img-gallery-item img"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="Strategy"><span class="img-cap">策略会</span></div>
-        <div class="img-gallery-item img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Planning"><span class="img-cap">规划中</span></div>
-        <div class="img-gallery-item img"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Team"><span class="img-cap">团队时刻</span></div>
-        <div class="img-gallery-item img"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Office"><span class="img-cap">办公空间</span></div>
+      <div class="layout-gallery" style="flex:1;">
+        <div class="img-gallery-item img" data-anim data-delay="1"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Meeting"><span class="img-cap">协作工作坊</span></div>
+        <div class="img-gallery-item img" data-anim data-delay="2"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="Strategy"><span class="img-cap">策略会</span></div>
+        <div class="img-gallery-item img" data-anim data-delay="3"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Planning"><span class="img-cap">规划中</span></div>
+        <div class="img-gallery-item img" data-anim data-delay="4"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Team"><span class="img-cap">团队时刻</span></div>
+        <div class="img-gallery-item img" data-anim data-delay="5"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Office"><span class="img-cap">办公空间</span></div>
       </div>
     </div>
   </section>
 
   <!-- --- Slide 8: Closing --- -->
   <section class="slide layout-closing dark" data-layout="closing" style="background:linear-gradient(135deg, #1a1814 0%, #2a1e13 50%, #3d2c1a 100%);">
-    <div class="content" data-anim>
-      <blockquote class="closing-quote" data-delay="1">
+    <div class="content">
+      <blockquote class="closing-quote anim-fade-scale" data-anim data-delay="1">
         "未来已经来临，<br>只是分布不均。"
       </blockquote>
-      <p class="meta" data-delay="3" style="color:var(--accent);margin-top:var(--sp-6);">William Gibson</p>
-      <p class="meta" data-delay="4" style="margin-top:var(--sp-2);">Folio · v0.1</p>
+      <p class="meta anim-fade-scale" data-anim data-delay="3" style="color:var(--accent);margin-top:var(--sp-6);">William Gibson</p>
+      <p class="meta anim-fade-scale" data-anim data-delay="4" style="margin-top:var(--sp-2);">Folio · v0.5</p>
+    </div>
+  </section>
+
+  <!-- --- Slide 9: Timeline --- -->
+  <section class="slide layout-timeline" data-layout="timeline">
+    <div class="content layout-timeline">
+      <div class="timeline-intro">
+        <div class="caption" data-anim data-delay="1" style="color:var(--accent);margin-bottom:var(--sp-3);">Timeline</div>
+        <h2 class="display-1 anim-fade-scale" data-anim data-delay="2">工作系统的<br>四次跃迁</h2>
+        <p class="lead" data-anim data-delay="3" style="margin-top:var(--sp-4);">从流程自动化到组织策展，新的协作模型不是一次升级，而是一连串认知结构的替换。</p>
+      </div>
+      <div class="timeline-events">
+        <article class="timeline-event" data-anim data-delay="2">
+          <span class="meta timeline-date">2019 · Digitize</span>
+          <h3 class="display-2 timeline-title">文档从存档变成协作界面</h3>
+          <p class="body">团队开始在同一份文档中思考、批注、决策，静态文件第一次承担了同步现场的角色。</p>
+        </article>
+        <article class="timeline-event" data-anim data-delay="3">
+          <span class="meta timeline-date">2021 · Async</span>
+          <h3 class="display-2 timeline-title">异步工作取代会而不决</h3>
+          <p class="body">更多项目通过预读、录屏和结构化反馈推进，会议从默认选项变成高成本事件。</p>
+        </article>
+        <article class="timeline-event" data-anim data-delay="4">
+          <span class="meta timeline-date">2023 · Assist</span>
+          <h3 class="display-2 timeline-title">AI 成为第二操作系统</h3>
+          <p class="body">摘要、改写、归档、比较开始被智能代理吞掉，人类把精力留给判断与取舍。</p>
+        </article>
+        <article class="timeline-event" data-anim data-delay="5">
+          <span class="meta timeline-date">2026 · Curate</span>
+          <h3 class="display-2 timeline-title">组织能力回到“选择什么”</h3>
+          <p class="body">竞争优势不再来自更快执行，而是更快构建问题、审美标准与行动框架。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- Slide 10: Full-Bleed Spread --- -->
+  <section class="slide layout-spread dark" data-layout="spread">
+    <div class="full-bleed spread-image" data-anim>
+      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600&q=80" alt="Editorial workspace spread">
+    </div>
+    <div class="spread-copy">
+      <div class="caption" data-anim data-delay="1" style="color:var(--accent);margin-bottom:var(--sp-3);">Cover Story</div>
+      <h2 class="display-hero anim-fade-scale" data-anim data-delay="2" style="color:white;max-width:8ch;">把空间设计成<br>决策引擎</h2>
+      <p class="lead" data-anim data-delay="3" style="color:rgba(255,255,255,0.74);max-width:34em;margin-top:var(--sp-4);">真正有方向感的团队，连桌面、墙面、屏幕与节奏都在传达同一件事：什么值得被放大，什么应该被剔除。</p>
+      <div class="spread-byline meta" data-anim data-delay="4">
+        <span>By Folio Studio</span>
+        <span>Field Notes · Shanghai</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- Slide 11: Comparison --- -->
+  <section class="slide" data-layout="compare">
+    <div class="content-v" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp-6);padding-top:var(--safe-y);">
+      <div>
+        <div class="caption" data-anim data-delay="1" style="color:var(--accent);margin-bottom:var(--sp-3);">Comparison</div>
+        <h2 class="display-1 anim-fade-scale" data-anim data-delay="2">从旧工作台到<br>新协作界面</h2>
+      </div>
+      <div class="layout-compare">
+        <article class="compare-item" data-anim data-delay="2">
+          <div class="img r-4x3"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&q=80" alt="Before workflow"></div>
+          <div class="caption" style="color:var(--accent);">Before</div>
+          <h3 class="display-2">工具分散</h3>
+          <p class="body">信息散落在聊天、表格与会议纪要中，决策线索缺乏连续性，团队只能依赖记忆补完上下文。</p>
+        </article>
+        <article class="compare-item" data-anim data-delay="3">
+          <div class="img r-4x3"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=700&q=80" alt="Transition workflow"></div>
+          <div class="caption" style="color:var(--accent);">Transition</div>
+          <h3 class="display-2">流程编排</h3>
+          <p class="body">团队开始把节点、责任与反馈放进一个可追踪的系统里，协作首次拥有了可设计的骨架。</p>
+        </article>
+        <article class="compare-item" data-anim data-delay="4">
+          <div class="img r-4x3"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80" alt="After workflow"></div>
+          <div class="caption" style="color:var(--accent);">After</div>
+          <h3 class="display-2">界面即方法</h3>
+          <p class="body">每一次输入都被自动整理成下一步行动，团队不再追赶信息，而是在有设计的节奏里推进共识。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- Slide 12: Numbered Listicle --- -->
+  <section class="slide dark" data-layout="list" style="background:#171310;">
+    <div class="content" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp-7);align-content:center;">
+      <div>
+        <div class="caption" data-anim data-delay="1" style="color:var(--accent);margin-bottom:var(--sp-3);">Listicle</div>
+        <h2 class="display-1 anim-fade-scale" data-anim data-delay="2" style="color:var(--paper);">四个原则，<br>搭起新工作流</h2>
+      </div>
+      <div class="layout-list">
+        <article class="list-row" data-anim data-delay="2">
+          <div class="list-number">01</div>
+          <div class="list-copy">
+            <h3 class="display-2" style="color:var(--paper);">先定义问题，再选择工具</h3>
+            <p class="body">如果没有清晰的问题结构，再高级的工具也只会放大混乱。</p>
+          </div>
+        </article>
+        <article class="list-row" data-anim data-delay="3">
+          <div class="list-number">02</div>
+          <div class="list-copy">
+            <h3 class="display-2" style="color:var(--paper);">让信息默认可见</h3>
+            <p class="body">共享语境比共享文件更重要，团队需要随时进入而不是反复被拉齐。</p>
+          </div>
+        </article>
+        <article class="list-row" data-anim data-delay="4">
+          <div class="list-number">03</div>
+          <div class="list-copy">
+            <h3 class="display-2" style="color:var(--paper);">把 AI 放进重复决策里</h3>
+            <p class="body">重复性的判断越早自动化，人的注意力就越能集中在方向与例外情况。</p>
+          </div>
+        </article>
+        <article class="list-row" data-anim data-delay="5">
+          <div class="list-number">04</div>
+          <div class="list-copy">
+            <h3 class="display-2" style="color:var(--paper);">审美也是一种管理工具</h3>
+            <p class="body">界面的秩序、空间的留白与语言的节奏，会持续塑造团队如何思考与协作。</p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -839,8 +1216,8 @@ body.low-power #webgl-bg { display: none; }
 <div id="nav">
   <span class="arrow" id="nav-prev">←</span>
   <span id="nav-dots"></span>
-  <span class="page-nb" id="nav-count">1 / 8</span>
-  <button class="nav-btn" id="nav-share" title="复制当前页链接">🔗</button>
+  <span class="page-nb" id="nav-count">1 / 12</span>
+  <button class="nav-btn" id="nav-share" title="复制当前页链接"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span></button>
   <span class="arrow" id="nav-next">→</span>
   <span id="nav-copied">✓ 已复制链接</span>
 </div>
@@ -892,8 +1269,12 @@ body.low-power #webgl-bg { display: none; }
     }
     current = index;
     deck.style.transform = `translateX(-${current * 100}%)`;
-    slides.forEach((s, i) => s.classList.toggle('active', i === current));
-    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === current);
+    });
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
     countDisplay.textContent = `${current + 1} / ${total}`;
     progress.style.width = `${((current + 1) / total) * 100}%`;
     if (updateHash) {
@@ -905,7 +1286,7 @@ body.low-power #webgl-bg { display: none; }
   /* ==================== 生成导航点 ==================== */
   for (let i = 0; i < total; i++) {
     const dot = document.createElement('span');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.className = `dot${i === 0 ? ' active' : ''}`;
     dot.dataset.index = i;
     dot.addEventListener('click', () => { goTo(i); closeOverview(); });
     dotContainer.appendChild(dot);
@@ -915,7 +1296,7 @@ body.low-power #webgl-bg { display: none; }
   function handleHash() {
     const hash = window.location.hash.replace('#', '');
     const idx = parseInt(hash, 10);
-    if (!isNaN(idx) && idx >= 1 && idx <= total) {
+    if (!Number.isNaN(idx) && idx >= 1 && idx <= total) {
       goTo(idx - 1, { updateHash: false });
     }
   }
@@ -937,7 +1318,7 @@ body.low-power #webgl-bg { display: none; }
     overviewGrid.innerHTML = '';
     slides.forEach((s, i) => {
       const thumb = document.createElement('div');
-      thumb.className = 'thumb' + (i === current ? ' active' : '');
+      thumb.className = `thumb${i === current ? ' active' : ''}`;
       thumb.innerHTML = `<div class="thumb-label">${i + 1}</div>`;
       // 用 clone 节点生成缩略图
       const clone = s.cloneNode(true);
@@ -1033,7 +1414,9 @@ body.low-power #webgl-bg { display: none; }
     if (overviewOpen) return;
     if (wheelTimeout) return;
     wheelTimeout = true;
-    setTimeout(() => wheelTimeout = false, 600);
+    setTimeout(() => {
+      wheelTimeout = false;
+    }, 600);
     if (e.deltaY > 0) goTo(current + 1);
     else goTo(current - 1);
   }, { passive: true });
@@ -1079,6 +1462,7 @@ body.low-power #webgl-bg { display: none; }
   }
   // 进度条初始
   progress.style.width = `${(1 / total) * 100}%`;
+  requestAnimationFrame(() => document.body.classList.add('loaded'));
 
 })();
 </script>

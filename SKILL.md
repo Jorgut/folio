@@ -17,7 +17,7 @@ HTML (源文件) ─┬─ PPTX ───→ PowerPoint / Google Slides / Keynot
 
 1. **杂志级排版** — 不对称网格、图文重叠、全出血图、CSS 多列正文、大字号对比
 2. **多格式导出** — PPTX（Native 全文字可编辑）、PDF（可导入 InDesign）
-3. **8 种杂志布局** — 封面、不对称 split、overlap、full-bleed 引语、editorial 正文、数据大字报、图片画廊、收束页
+3. **12 种杂志布局** — 封面、不对称 split、overlap、full-bleed 引语、editorial 正文、数据大字报、图片画廊、收束页、时间线、左右跨页、并排对比、编号清单
 4. **交互式演示** — 缩略图概览、全屏、URL Hash 定位、快捷键面板、进度条
 5. **跨工具协作** — 输出格式兼容 Figma / Google Slides / Keynote / InDesign
 
@@ -55,7 +55,10 @@ IA (信息架构) → Lo-fi Wireframe → Mid-fi → Hi-fi → HTML Mockup → N
 | `references/information-architecture.md` | IA 五阶段流程、内容盘点模板、叙事弧模型 |
 | `references/wireframing.md` | Lo-fi/Mid-fi/Hi-fi 定义、线框图模板、验证检查清单 |
 | `references/checklist.md` | P0-P3 质量检查清单 |
-| `templates/wireframe-sheet.html` | 可打印的线框图纸（9 种布局 + 注释区）|
+| `templates/wireframe-sheet.html` | 可打印的线框图纸（13 种布局 + 注释区）|
+| `scripts/export-native-pptx.mjs` | Native PPTX 导出（全文字可编辑）|
+| `scripts/layout-mapping.mjs` | 12 种布局映射引擎（PptxGenJS 原生 shape）|
+| `scripts/export-verify.mjs` | 输出验证脚本（11 项检查）|
 
 ### 设计原则
 
@@ -83,7 +86,7 @@ IA (信息架构) → Lo-fi Wireframe → Mid-fi → Hi-fi → HTML Mockup → N
 | `Escape` | 回到首页 / 关闭概览 |
 | `B` | 低功耗模式（关闭动效） |
 | `?` | 快捷键面板 |
-| 🔗 按钮 | 复制当前页 URL（带 `#页码` hash） |
+| `⌘` 按钮 | 显示/隐藏导航箭头与页码 |
 | URL Hash | `index.html#3` 直接打开第 3 页 |
 | 顶部进度条 | 显示当前进度 |
 | 滚轮 / 触屏滑动 | 翻页 |
@@ -100,6 +103,10 @@ IA (信息架构) → Lo-fi Wireframe → Mid-fi → Hi-fi → HTML Mockup → N
 | 6 | **Stats** | 数据大字报 |
 | 7 | **Gallery** | 图片画廊（auto-fill 自适应列数） |
 | 8 | **Closing** | 收束页 |
+| 9 | **Timeline** | 时间线 / 流程步骤 |
+| 10 | **Spread** | 左右全出血跨页图文 |
+| 11 | **Compare** | 并排对比（旧 vs 新 / A vs B）|
+| 12 | **List** | 编号列表 / 原则清单 |
 
 ## 工作流
 
@@ -125,14 +132,19 @@ mkdir -p 项目/ppt/images
 
 ### Step 4 · 导出分发
 
-#### 导出 PPTX（截图保真，PowerPoint / Google Slides / Keynote 可用）
+#### 导出 PPTX（Native 全文字可编辑 — 推荐）
 ```bash
-node <SKILL_ROOT>/scripts/export-pptx.mjs 项目/ppt/index.html
+node <SKILL_ROOT>/scripts/export-native-pptx.mjs 项目/ppt/index.html
 ```
-输出同目录 `.pptx`。每页为 2× 视网膜截图，布局 100% 保真。文字不可编辑但可在目标工具中添加新内容。
+输出同目录 `.pptx`。所有文字/色块/网格线均为 PptxGenJS 原生对象，在 PowerPoint / Google Slides / Keynote 中完全可编辑、可改字体、可重新排版。仅照片/插图使用截图嵌入。
 
-**在 Google Slides 中使用**：上传 `.pptx` 到 Google Drive → 右键 → 用 Google Slides 打开。
-**在 Keynote 中使用**：双击 `.pptx` 或用 Keynote 打开 → 自动转换。
+**12 种布局自动映射**：cover / split-4-8 / overlap-right / bleed-quote / editorial / stats / gallery / closing / timeline / spread / compare / list，外加智能 fallback。
+
+#### 输出验证
+```bash
+node <SKILL_ROOT>/scripts/export-verify.mjs 项目/ppt/index.html
+```
+11 项全自动检查：slide 数量、layout 识别、console error、PPTX 结构、文字提取完整性、slide 逐页内容预览。
 
 #### 导出 PDF（文字可选中，InDesign 可用）
 ```bash

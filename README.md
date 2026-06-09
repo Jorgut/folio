@@ -10,8 +10,8 @@
 >
 > Folio 目前处于**技术验证和测试阶段**，尚未正式发布。所有功能、API 和工作流都可能在后续版本中发生重大变更。
 >
-> - 当前版本：v0.4
-> - 最后更新：2026-06-03
+> - 当前版本：v0.7
+> - 最后更新：2026-06-09
 > - 稳定性：实验性
 > - 贡献：欢迎反馈和建议，但暂不接受 PR（核心架构尚未定型）
 >
@@ -23,12 +23,14 @@
 
 | 特性 | 状态 |
 |------|------|
-| 杂志级排版（8 种布局） | ✅ 稳定 |
+| 杂志级排版（12 种布局） | ✅ 稳定 |
 | 响应式/自适应设计 | ✅ 稳定 |
 | 交互式演示（快捷键、概览、全屏） | ✅ 稳定 |
 | PPTX 截图导出 | ✅ 稳定 |
 | PDF 导出（文字矢量可选中） | ✅ 稳定 |
-| Native PPTX 引擎（全文字可编辑） | 🧪 测试中 |
+| Native PPTX 引擎（全文字可编辑） | ✅ Phase 1a 完成 |
+| 布局映射引擎（12 种布局 mappers） | ✅ Phase 1b 完成 |
+| 输出验证脚本 | ✅ Phase 1c 完成 |
 | 出版级 PDF（裁切标记 / CMYK） | 🧪 测试中 |
 | 设计工作流（IA → Wireframe → Mockup） | 🧪 测试中 |
 
@@ -47,10 +49,13 @@ cd scripts/
 npm install
 npx playwright install chromium
 
-# 4. 导出 PPTX（截图方式，布局 100% 还原）
-node export-pptx.mjs 我的项目/ppt.html
+# 4. 导出 PPTX（Native 全文字可编辑，带布局映射）
+node export-native-pptx.mjs 我的项目/ppt.html
 
-# 5. 导出 PDF（文字可选中，InDesign 可用）
+# 5. 输出验证
+node export-verify.mjs 我的项目/ppt.html
+
+# 6. 导出 PDF（文字可选中，InDesign 可用）
 node export-pdf.mjs 我的项目/ppt.html
 ```
 
@@ -80,20 +85,24 @@ IA (信息架构) → Lo-fi Wireframe → Mid-fi → Hi-fi → HTML Mockup → N
 | `references/presentation-design.md` | 编辑设计模式（NYT Magazine、Stripe Press、Monocle 等） |
 | `references/information-architecture.md` | IA 五阶段流程（适配演示文稿） |
 | `references/wireframing.md` | Lo-fi/Mid-fi/Hi-fi 线框图方法 |
-| `templates/wireframe-sheet.html` | 可打印线框图纸（9 种布局 + 注释区） |
+| `templates/wireframe-sheet.html` | 可打印线框图纸（13 种布局 + 注释区） |
 
-## 8 种杂志布局
+## 12 种杂志布局
 
-| 布局 | 用途 |
-|------|------|
-| Cover | 封面 — 居中或偏置大字 |
-| Split 4-8 / 3-9 / 7-5 | 不对称图文分栏 |
-| Overlap | 全出血图 + 文字浮层 |
-| Bleed Quote | 全出血图 + 引语 |
-| Editorial | CSS 双栏正文 |
-| Stats | 数字大字报 |
-| Gallery | 图片画廊（auto-fill 自适应列数） |
-| Closing | 收束页 |
+| # | 布局 | 用途 |
+|---|------|------|
+| 1 | **Cover** | 封面 — 居中或偏置大字 |
+| 2 | **Split 4-8 / 3-9 / 7-5** | 不对称图文分栏 |
+| 3 | **Overlap** | 全出血图 + 文字浮层 |
+| 4 | **Bleed Quote** | 全出血图 + 引语 |
+| 5 | **Editorial** | CSS 双栏正文 |
+| 6 | **Stats** | 数字大字报 |
+| 7 | **Gallery** | 图片画廊（auto-fill 自适应列数） |
+| 8 | **Closing** | 收束页 |
+| 9 | **Timeline** | 时间线 / 流程步骤 |
+| 10 | **Spread** | 左右全出血跨页图文 |
+| 11 | **Compare** | 并排对比（旧 vs 新 / A vs B） |
+| 12 | **List** | 编号列表 / 原则清单 |
 
 ## 设计原则
 

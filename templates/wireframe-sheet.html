@@ -172,6 +172,59 @@
   .wf-closing .quote { width: 70%; height: 24px; }
   .wf-closing .attr { width: 30%; height: 12px; }
 
+  /* Spread wireframe */
+  .wf-spread {
+    width: 100%; height: 180px; position: relative;
+  }
+  .wf-spread .bg { width: 100%; height: 100%; }
+  .wf-spread .copy {
+    position: absolute; bottom: 16px; left: 16px; right: 16px;
+  }
+  .wf-spread .copy .title { width: 50%; height: 18px; margin-bottom: 4px; }
+  .wf-spread .copy .sub  { width: 30%; height: 10px; }
+
+  /* Compare wireframe */
+  .wf-compare {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    height: 180px; padding: 8px;
+  }
+  .wf-compare .col {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .wf-compare .col .img { flex: 1; }
+  .wf-compare .col .lbl { height: 10px; width: 60%; }
+
+  /* Timeline wireframe */
+  .wf-timeline {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 8px;
+    height: 180px; padding: 8px;
+  }
+  .wf-timeline .intro-col {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .wf-timeline .intro-col .hdr { height: 16px; width: 80%; }
+  .wf-timeline .intro-col .desc { flex: 1; }
+  .wf-timeline .events-col {
+    position: relative; padding-left: 20px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .wf-timeline .events-col::before {
+    content: ''; position: absolute; left: 8px; top: 4px; bottom: 4px;
+    width: 2px; background: #bbb;
+  }
+  .wf-timeline .events-col .event { height: 12px; }
+
+  /* Listicle wireframe */
+  .wf-list {
+    display: flex; flex-direction: column; gap: 6px;
+    height: 180px; padding: 8px;
+  }
+  .wf-list .row {
+    display: grid; grid-template-columns: 32px 1fr; gap: 8px; align-items: center;
+  }
+  .wf-list .row .num { height: 16px; width: 24px; }
+  .wf-list .row .txt { height: 12px; }
+
   /* Annotation area */
   .annotations {
     margin-top: 24px;
@@ -440,6 +493,108 @@
       <div class="annotation-item">
         <h4>Content</h4>
         <div class="editable" contenteditable>"Final message..." — Source</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPREAD -->
+  <div class="wireframe-card">
+    <h3>10 · Spread</h3>
+    <div class="meta">Full-bleed image + bottom copy — magazine spread</div>
+    <div class="wf-box wf-spread">
+      <div class="wf-box image bg"><span class="wf-box label">Full Bleed Image</span></div>
+      <div class="wf-box copy">
+        <div class="wf-box text title"><span class="wf-box label">Headline</span></div>
+        <div class="wf-box text sub"><span class="wf-box label">Byline / Lead</span></div>
+      </div>
+    </div>
+    <div class="annotations">
+      <div class="annotation-item">
+        <h4>Content</h4>
+        <div class="editable" contenteditable>Full-bleed image + headline + byline...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARE -->
+  <div class="wireframe-card">
+    <h3>11 · Compare</h3>
+    <div class="meta">Three-column comparison — A / B / hybrid</div>
+    <div class="wf-box wf-compare">
+      <div class="col">
+        <div class="wf-box image img"><span class="wf-box label">A</span></div>
+        <div class="wf-box text lbl"><span class="wf-box label">Label</span></div>
+        <div class="wf-box text" style="height:8px"><span class="wf-box label">Desc</span></div>
+      </div>
+      <div class="col">
+        <div class="wf-box image img"><span class="wf-box label">B</span></div>
+        <div class="wf-box text lbl"><span class="wf-box label">Label</span></div>
+        <div class="wf-box text" style="height:8px"><span class="wf-box label">Desc</span></div>
+      </div>
+      <div class="col">
+        <div class="wf-box image img"><span class="wf-box label">C</span></div>
+        <div class="wf-box text lbl"><span class="wf-box label">Label</span></div>
+        <div class="wf-box text" style="height:8px"><span class="wf-box label">Desc</span></div>
+      </div>
+    </div>
+    <div class="annotations">
+      <div class="annotation-item">
+        <h4>Content</h4>
+        <div class="editable" contenteditable>Three options / phases / directions to compare...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="wireframe-card">
+    <h3>12 · Timeline</h3>
+    <div class="meta">Vertical timeline — spatial or process journey</div>
+    <div class="wf-box wf-timeline">
+      <div class="wf-box intro-col" style="border:none;background:transparent">
+        <div class="wf-box text hdr"><span class="wf-box label">Section</span></div>
+        <div class="wf-box text desc"><span class="wf-box label">Intro / lead describing the journey...</span></div>
+      </div>
+      <div class="events-col">
+        <div class="wf-box text event"><span class="wf-box label">Event 1 — detail</span></div>
+        <div class="wf-box text event"><span class="wf-box label">Event 2 — detail</span></div>
+        <div class="wf-box text event"><span class="wf-box label">Event 3 — detail</span></div>
+        <div class="wf-box text event"><span class="wf-box label">Event 4 — detail</span></div>
+      </div>
+    </div>
+    <div class="annotations">
+      <div class="annotation-item">
+        <h4>Content</h4>
+        <div class="editable" contenteditable>Timeline steps with title + body description...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIST -->
+  <div class="wireframe-card">
+    <h3>13 · List</h3>
+    <div class="meta">Numbered listicle — items with count</div>
+    <div class="wf-box wf-list">
+      <div class="row">
+        <div class="wf-box text num" style="border-color:var(--accent, #94352b)"><span class="wf-box label">1</span></div>
+        <div class="wf-box text txt"><span class="wf-box label">First item title and description</span></div>
+      </div>
+      <div class="row">
+        <div class="wf-box text num" style="border-color:var(--accent, #94352b)"><span class="wf-box label">2</span></div>
+        <div class="wf-box text txt"><span class="wf-box label">Second item title and description</span></div>
+      </div>
+      <div class="row">
+        <div class="wf-box text num" style="border-color:var(--accent, #94352b)"><span class="wf-box label">3</span></div>
+        <div class="wf-box text txt"><span class="wf-box label">Third item title and description</span></div>
+      </div>
+      <div class="row">
+        <div class="wf-box text num" style="border-color:var(--accent, #94352b)"><span class="wf-box label">4</span></div>
+        <div class="wf-box text txt"><span class="wf-box label">Fourth item title and description</span></div>
+      </div>
+    </div>
+    <div class="annotations">
+      <div class="annotation-item">
+        <h4>Content</h4>
+        <div class="editable" contenteditable>Numbered items with title + description...</div>
       </div>
     </div>
   </div>
