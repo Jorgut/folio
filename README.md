@@ -4,6 +4,11 @@
 
 **单文件 HTML** 横向翻页 PPT，杂志编辑式排版。支持一键导出 PPTX（Native 全文字可编辑）和 PDF（可导入 InDesign）。
 
+<p align="center">
+  <img src="assets/screenshots/slide-cover.png" width="45%" alt="Cover 布局">
+  <img src="assets/screenshots/slide-editorial.png" width="45%" alt="Editorial 布局">
+</p>
+
 ---
 
 > ⚠️ **项目状态：测试阶段**
@@ -62,6 +67,11 @@ node export-pdf.mjs 我的项目/ppt.html
 ## 设计工作流
 
 > 不要跳过 IA 和 wireframe 直接写 HTML。结构错了后面全白费。
+
+<p align="center">
+  <img src="assets/screenshots/wireframe-sheet.png" width="80%" alt="Wireframe Sheet — 13 种布局">
+  <br><em>Wireframe Sheet — 13 种杂志布局，支持打印和标注</em>
+</p>
 
 ```
 IA (信息架构) → Lo-fi Wireframe → Mid-fi → Hi-fi → HTML Mockup → Native Export
