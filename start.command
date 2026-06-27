@@ -1,11 +1,10 @@
 #!/bin/bash
 # Folio - Design Intelligence Engine
-# Double-click to copy context and launch opencode
-# Then Cmd+V in opencode to paste the HANDOFF context
+# Double-click to start opencode with project context
 
 cd "$(dirname "$0")"
 
-cat HANDOFF.md | pbcopy
+HANDOFF=$(cat HANDOFF.md)
 
 clear
 echo ''
@@ -15,19 +14,7 @@ echo '║                                              ║'
 echo '║  Recent: README rewrite / Wireframe update   ║'
 echo '║          Figma dual-mode / IDML docs         ║'
 echo '║                                              ║'
-echo '║  TODO: Improve getting-started flow          ║'
-echo '║        Evaluate Design Engine restructure    ║'
-echo '║                                              ║'
-echo '║  Context copied to clipboard!                ║'
-echo '║  In opencode: press Cmd+V to paste           ║'
+echo '║  Starting opencode with context...           ║'
 echo '╚══════════════════════════════════════════════╝'
 
-cat HANDOFF.md
-
-echo ''
-echo '======================================================'
-echo '  Context copied to clipboard!'
-echo '  -> opencode started below, press Cmd+V to continue'
-echo '======================================================'
-
-exec opencode
+exec opencode /Users/aj/.claude/skills/folio
