@@ -1,8 +1,4 @@
-<p align="center">
-  <a href="README.md">🇬🇧 English</a> · <strong>🇨🇳 中文</strong>
-</p>
-
----
+> 🌏 **English version: [README.md](./README.md)**
 
 # Folio · 设计智能引擎
 

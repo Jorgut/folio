@@ -1,8 +1,4 @@
-<p align="center">
-  <strong>🇬🇧 English</strong> · <a href="README.zh-CN.md">🇨🇳 中文</a>
-</p>
-
----
+> 🌏 **中文版: [README.zh-CN.md](./README.zh-CN.md)**
 
 # Folio · Design Intelligence Engine
 
