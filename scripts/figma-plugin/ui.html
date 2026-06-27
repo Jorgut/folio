@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+      padding: 24px;
+      background: #fff;
+      color: #1a1814;
+    }
+    h1 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    p {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+    .file-area {
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .file-area:hover, .file-area.has-file {
+      border-color: #666;
+    }
+    .file-area .label {
+      font-size: 13px;
+      color: #999;
+    }
+    .file-area .filename {
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      word-break: break-all;
+    }
+    .file-input {
+      display: none;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button.primary {
+      background: #000;
+      color: #fff;
+    }
+    button.primary:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    button.primary:hover:not(:disabled) {
+      opacity: 0.8;
+    }
+    #status {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #666;
+      min-height: 20px;
+    }
+    #status.success { color: #1a7d3a; }
+    #status.error { color: #c82a2a; }
+
+    .progress-wrap {
+      margin-top: 12px;
+      display: none;
+    }
+    .progress-wrap.active {
+      display: block;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: #e5e5e5;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #000;
+      border-radius: 2px;
+      transition: width 0.2s ease;
+      width: 0%;
+    }
+    .progress-label {
+      font-size: 11px;
+      color: #999;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Folio Importer</h1>
+  <p>Import a .figma.json file exported from Folio.</p>
+
+  <div class="file-area" id="fileArea">
+    <div class="label" id="fileLabel">Click to select file</div>
+    <div class="filename" id="filename" style="display:none"></div>
+  </div>
+  <input type="file" class="file-input" id="fileInput" accept=".json">
+
+  <button class="primary" id="importBtn" disabled>Import</button>
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div id="status"></div>
+
+  <script>
+    let jsonData = null;
+
+    document.getElementById('fileArea').onclick = () => {
+      document.getElementById('fileInput').click();
+    };
+
+    document.getElementById('fileInput').onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        jsonData = JSON.parse(text);
+        document.getElementById('filename').textContent = file.name;
+        document.getElementById('filename').style.display = 'block';
+        document.getElementById('fileLabel').style.display = 'none';
+        document.getElementById('fileArea').classList.add('has-file');
+        document.getElementById('importBtn').disabled = false;
+        document.getElementById('status').textContent = '';
+        document.getElementById('status').className = '';
+      } catch (err) {
+        document.getElementById('status').textContent = 'Error: Invalid JSON file';
+        document.getElementById('status').className = 'error';
+      }
+    };
+
+    document.getElementById('importBtn').onclick = () => {
+      if (!jsonData) return;
+      document.getElementById('importBtn').disabled = true;
+      document.getElementById('status').textContent = 'Importing...';
+      document.getElementById('status').className = '';
+      document.getElementById('progressWrap').classList.add('active');
+      document.getElementById('progressFill').style.width = '0%';
+      parent.postMessage({ pluginMessage: { type: 'import', data: jsonData } }, '*');
+    };
+
+    window.onmessage = (e) => {
+      const msg = e.data.pluginMessage;
+      if (!msg) return;
+      if (msg.type === 'progress') {
+        var pct = Math.round((msg.current / msg.total) * 100);
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressLabel').textContent = msg.current + ' / ' + msg.total;
+        document.getElementById('status').textContent = 'Importing slide ' + msg.current + '/' + msg.total + '...';
+      } else if (msg.type === 'done') {
+        document.getElementById('progressFill').style.width = '100%';
+        document.getElementById('progressLabel').textContent = msg.total + ' / ' + msg.total;
+        document.getElementById('status').textContent = msg.message;
+        document.getElementById('status').className = 'success';
+        document.getElementById('importBtn').disabled = false;
+        document.getElementById('fileInput').value = '';
+      } else if (msg.type === 'error') {
+        document.getElementById('status').textContent = msg.message;
+        document.getElementById('status').className = 'error';
+        document.getElementById('importBtn').disabled = false;
+      }
+    };
+
+    document.getElementById('cancelBtn')?.addEventListener('click', () => {
+      parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*');
+    });
+  </script>
+</body>
+</html>

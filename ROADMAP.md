@@ -82,10 +82,9 @@ User Prompt → Decision Engine → Visual Style → Engines → Output
 
 - SKILL.md 重构：新增决策引擎、视觉风格库、交互模式库、知识库架构
 - `engines/` 目录：7 个引擎能力定义（Layout / Typography / Color / Interaction / Animation / Visual Effects / Export）
-- `design-intelligence/decision-engine.md`：完整的 5 步决策流程 + 快速决策矩阵
-- `design-intelligence/visual-styles/`：8 个视觉风格完整定义（Minimal / Editorial / Swiss / Architectural / Brutalism / Glass / Dark / Bento / Luxury / Cyberpunk）
-- `design-intelligence/interaction-patterns/`：交互模式分类库（Page Enter / Hover / Scroll / Navigation / Loading / Data）
-- `design-intelligence/knowledge-base/`：设计知识库（Gestalt Principles / UX Laws / Accessibility / Information Design）
+- `SKILL.md`：108 行精简工作流（风格决策表 + 4 步流程 + 约束规则）
+- `design/style-guide.md`：10 种视觉风格完整参数合并（替代原先 10 个独立文件）
+- `design/principles.md`：设计原则合并（UX Laws / Gestalt / Information Design / Accessibility / 交互层级）
 - 布局引擎/排版引擎/配色引擎/交互引擎/动效引擎/视觉特效引擎/导出引擎 — 完整定义
 
 ### 下一步：引擎→代码联动
@@ -93,7 +92,7 @@ User Prompt → Decision Engine → Visual Style → Engines → Output
 - `engines/color-engine.md` → 自动生成 CSS 变量
 - `engines/typography-engine.md` → 自动加载 Google Fonts
 - `engines/visual-effects-engine.md` → CSS 特效代码片段
-- `design-intelligence/decision-engine.md` → CLI 提示交互
+- `design/style-guide.md` 和 `design/principles.md` → CLI 提示交互
 
 ---
 

@@ -15,7 +15,7 @@
 ## 引擎协作流程
 
 ```
-Decision Engine (design-intelligence/decision-engine.md)
+决策表与工作流 (SKILL.md)
   │  分析输入 → 输出决策参数
   │
   ├── Layout Engine ← 选择布局序列

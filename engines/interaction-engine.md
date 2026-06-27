@@ -2,7 +2,7 @@
 
 > 交互模式选择与组合规则
 
-完整交互模式库见 `design-intelligence/interaction-patterns/` — 本文件为引擎级决策指南。
+完整交互模式库见 `design/principles.md` → Interaction Levels。本文件为引擎级决策指南。
 
 ## 交互层级
 

@@ -24,6 +24,8 @@ const TEXT_SELECTOR = [
   '.quote-block .pull-quote', '.quote-block .attribution',
   '.text-panel h2', '.text-panel .lead', '.text-panel .body', '.text-panel .caption',
   '.article-header h2', '.article-body p',
+  '.table-label', '.table-value',
+  '.quote-text',
 ].join(', ');
 
 function pxToInches(px) {
@@ -231,6 +233,11 @@ async function extractSlides(page) {
       const textElements = Array.from(slide.querySelectorAll(textSelector))
         .filter((element) => !isWithinIgnoredContainer(element))
         .filter((element) => !isImageContainerText(element))
+        .filter((element) => {
+          // Only leaf elements: exclude parent containers that also match the selector
+          const children = element.querySelectorAll(textSelector);
+          return children.length === 0;
+        })
         .map(readTextElement)
         .filter(Boolean);
 

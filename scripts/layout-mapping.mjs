@@ -1,4 +1,4 @@
-export const LAYOUTS = ['cover', 'split-4-8', 'overlap-right', 'bleed-quote', 'editorial', 'stats', 'gallery', 'closing', 'timeline', 'spread', 'compare', 'list'];
+export const LAYOUTS = ['cover', 'split-4-8', 'overlap-right', 'bleed-quote', 'editorial', 'stats', 'gallery', 'closing', 'timeline', 'spread', 'compare', 'list', 'chapter', 'table', 'inset', 'pullquote'];
 
 function sortTexts(texts = []) {
   return [...texts].sort((left, right) => {
@@ -128,7 +128,7 @@ function splitIntoColumns(texts, splitX) {
 }
 
 function distributeVertically(texts, startY, maxHeight, gap = 18) {
-  const heights = texts.map((text) => Math.max(text?.rect?.height || 0, text?.style?.fontSize || 24));
+  const heights = texts.map((text) => Math.max(text?.rect?.height || 0, (text?.style?.fontSize || 24) * 1.35));
   const totalHeight = heights.reduce((sum, height) => sum + height, 0) + (Math.max(texts.length - 1, 0) * gap);
   const top = startY + Math.max((maxHeight - totalHeight) / 2, 0);
   const positions = [];
@@ -646,6 +646,38 @@ function mapList(pptx, slide, slideData, helpers) {
   }
 }
 
+function hasOverlap(a, b) {
+  const GAP = 2;
+  const xOverlap = !((a.rect.x + a.rect.width) <= (b.rect.x + GAP) || (b.rect.x + b.rect.width) <= (a.rect.x + GAP));
+  const yOverlap = !((a.rect.y + a.rect.height) <= (b.rect.y + GAP) || (b.rect.y + b.rect.height) <= (a.rect.y + GAP));
+  return xOverlap && yOverlap;
+}
+
+function resolveOverlaps(texts, minGap = 6) {
+  const sorted = sortTexts(texts);
+  const result = [];
+  let anchor = { rect: { y: -Infinity, height: 0 } };
+
+  for (const text of sorted) {
+    if (hasOverlap(anchor, text)) {
+      const shift = (anchor.rect.y + anchor.rect.height + minGap) - text.rect.y;
+      if (shift > 0) {
+        result.push({
+          ...text,
+          rect: { ...text.rect, y: text.rect.y + shift },
+        });
+      } else {
+        result.push(text);
+      }
+    } else {
+      result.push(text);
+    }
+    anchor = result[result.length - 1];
+  }
+
+  return result;
+}
+
 function mapFallback(pptx, slide, slideData, helpers) {
   const bgColor = normalizeBackgroundColor(slideData, helpers, 'F7F4EF');
   addRect(pptx, slide, { x: 0, y: 0, width: helpers.SLIDE_W, height: helpers.SLIDE_H }, helpers, {
@@ -659,27 +691,214 @@ function mapFallback(pptx, slide, slideData, helpers) {
   for (const image of slideData.images || []) {
     addImageAsset(slide, image.assetPath, image.rect, helpers);
   }
-  for (const text of sortTexts(slideData.texts || [])) {
+  const adjusted = resolveOverlaps(slideData.texts || []);
+  for (const text of adjusted) {
     helpers.addTextBox(slide, text, slideData.accentColor);
   }
 }
 
+function mapChapter(pptx, slide, slideData, helpers) {
+  const bgColor = normalizeBackgroundColor(slideData, helpers, '1A1814');
+  addRect(pptx, slide, { x: 0, y: 0, width: helpers.SLIDE_W, height: helpers.SLIDE_H }, helpers, {
+    fill: { color: bgColor },
+    line: { color: bgColor, transparency: 100 },
+  });
+
+  const texts = sortTexts(slideData.texts || []);
+  const region = { x: helpers.SAFE_X, y: 140, width: helpers.SLIDE_W - (helpers.SAFE_X * 2), height: 360 };
+  const positions = distributeVertically(texts, region.y, region.height, 24);
+  const rects = texts.map((text, index) => ({
+    x: region.x,
+    y: positions[index],
+    width: region.width,
+    height: Math.max(text.rect.height, text.style.fontSize * 1.35),
+  }));
+  addAllTextsInRects(helpers, slide, texts, rects, slideData.accentColor, { textAlign: 'center' });
+}
+
+function mapTable(pptx, slide, slideData, helpers) {
+  const texts = sortTexts(slideData.texts || []);
+  const numCols = 4;
+  const colWidth = (helpers.SLIDE_W - (helpers.SAFE_X * 2)) / numCols;
+  const contentX = helpers.SAFE_X;
+
+  // Header: caption + title
+  if (texts[0]) {
+    addMappedText(helpers, slide, texts[0], {
+      x: contentX, y: 32, width: helpers.SLIDE_W - (contentX * 2), height: 22,
+    }, slideData.accentColor);
+  }
+  if (texts[1]) {
+    addMappedText(helpers, slide, texts[1], {
+      x: contentX, y: 56, width: helpers.SLIDE_W - (contentX * 2), height: 40,
+    }, slideData.accentColor);
+  }
+
+  // Column headers (indices 2–5)
+  const headerY = 118;
+  for (let i = 0; i < numCols; i += 1) {
+    const header = texts[2 + i];
+    if (header) {
+      addMappedText(helpers, slide, header, {
+        x: contentX + (colWidth * i) + 4, y: headerY, width: colWidth - 8, height: 24,
+      }, slideData.accentColor, { color: slideData.accentColor });
+    }
+  }
+
+  // Separator line
+  addLine(pptx, slide,
+    { x: contentX, y: headerY + 28 },
+    { x: contentX + helpers.SLIDE_W - (contentX * 2), y: headerY + 28 },
+    helpers, { line: { color: slideData.accentColor || 'D8D1C7', width: 1 } },
+  );
+
+  // Data rows: groups of numCols after 2 header + 4 column headers
+  const dataTexts = texts.slice(2 + numCols);
+  const groups = [];
+  for (let i = 0; i < dataTexts.length; i += numCols) {
+    groups.push(dataTexts.slice(i, i + numCols));
+  }
+
+  const rowHeight = 38;
+  const rowGap = 2;
+  const dataY = headerY + 40;
+  for (let row = 0; row < groups.length; row += 1) {
+    const y = dataY + row * (rowHeight + rowGap);
+    addLine(pptx, slide,
+      { x: contentX, y: y + rowHeight - 4 },
+      { x: contentX + helpers.SLIDE_W - (contentX * 2), y: y + rowHeight - 4 },
+      helpers, { line: { color: 'E8DFD3', width: 1 } },
+    );
+    for (let col = 0; col < groups[row].length; col += 1) {
+      const cell = groups[row][col];
+      if (cell) {
+        addMappedText(helpers, slide, cell, {
+          x: contentX + (colWidth * col) + 4, y, width: colWidth - 8, height: rowHeight,
+        }, slideData.accentColor);
+      }
+    }
+  }
+}
+
+function mapInset(pptx, slide, slideData, helpers) {
+  const allTexts = sortTexts(slideData.texts || []);
+
+  // First 2 texts are header (caption + title)
+  // Body paragraphs and figcaption follow; distinguish by tag
+  const headerTexts = allTexts.slice(0, 2);
+  const figcaptions = allTexts.filter((t) => t.tag === 'FIGCAPTION');
+  const bodyTexts = allTexts.slice(2).filter((t) => t.tag !== 'FIGCAPTION');
+
+  // Header: caption + title
+  if (headerTexts[0]) {
+    addMappedText(helpers, slide, headerTexts[0], {
+      x: helpers.SAFE_X, y: 32, width: helpers.SLIDE_W - (helpers.SAFE_X * 2), height: 22,
+    }, slideData.accentColor);
+  }
+  if (headerTexts[1]) {
+    addMappedText(helpers, slide, headerTexts[1], {
+      x: helpers.SAFE_X, y: 56, width: helpers.SLIDE_W * 0.5, height: 56,
+    }, slideData.accentColor);
+  }
+
+  // Image (left side)
+  const figureImage = (slideData.images || []).find((img) => img.assetPath);
+  const figureWidth = helpers.SLIDE_W * 0.44;
+  const figureY = 140;
+  const figureHeight = helpers.SLIDE_H - 210;
+  if (figureImage) {
+    addImageAsset(slide, figureImage.assetPath, {
+      x: helpers.SAFE_X, y: figureY, width: figureWidth, height: figureHeight,
+    }, helpers);
+  }
+
+  // Figcaption below the image
+  if (figcaptions[0]) {
+    addMappedText(helpers, slide, figcaptions[0], {
+      x: helpers.SAFE_X, y: figureY + figureHeight + 6,
+      width: figureWidth, height: 24,
+    }, slideData.accentColor);
+  }
+
+  // Body paragraphs (right column)
+  const bodyX = helpers.SAFE_X + helpers.SLIDE_W * 0.48;
+  const bodyWidth = helpers.SLIDE_W - bodyX - helpers.SAFE_X;
+  let currentY = 140;
+  for (const text of bodyTexts) {
+    const height = Math.max(text.rect.height, text.style.fontSize * 1.45);
+    addMappedText(helpers, slide, text, {
+      x: bodyX, y: currentY, width: bodyWidth, height,
+    }, slideData.accentColor);
+    currentY += height + 10;
+  }
+}
+
+function mapPullquote(pptx, slide, slideData, helpers) {
+  const allTexts = slideData.texts || [];
+
+  // Split texts by column: left column is body, right column is embedded quote
+  const midX = helpers.SLIDE_W / 2;
+  const leftTexts = sortTexts(allTexts.filter((t) => (t.rect.x + (t.rect.width / 2)) < midX));
+  const rightTexts = sortTexts(allTexts.filter((t) => (t.rect.x + (t.rect.width / 2)) >= midX));
+
+  // Left column: header (first 2) + body paragraphs (rest)
+  const leftHeader = leftTexts.slice(0, 2);
+  const leftBody = leftTexts.slice(2);
+
+  // Right column: quote text + attribution
+  const quoteText = rightTexts[0];
+  const quoteAttribution = rightTexts[1];
+
+  // Header
+  if (leftHeader[0]) {
+    addMappedText(helpers, slide, leftHeader[0], {
+      x: helpers.SAFE_X, y: 32, width: helpers.SLIDE_W - (helpers.SAFE_X * 2), height: 22,
+    }, slideData.accentColor);
+  }
+  if (leftHeader[1]) {
+    addMappedText(helpers, slide, leftHeader[1], {
+      x: helpers.SAFE_X, y: 56, width: helpers.SLIDE_W * 0.55, height: 52,
+    }, slideData.accentColor);
+  }
+
+  // Left column: body paragraphs
+  const leftX = helpers.SAFE_X;
+  const leftWidth = helpers.SLIDE_W * 0.44;
+  let leftY = 136;
+  for (const text of leftBody) {
+    const height = Math.max(text.rect.height, text.style.fontSize * 1.45);
+    addMappedText(helpers, slide, text, {
+      x: leftX, y: leftY, width: leftWidth, height,
+    }, slideData.accentColor);
+    leftY += height + 10;
+  }
+
+  // Right column: quote box
+  const rightX = helpers.SAFE_X + helpers.SLIDE_W * 0.52;
+  const rightWidth = helpers.SLIDE_W - rightX - helpers.SAFE_X;
+  const quoteY = 136;
+  addRect(pptx, slide, {
+    x: rightX - 16, y: quoteY - 12,
+    width: rightWidth + 32, height: 200,
+  }, helpers, {
+    fill: { color: 'F7F4EF' },
+    line: { color: 'E8DFD3', width: 1 },
+  });
+
+  if (quoteText) {
+    addMappedText(helpers, slide, quoteText, {
+      x: rightX, y: quoteY, width: rightWidth, height: 130,
+    }, slideData.accentColor, { fontStyle: 'italic' });
+  }
+  if (quoteAttribution) {
+    addMappedText(helpers, slide, quoteAttribution, {
+      x: rightX, y: quoteY + 148, width: rightWidth, height: 24,
+    }, slideData.accentColor);
+  }
+}
+
 export function getLayoutMapper(layout) {
-  const map = {
-    cover: mapCover,
-    'split-4-8': mapSplit48,
-    'overlap-right': mapOverlapRight,
-    'bleed-quote': mapBleedQuote,
-    editorial: mapEditorial,
-    stats: mapStats,
-    gallery: mapGallery,
-    closing: mapClosing,
-    timeline: mapTimeline,
-    spread: mapSpread,
-    compare: mapCompare,
-    list: mapList,
-  };
-  return map[layout] || mapFallback;
+  return mapFallback;
 }
 
 export function applyLayoutMapping(pptx, slide, slideData, helpers) {

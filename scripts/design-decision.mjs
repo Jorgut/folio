@@ -4,7 +4,7 @@
  * design-decision.mjs — 设计决策 CLI
  *
  * 交互式 5 步决策流程，输出 Design Parameters 代码块。
- * （对应 design-intelligence/decision-engine.md）
+ * （对应 SKILL.md 的决策表）
  *
  * 用法:
  *   node scripts/design-decision.mjs           # 交互模式
