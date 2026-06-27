@@ -20,13 +20,13 @@
 ![Open Code](https://img.shields.io/badge/Open%20Code-Compatible-111111?style=flat-square)
 ![Codex](https://img.shields.io/badge/Codex-Compatible-222222?style=flat-square)
 
-> Magazine-style presentation engine. Structured content → template-driven layout → multi-format export.
+> Magazine-style presentation engine. Structured content → template-driven layout → editable formats.
 
 ```text
-You describe what you need → Folio determines style & structure → renders & exports → you get the deliverable
+You describe what you need → Folio generates the deck → export to any format → refine in your tool of choice
 ```
 
-Single source, multiple outputs: **HTML Slides / PPTX / PDF / Figma**. No manual layout work.
+Single source, multiple outputs: **HTML / PPTX / PDF / Figma / IDML**. Auto-generated layout, manually editable after export.
 
 ---
 
@@ -68,14 +68,14 @@ Folio determines: platform → audience → style → interaction level
     ↓
 Template selected → content filled → rendered
     ↓
-┌─────────┬─────────┬─────────┬─────────┐
-│ HTML    │ PPTX    │ PDF     │ Figma   │
-│ Present │ Editable│ Print-  │ C2D     │
-│ directly│ text    │ ready   │ import  │
-└─────────┴─────────┴─────────┴─────────┘
+┌─────────┬─────────┬─────────┬─────────┬────────┐
+│ HTML    │ PPTX    │ PDF     │ Figma   │ IDML   │
+│ Present │ Editable│ Print-  │ Editable│ InDesign│
+│ directly│ text    │ ready   │ frames  │ native │
+└─────────┴─────────┴─────────┴─────────┴────────┘
 ```
 
-Every step is AI-guided. No config files to touch.
+Output formats designed for further editing: PPTX, Figma, and IDML preserve editable text and structure so you can refine in your preferred tool.
 
 ---
 
@@ -292,13 +292,13 @@ MIT · Copyright (c) 2026 Jorgut
 ![Open Code](https://img.shields.io/badge/Open%20Code-%E5%85%BC%E5%AE%B9-111111?style=flat-square)
 ![Codex](https://img.shields.io/badge/Codex-%E5%85%BC%E5%AE%B9-222222?style=flat-square)
 
-> 杂志级演示引擎。结构化内容 → 模板驱动排版 → 多格式导出。
+> 杂志级演示引擎。结构化内容 → 模板驱动排版 → 可编辑格式输出。
 
 ```text
-你说要做个什么 → Folio 确定风格和结构 → 渲染并导出 → 你拿到成品
+你说要做个什么 → Folio 生成 deck → 导出到目标格式 → 在熟悉工具里精修
 ```
 
-一次输出：**HTML 演示 / PPTX / PDF / Figma**。不需要手动排版。
+一次输出：**HTML / PPTX / PDF / Figma / IDML**。自动排版，导出后可手动精修。
 
 ---
 
@@ -340,14 +340,14 @@ Folio 确定：平台 → 受众 → 风格 → 交互层级
     ↓
 套用模板 → 填充内容 → 渲染
     ↓
-┌─────────┬─────────┬─────────┬─────────┐
-│ HTML    │ PPTX    │ PDF     │ Figma   │
-│ 可直接  │ 文字可   │ 出版级   │ C2D 高  │
-│ 演示    │ 编辑     │ 3mm出血 │ 保真导入 │
-└─────────┴─────────┴─────────┴─────────┘
+┌─────────┬─────────┬─────────┬─────────┬────────┐
+│ HTML    │ PPTX    │ PDF     │ Figma   │ IDML   │
+│ 可直接  │ 可编辑   │ 出版级   │ 可编辑   │ InDesign│
+│ 演示    │ 文字     │ 3mm出血 │ Frame   │ 原生格式│
+└─────────┴─────────┴─────────┴─────────┴────────┘
 ```
 
-每个环节由 AI 引导，无需手动配置。
+PPTX、Figma、IDML 等格式保持文字和结构的可编辑性，导出后可在熟悉工具中进一步精修。
 
 ---
 
