@@ -16,6 +16,9 @@
 ![PDF](https://img.shields.io/badge/PDF-Print%20Ready-DC143C?style=flat-square)
 ![Figma](https://img.shields.io/badge/Figma-Pixel%20Perfect-A259FF?style=flat-square)
 ![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-6B5B95?style=flat-square)
+![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-222222?style=flat-square)
+![Open Code](https://img.shields.io/badge/Open%20Code-Compatible-111111?style=flat-square)
+![Codex](https://img.shields.io/badge/Codex-Compatible-222222?style=flat-square)
 
 > Magazine-style presentation engine. Structured content → template-driven layout → multi-format export.
 
@@ -184,6 +187,9 @@ MIT · Copyright (c) 2026 Jorgut
 ![PDF](https://img.shields.io/badge/PDF-%E5%8D%B0%E5%88%B7%E7%BA%A7-DC143C?style=flat-square)
 ![Figma](https://img.shields.io/badge/Figma-%E5%83%8F%E7%B4%A0%E7%BA%A7%E8%BF%98%E5%8E%9F-A259FF?style=flat-square)
 ![Claude Code](https://img.shields.io/badge/Claude%20Code-%E5%85%BC%E5%AE%B9-6B5B95?style=flat-square)
+![OpenClaw](https://img.shields.io/badge/OpenClaw-%E5%85%BC%E5%AE%B9-222222?style=flat-square)
+![Open Code](https://img.shields.io/badge/Open%20Code-%E5%85%BC%E5%AE%B9-111111?style=flat-square)
+![Codex](https://img.shields.io/badge/Codex-%E5%85%BC%E5%AE%B9-222222?style=flat-square)
 
 > 杂志级演示引擎。结构化内容 → 模板驱动排版 → 多格式导出。
 
