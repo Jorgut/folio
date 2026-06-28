@@ -291,6 +291,7 @@ All export scripts live in `scripts/` and follow the `export-*.mjs` naming conve
 | `generate-theme.mjs` | Theme code generator (engine → CSS) |
 | `layout-mapping.mjs` | Layout mapping engine (PPTX/IDML position calculation) |
 | `figma-clipboard.mjs` | Experimental fig-kiwi clipboard encoder |
+| `git-push-gh-auth.sh` | Push current branch using `gh` token when plain HTTPS `git push` cannot prompt for credentials |
 
 ### Figma Export — Dual Mode
 
@@ -671,6 +672,7 @@ templates/wireframe-sheet.html
 | `generate-theme.mjs` | 主题代码生成器（引擎 → CSS） |
 | `layout-mapping.mjs` | 布局映射引擎（PPTX/IDML 坐标计算） |
 | `figma-clipboard.mjs` | 实验性 fig-kiwi 剪贴板编码器 |
+| `git-push-gh-auth.sh` | 当普通 HTTPS `git push` 无法弹凭证时，用 `gh` token 推送当前分支 |
 
 ### Figma 导出（双模式）
 
