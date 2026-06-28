@@ -36,18 +36,96 @@ Single source, multiple outputs: **HTML / PPTX / PDF / Figma / IDML**. Auto-gene
 
 ---
 
+## Platform Compatibility
+
+Folio is intentionally packaged so it can work across multiple agent ecosystems, not only one specific tool.
+
+### Minimum contract
+
+To be portable, a host only needs access to this folder and these files:
+
+- `SKILL.md` — core instructions
+- `SKILL.min.md` — minimal fallback instructions for low-context or prompt-only tools
+- `README.md` — human-facing usage and installation guide
+- `INSTALL.md` — platform-agnostic installation and troubleshooting guide
+- `manifest.json` — machine-readable release metadata for update checks
+- `VERSION` — local version number
+- `CHANGELOG.md` — human-readable release notes
+- `index.html` — base template
+- `design/`, `engines/`, `scripts/`, `templates/` — supporting system files
+
+### Installation by platform
+
+| Platform | Recommended setup |
+|----------|-------------------|
+| **Claude Code** | Place the folder under `~/.claude/skills/folio/` |
+| **OpenCode / OpenCode-compatible** | Place under `~/.config/opencode/skills/folio/` or your configured skills directory |
+| **Codex / Codex-like agents** | Mount or copy the folder into the tool's skill / prompt workspace, and make sure `SKILL.md` is exposed as the entry file |
+| **Any LLM without skill support** | Paste `SKILL.md` into system instructions / project instructions and keep the repo available as a local reference |
+
+### Important compatibility notes
+
+- `SKILL.md` now includes portable frontmatter metadata (`name`, `description`, `version`, `tags`, `compatible_with`) so skill loaders can identify it more reliably.
+- Some tools do **not** support `<SKILL_ROOT>` automatically. In those environments, replace `<SKILL_ROOT>` with the absolute path to the `folio` folder.
+- Some tools scan skills only on startup. If the skill does not appear immediately, restart the client or start a new session.
+- If a platform cannot execute skills natively, Folio still works as a **promptable design system + export toolkit**.
+
+### Update behavior
+
+Folio's update system is designed in two layers:
+
+- **Cross-platform core** inside the repo:
+  - `manifest.json`
+  - `VERSION`
+  - `CHANGELOG.md`
+  - `scripts/check-update.mjs`
+  - `scripts/self-update.mjs`
+- **Host trigger layer** supplied by the AI tool:
+  - Hosts with startup hooks can auto-run update checks when Folio loads
+  - Hosts without startup hooks should run the check on first use in the session
+  - Hosts without script or network access should skip auto-checking and fall back to manual update
+
+Folio does **not** assume every platform can auto-run scripts at load time.
+
+### Fallback prompt for generic AI tools
+
+If your AI tool has no native skill mechanism, start with:
+
+> "Use the attached Folio skill instructions and repo as a presentation engine. Create an 8-slide deck about [topic], keep it clean and modern, and export HTML first."
+
+### Extra portability files
+
+- `INSTALL.md` — installation matrix, troubleshooting, packaging checklist
+- `SKILL.min.md` — small-footprint version for tools with weak or no native skill support
+- `manifest.json` / `VERSION` / `CHANGELOG.md` — update metadata and release history
+
+---
+
 ## Quick Start
 
-Open Claude (or any AI with this Skill loaded) and say:
+If you do not know where to begin, copy this sentence into Claude:
 
-> **"Use Folio to make a presentation about [your topic], export as HTML."**
+> **"Use Folio to make an 8-slide presentation about [your topic]. Keep it clean and modern. Export HTML first."**
 
-The AI will walk through:
-1. **Content** — How many slides? What goes on each page? Any images?
-2. **Style** — Pick from 10 visual styles, or describe the feeling for a recommendation
-3. **Output** — HTML / PPTX / PDF / Figma / IDML
+That is enough for a first run.
 
-That's it. You get your deck.
+### What happens next
+
+The AI should guide you through only 3 decisions:
+1. **Topic** — What is the presentation about?
+2. **Style** — Clean / editorial / bold / luxury / dark, or let Folio choose
+3. **Output** — Start with **HTML**, then export PPTX / PDF / Figma / IDML if needed
+
+### Easiest first project
+
+Use this path if you want the least friction:
+
+1. Ask for **8 slides**
+2. Start with **HTML** output
+3. Review the structure and wording
+4. Only then export **PPTX** or **PDF** for editing / delivery
+
+In short: **topic first, style second, export last**.
 
 ---
 
@@ -338,18 +416,95 @@ MIT · Copyright (c) 2026 Jorgut
 
 ---
 
+## 平台兼容性
+
+Folio 的打包方式是尽量跨平台的，不绑定某一个 agent 工具。
+
+### 最小兼容契约
+
+只要宿主工具能访问这个目录和下面这些文件，Folio 就能工作：
+
+- `SKILL.md` — 核心指令
+- `SKILL.min.md` — 给低上下文 / 仅提示词工具使用的极简版本
+- `README.md` — 给人看的说明和安装指引
+- `INSTALL.md` — 平台无关的安装与排障说明
+- `manifest.json` — 给脚本和宿主读取的版本元数据
+- `VERSION` — 本地版本号
+- `CHANGELOG.md` — 给人看的更新记录
+- `index.html` — 基础模板
+- `design/`、`engines/`、`scripts/`、`templates/` — 支撑系统文件
+
+### 各平台建议安装方式
+
+| 平台 | 推荐方式 |
+|------|----------|
+| **Claude Code** | 放到 `~/.claude/skills/folio/` |
+| **OpenCode / OpenCode 兼容工具** | 放到 `~/.config/opencode/skills/folio/` 或你配置的 skills 目录 |
+| **Codex / 类 Codex agent** | 把整个目录挂载或复制到它的 skill / prompt 工作区，并确保 `SKILL.md` 作为入口文件可见 |
+| **不支持 skill 的通用 AI** | 把 `SKILL.md` 内容粘进 system instructions / project instructions，并让模型能访问这个仓库 |
+
+### 兼容性注意事项
+
+- `SKILL.md` 现在带有可移植的 frontmatter 元数据（`name`、`description`、`version`、`tags`、`compatible_with`），更利于被 skill loader 识别。
+- 有些工具不会自动解析 `<SKILL_ROOT>`。这种情况下，请把它替换成 `folio` 目录的绝对路径。
+- 有些工具只会在启动时扫描 skills。如果你装好后没立刻看到它，请重启客户端或新开会话。
+- 如果某个平台根本不支持原生 skill，Folio 仍然可以作为 **可复制提示词 + 本地设计系统仓库** 来用。
+
+### 更新机制
+
+Folio 的更新系统分成两层：
+
+- **仓库内的跨平台更新核心**：
+  - `manifest.json`
+  - `VERSION`
+  - `CHANGELOG.md`
+  - `scripts/check-update.mjs`
+  - `scripts/self-update.mjs`
+- **宿主工具负责的触发层**：
+  - 有 startup hook 的宿主：加载 Folio 时自动检查
+  - 没有 startup hook 的宿主：本次会话第一次真正使用 Folio 时检查
+  - 没有脚本权限或网络权限的宿主：跳过自动检查，退化为手动更新
+
+Folio **不会假设所有平台都能在加载 skill 时自动执行脚本**。
+
+### 给通用 AI 的兜底提示词
+
+如果你的 AI 工具没有原生 skill 机制，可以这样开场：
+
+> "Use the attached Folio skill instructions and repo as a presentation engine. Create an 8-slide deck about [topic], keep it clean and modern, and export HTML first."
+
+### 额外的可移植文件
+
+- `INSTALL.md` — 安装矩阵、排障说明、打包清单
+- `SKILL.min.md` — 给原生 skill 支持较弱的平台准备的小体积版本
+- `manifest.json` / `VERSION` / `CHANGELOG.md` — 更新元数据与版本记录
+
+---
+
 ## 快速开始
 
-打开 Claude（或任何接入此 Skill 的 AI），说：
+如果你现在还不知道该怎么开口，直接把这句话复制给 Claude：
 
-> **"用 Folio 做一个关于 [你的主题] 的演示，导出 HTML。"**
+> **"用 Folio 做一个关于 [你的主题] 的 8 页演示，风格干净现代，先导出 HTML。"**
 
-AI 会依次确认：
-1. **内容** — 几张 slide？每页写什么？有图吗？
-2. **风格** — 从 10 套风格中选一个（或你描述感觉，AI 推荐）
-3. **导出格式** — HTML / PPTX / PDF / Figma / IDML
+第一次使用，这一句就够了。
 
-然后你拿到成品。
+### 接下来 AI 只需要帮你确认 3 件事
+
+1. **主题** — 你要讲什么？
+2. **风格** — 干净 / 杂志感 / 大胆 / 高级 / 深色，或者直接让 Folio 代选
+3. **输出** — 先出 **HTML**，确认结构后再导出 PPTX / PDF / Figma / IDML
+
+### 最容易成功的第一条路径
+
+如果你只想先做出第一版，不想一开始就做太多决定：
+
+1. 先做 **8 页**
+2. 先导出 **HTML**
+3. 先看结构和文案顺不顺
+4. 确认后再导出 **PPTX** 或 **PDF** 去编辑 / 交付
+
+记住一条就行：**先定主题，再定风格，最后定导出格式。**
 
 ---
 

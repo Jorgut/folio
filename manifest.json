@@ -1,0 +1,24 @@
+{
+  "name": "folio",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
+  "release_date": "2026-06-28",
+  "update_channel": "stable",
+  "repo": "https://github.com/Jorgut/folio",
+  "raw_manifest_url": "https://raw.githubusercontent.com/Jorgut/folio/main/manifest.json",
+  "changelog_url": "https://github.com/Jorgut/folio/blob/main/CHANGELOG.md",
+  "minimum_host_capabilities": {
+    "file_access": true,
+    "script_execution": true,
+    "network_access_for_auto_check": false,
+    "startup_hook_for_auto_check": false
+  },
+  "update_policy": {
+    "default_trigger": "first-use",
+    "preferred_trigger": "startup-hook",
+    "requires_user_confirmation": true,
+    "supports_git_fast_forward": true,
+    "supports_manifest_only_check": true
+  }
+}

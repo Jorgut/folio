@@ -1,11 +1,86 @@
+---
+name: folio
+description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
+version: 1.0.0
+tags:
+  - presentation
+  - slides
+  - editorial
+  - figma
+  - pdf
+  - pptx
+compatible_with:
+  - claude-code
+  - opencode
+  - codex
+  - generic-llm
+---
+
 # Folio · 版式引擎
 
 > Layout Engine。你给内容 + 风格，我给 deck。
 > 不做设计咨询，只做高质量渲染。3 分钟出 deck。
 
+## Cross-platform loading note
+
+This skill is designed to degrade gracefully across different agent platforms.
+
+- If the host supports **file-based skills**, load this folder as `folio` and use `SKILL.md` as the entrypoint.
+- If the host does **not** support native skills, paste the relevant parts of `SKILL.md` into the system prompt / project instructions / custom GPT instructions.
+- If the host does not resolve `<SKILL_ROOT>`, replace it with the absolute path to this folder before running export commands.
+
+## Update check policy
+
+Folio includes a cross-platform update core:
+
+- `manifest.json` — machine-readable release metadata
+- `VERSION` — human-readable local version
+- `CHANGELOG.md` — release notes
+- `scripts/check-update.mjs` — safe update check
+- `scripts/self-update.mjs` — user-confirmed upgrade path
+
+Trigger rules:
+
+1. If the host supports **startup hooks** or **automated skill entry actions**, run:
+   ```bash
+   node <SKILL_ROOT>/scripts/check-update.mjs
+   ```
+   when Folio is loaded.
+2. If the host does **not** support startup hooks, run the same check on **first use in the session**.
+3. If script execution or network access is unavailable, **skip the check and continue normally**.
+4. If an update is found, **inform the user and ask whether to run**:
+   ```bash
+   node <SKILL_ROOT>/scripts/self-update.mjs
+   ```
+
+Do not silently overwrite the local skill. Update checks may be automatic, but upgrades must remain user-confirmed.
+
+## 不知道怎么开始时，直接这样做
+
+先不要同时决定风格、主题色、导出格式和插件流程。
+
+默认起手式：
+
+1. 先做 **8 页 deck**
+2. 风格先用 **Minimal** 或 **Editorial**
+3. 输出先选 **HTML**
+4. 确认结构后，再导出 **PPTX / PDF / Figma / IDML**
+
+给 AI 的最小可用提示词：
+
+> 用 Folio 做一个关于 `[主题]` 的 8 页演示，风格干净现代，先导出 HTML。
+
+工作原则：**先把内容结构跑通，再做风格微调和多格式导出。**
+
 ## 工作流
 
 ### Step 1: 确定风格
+
+如果用户没有明确要求，默认：
+- 风格：`Minimal`
+- 主题：`theme-default`
+- 输出：`HTML`
+- 页数：`8`
 
 除非用户明确指定，否则用决策表定：
 
