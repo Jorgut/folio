@@ -103,6 +103,13 @@ function getGitSha(args) {
   }
 }
 
+function normalizeHighlights(manifest) {
+  if (!manifest || !Array.isArray(manifest.release_highlights)) return [];
+  return manifest.release_highlights
+    .map(item => String(item || '').trim())
+    .filter(Boolean);
+}
+
 async function getRemoteManifest(localManifest) {
   const cache = readCache();
   if (cache && cache.remoteManifest && Date.now() - cache.checkedAt < CACHE_TTL_MS) {
@@ -151,6 +158,13 @@ async function main() {
     console.log(`🆕 Folio update available: ${localVersion} → ${remoteVersion}`);
     console.log(`Manifest source: ${remoteManifest.raw_manifest_url || localManifest.raw_manifest_url || 'remote manifest'}`);
     if (cacheUsed) console.log('Note: result came from recent cache.');
+    const highlights = normalizeHighlights(remoteManifest);
+    if (highlights.length > 0) {
+      console.log('What is included in this update:');
+      for (const highlight of highlights) {
+        console.log(`- ${highlight}`);
+      }
+    }
     if (remoteManifest.changelog_url) console.log(`Changelog: ${remoteManifest.changelog_url}`);
     console.log('Ask the user whether to upgrade. If they confirm, run:');
     console.log('node <SKILL_ROOT>/scripts/self-update.mjs');

@@ -2,6 +2,12 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.1 - 2026-06-30
+
+- Update checks now show user-facing feature highlights before asking whether to upgrade
+- Upgrade flow remains user-confirmed; no automatic silent update behavior
+- Added `scripts/git-push-gh-auth.sh` for HTTPS GitHub push in non-interactive environments
+
 ## 1.0.0 - 2026-06-28
 
 - Added cross-platform skill metadata and install guidance

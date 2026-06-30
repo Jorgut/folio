@@ -122,6 +122,7 @@ Folio ships with a cross-platform update core, but hosts trigger it differently.
 
 - Never silently overwrite the local skill
 - Always ask the user before running `self-update.mjs`
+- Show concrete release highlights from remote metadata before asking the user to upgrade
 - If the install is not a git clone, manual replacement may be required
 - If the working tree is dirty, refuse auto-upgrade until the user resolves local changes
 

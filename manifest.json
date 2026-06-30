@@ -1,9 +1,9 @@
 {
   "name": "folio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 1,
   "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
-  "release_date": "2026-06-28",
+  "release_date": "2026-06-30",
   "update_channel": "stable",
   "repo": "https://github.com/Jorgut/folio",
   "raw_manifest_url": "https://raw.githubusercontent.com/Jorgut/folio/main/manifest.json",
@@ -20,5 +20,10 @@
     "requires_user_confirmation": true,
     "supports_git_fast_forward": true,
     "supports_manifest_only_check": true
-  }
+  },
+  "release_highlights": [
+    "Update checks now show concrete maintained features before asking the user whether to upgrade.",
+    "Upgrade choice remains explicitly user-confirmed; no silent overwrite behavior was added.",
+    "Added gh-auth push helper for non-interactive HTTPS GitHub push environments."
+  ]
 }

@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.0
+version: 1.0.1
 tags:
   - presentation
   - slides
@@ -52,6 +52,7 @@ Trigger rules:
    ```bash
    node <SKILL_ROOT>/scripts/self-update.mjs
    ```
+5. When an update is found, **show the concrete maintained features or release highlights first**, so the user can decide whether the upgrade is worth applying.
 
 Do not silently overwrite the local skill. Update checks may be automatic, but upgrades must remain user-confirmed.
 
