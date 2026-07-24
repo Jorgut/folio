@@ -8,6 +8,8 @@
 
 # Folio · Design Intelligence Engine
 
+[![skills.sh](https://img.shields.io/badge/skills.sh-Jorgut/folio-8A2BE2?style=flat-square)](https://skills.sh/Jorgut/folio)
+[![Install with npx](https://img.shields.io/badge/npx%20skills%20add-Jorgut%2Ffolio-000?style=flat-square)](https://github.com/Jorgut/folio)
 ![GitHub stars](https://img.shields.io/github/stars/Jorgut/folio?style=flat-square)
 ![License](https://img.shields.io/github/license/Jorgut/folio?style=flat-square)
 ![Skill](https://img.shields.io/badge/Skill-Design%20Intelligence%20Engine-111111?style=flat-square)
