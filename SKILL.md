@@ -10,7 +10,7 @@ tags:
   - pdf
   - pptx
 compatible_with:
-  - claude-code
+  - Codex
   - opencode
   - codex
   - generic-llm
@@ -72,6 +72,20 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 > 用 Folio 做一个关于 `[主题]` 的 8 页演示，风格干净现代，先导出 HTML。
 
 工作原则：**先把内容结构跑通，再做风格微调和多格式导出。**
+
+如果用户已经给出**主题**，默认视为信息已足够开始：
+
+- 不要先反问“这个 presentation 是关于什么的”
+- 不要先追问 8 页分别写什么
+- 不要先追问视觉风格偏好
+- 直接按默认值起稿：`8 页` + `Minimal` + `theme-default` + `HTML`
+- 先产出一版结构，再在后续回合微调
+
+只有在以下信息会阻止执行时才允许追问：
+
+- 用户明确要求某个你无法推断的输出路径或文件位置
+- 用户要求使用外部素材，但素材本身没有提供且无法替代
+- 宿主环境缺少执行所必需的权限或文件
 
 ## 工作流
 

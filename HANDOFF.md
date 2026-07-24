@@ -32,12 +32,19 @@
   - 有 startup hook 的宿主可自动检查
   - 无 startup hook 的宿主在 first-use 检查
   - 无脚本/无网络权限的宿主降级为手动更新
+- 更新提示增强：
+  - 当发现新版本时，先展示具体维护/新增功能（`release_highlights`）
+  - 升级决定仍然保留给用户，不做静默升级
 - GitHub 推送稳定性修复：新增 `scripts/git-push-gh-auth.sh`
   - 适用于 HTTPS remote 无法交互弹凭证、但 `gh auth status` 已登录的环境
   - 已验证 `--dry-run` 与真实 push 都可用
+- topic-only 行为已收紧：
+  - 用户只要给出主题，就直接按 `8 页 + Minimal + theme-default + HTML` 起稿
+  - 不再先追问章节、风格、输出细节，除非执行被真实阻塞
 - 本轮相关提交：
   - `210fdd2` Add cross-platform update core
   - `e12b7e4` Add gh-auth push helper
+  - `7609d4a` Show update highlights before upgrade
 
 ## 待办
 
@@ -56,6 +63,11 @@
 
 4. **可选：机器可读 skill manifest 扩展**
    - 如果后续要继续增强跨平台发现能力，可补一个更中性的 `skill.json` / `manifest` 兼容层
+
+5. **待提交的本地改动（尚未 commit/push）**
+   - `README.md`：明确 topic-only 请求应直接起稿
+   - `SKILL.md`：禁止在主题已给出时先做过度追问
+   - `SKILL.min.md`：同步 `1.0.1` 并补上 topic-only 默认行为
 
 ## 项目结构
 
@@ -91,3 +103,5 @@ folio/
 ```bash
 bash scripts/git-push-gh-auth.sh
 ```
+- 当前工作区还有 3 个未提交文件：`README.md`、`SKILL.md`、`SKILL.min.md`
+- 这些未提交改动的主题是：**用户只给主题时，Folio 应直接起稿，不要先追问一串配置问题**

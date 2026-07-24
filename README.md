@@ -81,9 +81,9 @@ Folio's update system is designed in two layers:
   - `scripts/check-update.mjs`
   - `scripts/self-update.mjs`
 - **Host trigger layer** supplied by the AI tool:
-- Hosts with startup hooks can auto-run update checks when Folio loads
-- Hosts without startup hooks should run the check on first use in the session
-- Hosts without script or network access should skip auto-checking and fall back to manual update
+  - Hosts with startup hooks can auto-run update checks when Folio loads
+  - Hosts without startup hooks should run the check on first use in the session
+  - Hosts without script or network access should skip auto-checking and fall back to manual update
 
 Folio does **not** assume every platform can auto-run scripts at load time.
 
@@ -111,9 +111,11 @@ If you do not know where to begin, copy this sentence into Claude:
 
 That is enough for a first run.
 
+If the user already provided the **topic**, the AI should start drafting immediately instead of asking extra setup questions first.
+
 ### What happens next
 
-The AI should guide you through only 3 decisions:
+The AI should guide you through only 3 decisions, and it does **not** need to ask all of them before starting the first draft:
 1. **Topic** — What is the presentation about?
 2. **Style** — Clean / editorial / bold / luxury / dark, or let Folio choose
 3. **Output** — Start with **HTML**, then export PPTX / PDF / Figma / IDML if needed
@@ -464,9 +466,9 @@ Folio 的更新系统分成两层：
   - `scripts/check-update.mjs`
   - `scripts/self-update.mjs`
 - **宿主工具负责的触发层**：
-- 有 startup hook 的宿主：加载 Folio 时自动检查
-- 没有 startup hook 的宿主：本次会话第一次真正使用 Folio 时检查
-- 没有脚本权限或网络权限的宿主：跳过自动检查，退化为手动更新
+  - 有 startup hook 的宿主：加载 Folio 时自动检查
+  - 没有 startup hook 的宿主：本次会话第一次真正使用 Folio 时检查
+  - 没有脚本权限或网络权限的宿主：跳过自动检查，退化为手动更新
 
 Folio **不会假设所有平台都能在加载 skill 时自动执行脚本**。
 
@@ -494,7 +496,11 @@ Folio **不会假设所有平台都能在加载 skill 时自动执行脚本**。
 
 第一次使用，这一句就够了。
 
+如果用户已经给了**主题**，AI 应直接开始起稿，不要先追加一串配置问题。
+
 ### 接下来 AI 只需要帮你确认 3 件事
+
+AI 只需要帮你确认 3 件事，但**不需要在起稿前全部问完**：
 
 1. **主题** — 你要讲什么？
 2. **风格** — 干净 / 杂志感 / 大胆 / 高级 / 深色，或者直接让 Folio 代选

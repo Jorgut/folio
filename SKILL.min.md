@@ -1,7 +1,7 @@
 ---
 name: folio-min
 description: Minimal Folio skill for platforms that do not support full skill loading or large instruction files.
-version: 1.0.0
+version: 1.0.1
 tags:
   - presentation
   - slides
@@ -30,6 +30,7 @@ Goal: turn structured content into a clean, editable deck, starting with HTML an
 - Default theme: `theme-default`
 - Default output: **HTML**
 - Optimize for clarity first, polish second
+- If the user already gave a **topic**, do not ask extra setup questions before starting the first draft
 
 ## Working rules
 
@@ -48,6 +49,7 @@ Goal: turn structured content into a clean, editable deck, starting with HTML an
 3. Keep layout clean and magazine-like
 4. Review structure and wording in HTML first
 5. Export to other formats only after the HTML structure works
+6. If only the topic is provided, draft first and ask follow-up questions later only if execution is blocked
 
 ## If file access is available
 
