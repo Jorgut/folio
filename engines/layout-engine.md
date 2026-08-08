@@ -10,6 +10,161 @@
 4. **节奏变化** — 连续 2 页相同布局后必须换布局
 5. **封面 / 章节 / 收束页** — 必须用居中或大字布局
 
+## 构图协议
+
+Folio 的布局不是把元素放到页面上，而是先建立版心，再决定元素占据哪些线。
+
+每一页在写 HTML 前必须先回答 5 个问题：
+
+| 问题 | 必填答案 |
+|------|----------|
+| 版心 | `content` / `content-v` / `content-h` / `full-bleed` |
+| 网格 | 默认 `layout-frame`，12 列 + 8 行 |
+| 主视觉 | `frame-media-left` / `frame-media-right` / `frame-media-wide` / `frame-full` |
+| 文案锚点 | `frame-copy-left` / `frame-copy-right` / `frame-title` / `frame-body` |
+| 间距 | 只用 `--folio-caption-gap` / `--folio-module-gap` / `--folio-section-gap` |
+
+默认结构：
+
+```html
+<section class="slide" data-layout="split-4-8">
+  <div class="content layout-frame">
+    <div class="frame-copy-left align-mid">...</div>
+    <figure class="frame-media-right figure-stack">
+      <div class="img media-anchor-top r-4x3">...</div>
+      <figcaption class="caption">...</figcaption>
+    </figure>
+  </div>
+</section>
+```
+
+### 版面线
+
+| 线 | 作用 |
+|----|------|
+| `--safe-x` | 左右外边距，所有非出血内容必须落在此线内 |
+| `--safe-y` | 上下外边距，标题、元数据、图片边缘优先对齐 |
+| `--nav-safe` | 底部导航避让区，正文和图片说明不能压到这里 |
+| 12-column | 控制左右位置和宽度，不允许随意写百分比宽度 |
+| 8-row | 控制上下锚点，用于标题、图片、正文的垂直关系 |
+| baseline 8px | 控制文字段落、caption、模块间距节奏 |
+
+调试时在 `<body>` 加 `show-guides`，检查列、边距和 baseline 是否成立。交付前移除。
+
+### 图片锚点
+
+图片必须说明焦点锚点，避免 `object-fit: cover` 随机裁切重点：
+
+| 类名 | 用途 |
+|------|------|
+| `media-anchor-top` | 人脸、建筑顶部、天空线在上方 |
+| `media-anchor-mid` | 默认居中构图 |
+| `media-anchor-bottom` | 地面、产品底座、桌面信息在下方 |
+| `media-anchor-left` | 主体在左 |
+| `media-anchor-right` | 主体在右 |
+
+图片和说明文字用 `figure-stack`，caption gap 固定为 `--folio-caption-gap`。
+
+### 对齐规则
+
+- 标题左边缘和正文左边缘必须共线，除非使用 Cover / Chapter / Closing。
+- 同一页多张图片必须共享至少一条上边线、左边线或中轴线。
+- 图文 Split 优先 `4/8`、`3/9`、`7/5`；禁止临时写 `width: 43%` 这类无网格依据的比例。
+- 正文模块之间用 `--folio-module-gap`；章节级留白用 `--folio-section-gap`。
+- 全出血图片可以突破安全区，但覆盖文字仍必须回到 `content-start/content-end` 内。
+- 连续页可以换视觉，但外边距、列沟和 caption gap 必须保持一致。
+
+## 版式丰富度系统
+
+Folio 必须根据内容和用户专业度选择不同构图，不允许全 deck 重复一种“标题 + 图片 + 正文”的默认结构。
+
+### 受众模式
+
+| 用户/听众 | HTML class | 版式策略 |
+|-----------|------------|----------|
+| 非专业 / 初次接触 | `audience-beginner` | 大标题、短句、单一阅读路径、强图片解释 |
+| 专业 / 评审 / 投资人 | `audience-expert` | 信息密度更高、对照表、边注、证据链、可扫描结构 |
+| 混合受众 | 默认 | 关键页 beginner，证据页 expert，收束页 airy |
+
+### 信息密度
+
+| 密度 | HTML class | 使用场景 |
+|------|------------|----------|
+| Airy | `density-airy` | 封面后第一观点、奢侈品牌、建筑/作品集、强情绪页 |
+| Balanced | `density-balanced` | 默认叙事页、图文页、方法解释 |
+| Compact | `density-compact` | 数据、对比、表格、清单、专家材料 |
+
+### 构图家族
+
+| 家族 | 典型组合 | 适合内容 |
+|------|----------|----------|
+| Hero + Rail | `frame-media-hero` + `frame-copy-rail-right` | 高质量图片 + 短观点 |
+| Portrait Feature | `frame-copy-left` + `frame-media-portrait` | 人物、产品、建筑立面、案例主图 |
+| Evidence Board | `frame-title-wide` + `frame-card-a/b/c` | 三证据、三方案、三阶段 |
+| Sidebar Report | `frame-sidebar-left` + `frame-main-right` | 专业报告、研究发现、方法论 |
+| Strip Narrative | `frame-media-strip-top` + `frame-copy-wide` | 时间线、流程、场景开场 |
+| Centerpiece | `frame-centerpiece` | 单一强观点、报价、宣言、章节前奏 |
+| Dense Compare | `frame-title-wide` + compact cards/table | 专家对照、投资人/评审材料 |
+
+### 专业度决策
+
+```
+IF 用户说“给老板/投资人/专家评审看”
+  → 用 audience-expert + density-compact/balanced
+  → 多用 Sidebar Report / Dense Compare / Evidence Board
+
+IF 用户说“给大众/客户/新人/课程开场”
+  → 用 audience-beginner + density-airy/balanced
+  → 多用 Hero + Rail / Portrait Feature / Centerpiece
+
+IF 用户只给主题，没有说明受众
+  → 前 30% 页面 beginner，主体 balanced，证据页 expert，结尾 airy
+```
+
+### 版式节奏
+
+8 页 deck 推荐节奏：
+
+```
+Cover
+→ Hero + Rail
+→ Sidebar Report
+→ Evidence Board
+→ Gallery / Strip Narrative
+→ Dense Compare
+→ Centerpiece / Quote
+→ Closing
+```
+
+16 页 deck 推荐节奏：
+
+```
+Cover
+→ Hero + Rail
+→ Overlay
+→ Editorial
+→ Stats
+→ Evidence Board
+→ Gallery
+→ Chapter
+→ Sidebar Report
+→ Timeline / Strip Narrative
+→ Dense Compare
+→ Table
+→ Portrait Feature
+→ Pull Quote
+→ Centerpiece
+→ Closing
+```
+
+### 丰富度禁忌
+
+- 不要为了“丰富”随机换布局；每次变化都必须对应内容功能变化。
+- 同一 deck 里最多 2 页使用完全相同构图家族。
+- 专业页可以紧凑，但必须保留清晰扫描线：标题、证据、结论不能混成一团。
+- 非专业页可以留白，但不能空洞；每页必须有一个可复述的核心观点。
+- 图片质量低时不要用 Hero + Rail；改用 Sidebar Report 或 Evidence Board，让文字承担主信息。
+
 ## 布局组合策略
 
 | 内容类型 | 推荐布局序列 | 说明 |

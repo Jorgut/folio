@@ -96,6 +96,8 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 - 主题：`theme-default`
 - 输出：`HTML`
 - 页数：`8`
+- 受众：`混合受众`
+- 信息密度：`balanced`
 
 除非用户明确指定，否则用决策表定：
 
@@ -114,7 +116,26 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 
 完整风格参数 → `design/style-guide.md`
 
-### Step 2: 拷贝模板
+### Step 2: 确定受众、密度和版式节奏
+
+不要只问“做什么风格”。Folio 必须先判断这份 deck 给谁看：
+
+| 线索 | 受众模式 | 密度 | 版式倾向 |
+|------|----------|------|----------|
+| 老板 / 投资人 / 专家评审 | `audience-expert` | compact / balanced | Evidence Board, Dense Compare, Sidebar Report |
+| 客户 / 大众 / 新人 / 课程开场 | `audience-beginner` | airy / balanced | Hero + Rail, Portrait Feature, Centerpiece |
+| 作品集 / 品牌 / 空间展示 | mixed | airy | Hero image, Gallery, Strip Narrative |
+| 报告 / 研究 / 方法论 | expert | compact | Table, Timeline, Sidebar Report |
+| 没说明受众 | mixed | balanced | 前面易懂，中段专业，结尾留白 |
+
+每页先选：
+
+1. 受众模式：`audience-beginner` / `audience-expert` / 默认 mixed
+2. 密度：`density-airy` / `density-balanced` / `density-compact`
+3. 构图家族：Hero + Rail / Portrait Feature / Evidence Board / Sidebar Report / Strip Narrative / Centerpiece / Dense Compare
+4. 版心和锚点：`.content.layout-frame` + `frame-*` + `media-anchor-*`
+
+### Step 3: 拷贝模板
 
 ```bash
 cp <SKILL_ROOT>/index.html 项目/index.html
@@ -134,14 +155,33 @@ mkdir -p 项目/images
 | `theme-rose` | 玫瑰（暖粉+金） | Luxury |
 | `theme-ocean` | 海洋（冷蓝） | Glass, Tech |
 
-### Step 3: 填充内容
+### Step 4: 填充内容
 
 1. 读 `design/style-guide.md` → 按风格参数调字体/颜色/间距/特效
-2. 读 `engines/layout-engine.md` → 选布局组合（16 种布局，不对称优先）
-3. 粘 `<section data-layout="cover">`，改文案和图片路径
-4. 图片放 `images/`，命名 `{页号}-{语义}.{ext}`
+2. 读 `engines/layout-engine.md` → 先定构图协议，再选布局组合（16 种布局，不对称优先）
+3. 每页先写 `data-layout`，再放 `.content.layout-frame` 或明确说明为什么使用 `full-bleed`
+4. 每页必须声明受众/密度意图：通过 `audience-*`、`density-*` class 或在构图选择中体现
+5. 图文页必须声明列跨、垂直锚点、图片焦点锚点和 caption gap
+6. 粘 `<section data-layout="cover">`，改文案和图片路径
+7. 图片放 `images/`，命名 `{页号}-{语义}.{ext}`
 
-### Step 4: 导出
+构图起手式：
+
+```html
+<section class="slide" data-layout="split-4-8">
+  <div class="content layout-frame">
+    <div class="frame-copy-left align-mid">...</div>
+    <figure class="frame-media-right figure-stack">
+      <div class="img media-anchor-top r-4x3">...</div>
+      <figcaption class="caption">...</figcaption>
+    </figure>
+  </div>
+</section>
+```
+
+需要检查版面时，临时给 `<body>` 加 `show-guides`，检查安全区、12 列、baseline 和图片锚点。交付前移除。
+
+### Step 5: 导出
 
 | 格式 | 命令 |
 |------|------|
@@ -196,7 +236,12 @@ node scripts/export-figma.mjs --mode local index.html   # 强制本地插件
 ## 约束（违反 = 重做）
 
 - **8pt Grid** — 间距严格 `--sp-4`(32) / `--sp-5`(40) / `--sp-6`(48) / `--sp-7`(56) / `--sp-8`(64) / `--sp-9`(80)
-- **12 Column Grid** — 内容区 12 列，子元素 `col-span-*`
+- **Composition Frame** — 非封面/非全出血页必须优先使用 `.content.layout-frame`
+- **12 Column Grid** — 内容区 12 列，子元素用 `frame-*` 或 `col-span-*`
+- **Layout Diversity** — 每 3 页必须至少出现 2 个构图家族
+- **Audience Fit** — 专业受众用 compact/evidence/table，对大众受众用 airy/hero/centerpiece
+- **Image Anchors** — 图片必须用 `media-anchor-*` 指定裁切焦点
+- **Baseline Rhythm** — caption / module / section 间距分别用 `--folio-caption-gap` / `--folio-module-gap` / `--folio-section-gap`
 - **不对称优先** — 别用 50/50，用 4/8、3/9、7/5
 - **字号对比 ≥ 6:1** — 主标题 vs 正文
 - **一个 deck 一套主题色** — 中途不换
