@@ -38,12 +38,46 @@ async function main() {
   console.log(`[2/3] Loading slides...`);
   await page.goto(fileUrl, { waitUntil: 'networkidle', timeout: 30000 });
   await page.waitForSelector('.slide', { timeout: 10000 });
+  await page.emulateMedia({ media: 'print' });
 
   const slideCount = await page.evaluate(() => document.querySelectorAll('.slide').length);
   console.log(`  Found ${slideCount} slides`);
 
   // Stack slides vertically, each as a full page
   await page.evaluate(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @page { size: 1280px 720px; margin: 0; }
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      #deck {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+      }
+      .slide {
+        width: 100% !important;
+        height: 100vh !important;
+        opacity: 1 !important;
+        overflow: hidden !important;
+        break-after: page;
+        page-break-after: always;
+        transform: none !important;
+      }
+      .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+    `;
+    document.head.appendChild(style);
+
     const deck = document.getElementById('deck');
     const slides = document.querySelectorAll('.slide');
 
@@ -59,8 +93,13 @@ async function main() {
       s.style.height = '100vh';
       s.style.opacity = '1';
       s.style.overflow = 'hidden';
+      s.style.breakAfter = 'page';
       s.style.pageBreakAfter = 'always';
       s.style.transform = 'none';
+      if (i === slides.length - 1) {
+        s.style.breakAfter = 'auto';
+        s.style.pageBreakAfter = 'auto';
+      }
 
       // Activate all animations
       s.classList.add('active');
