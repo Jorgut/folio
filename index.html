@@ -78,6 +78,17 @@
   /* 安全区 — 8pt Grid 对齐：内边距为 8 的倍数 */
   --safe-x: clamp(16px, 5vw, 96px);  /* 2×–12× 8pt */
   --safe-y: clamp(16px, 4.44vh, 64px); /* 2×–8× 8pt */
+  --nav-safe: 72px;
+
+  /* Composition Grid — default editorial frame */
+  --folio-cols: 12;
+  --folio-rows: 8;
+  --folio-gutter: var(--sp-6);
+  --folio-row-gap: var(--sp-6);
+  --folio-baseline: 8px;
+  --folio-caption-gap: var(--sp-3);
+  --folio-module-gap: var(--sp-6);
+  --folio-section-gap: var(--sp-8);
 
   /* 过渡/动效 */
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
@@ -259,23 +270,23 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
 .content {
   grid-column: content-start / content-end;
   grid-row: content-top / content-bottom;
-  padding-bottom: 72px; /* 避开固定导航 */
+  padding-bottom: var(--nav-safe); /* 避开固定导航 */
 }
 .content-v {
   grid-column: content-start / content-end;
   grid-row: bleed-top / bleed-bottom;
-  padding-bottom: 72px;
+  padding-bottom: var(--nav-safe);
 }
 .content-h {
   grid-column: bleed-start / bleed-end;
   grid-row: content-top / content-bottom;
-  padding-bottom: 72px;
+  padding-bottom: var(--nav-safe);
 }
 
 /* -------- 6. Grid 系统 -------- */
 .grid {
   display: grid;
-  gap: var(--sp-6);
+  gap: var(--folio-module-gap);
 }
 .grid-12 { grid-template-columns: repeat(12, 1fr); }
 .grid-2  { grid-template-columns: 1fr 1fr; }
@@ -290,6 +301,127 @@ body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing:
 .col-span-7  { grid-column: span 7; }  .col-span-8  { grid-column: span 8; }
 .col-span-9  { grid-column: span 9; }  .col-span-10 { grid-column: span 10; }
 .col-span-11 { grid-column: span 11; } .col-span-12 { grid-column: span 12; }
+
+/* 构图骨架：默认先放 layout-frame，再放具体布局模块 */
+.layout-frame {
+  display: grid;
+  grid-template-columns: repeat(var(--folio-cols), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--folio-rows), minmax(0, 1fr));
+  column-gap: var(--folio-gutter);
+  row-gap: var(--folio-row-gap);
+  min-height: 100%;
+  align-items: stretch;
+}
+.layout-frame > * { min-width: 0; }
+.frame-full { grid-column: 1 / -1; grid-row: 1 / -1; }
+.frame-copy-left { grid-column: 1 / span 4; grid-row: 2 / span 5; }
+.frame-copy-right { grid-column: 9 / span 4; grid-row: 2 / span 5; }
+.frame-media-left { grid-column: 1 / span 7; grid-row: 1 / span 7; }
+.frame-media-right { grid-column: 6 / span 7; grid-row: 1 / span 7; }
+.frame-media-wide { grid-column: 3 / span 10; grid-row: 2 / span 5; }
+.frame-title { grid-column: 1 / span 8; grid-row: 1 / span 2; align-self: start; }
+.frame-body { grid-column: 1 / span 7; grid-row: 3 / span 4; }
+.frame-meta { grid-column: 1 / span 3; grid-row: 8; align-self: end; }
+.frame-title-wide { grid-column: 1 / span 10; grid-row: 1 / span 2; align-self: start; }
+.frame-title-right { grid-column: 6 / span 7; grid-row: 1 / span 2; align-self: start; }
+.frame-copy-wide { grid-column: 2 / span 8; grid-row: 3 / span 4; }
+.frame-copy-narrow { grid-column: 2 / span 5; grid-row: 3 / span 4; }
+.frame-copy-rail-left { grid-column: 1 / span 3; grid-row: 2 / span 6; }
+.frame-copy-rail-right { grid-column: 10 / span 3; grid-row: 2 / span 6; }
+.frame-sidebar-left { grid-column: 1 / span 3; grid-row: 1 / span 7; }
+.frame-sidebar-right { grid-column: 10 / span 3; grid-row: 1 / span 7; }
+.frame-main-left { grid-column: 1 / span 8; grid-row: 2 / span 6; }
+.frame-main-right { grid-column: 5 / span 8; grid-row: 2 / span 6; }
+.frame-media-hero { grid-column: 1 / span 8; grid-row: 1 / span 7; }
+.frame-media-portrait { grid-column: 8 / span 5; grid-row: 1 / span 7; }
+.frame-media-strip-top { grid-column: 1 / -1; grid-row: 1 / span 3; }
+.frame-media-strip-bottom { grid-column: 1 / -1; grid-row: 5 / span 3; }
+.frame-card-a { grid-column: 1 / span 4; grid-row: 3 / span 4; }
+.frame-card-b { grid-column: 5 / span 4; grid-row: 3 / span 4; }
+.frame-card-c { grid-column: 9 / span 4; grid-row: 3 / span 4; }
+.frame-card-wide-left { grid-column: 1 / span 7; grid-row: 3 / span 4; }
+.frame-card-wide-right { grid-column: 6 / span 7; grid-row: 3 / span 4; }
+.frame-centerpiece { grid-column: 3 / span 8; grid-row: 2 / span 5; align-self: center; justify-self: center; }
+
+.layout-frame.density-airy {
+  --folio-gutter: var(--sp-8);
+  --folio-row-gap: var(--sp-8);
+  --folio-module-gap: var(--sp-8);
+}
+.layout-frame.density-balanced {
+  --folio-gutter: var(--sp-6);
+  --folio-row-gap: var(--sp-6);
+  --folio-module-gap: var(--sp-6);
+}
+.layout-frame.density-compact {
+  --folio-gutter: var(--sp-4);
+  --folio-row-gap: var(--sp-4);
+  --folio-module-gap: var(--sp-4);
+}
+.layout-frame.audience-expert {
+  --text-lead: clamp(0.875rem, min(1.25vw, 2.25vh), 1.125rem);
+  --text-body: clamp(0.75rem, min(1vw, 1.8vh), 0.9375rem);
+}
+.layout-frame.audience-beginner {
+  --text-lead: clamp(1rem, min(1.55vw, 2.8vh), 1.375rem);
+  --text-body: clamp(0.875rem, min(1.18vw, 2.1vh), 1.0625rem);
+}
+
+.editorial-rule-top { border-top: 1px solid var(--ink-tint); padding-top: var(--folio-caption-gap); }
+.editorial-rule-left { border-left: 1px solid var(--ink-tint); padding-left: var(--folio-module-gap); }
+.module-stack { display: grid; gap: var(--folio-module-gap); align-content: start; }
+.section-stack { display: grid; gap: var(--folio-section-gap); align-content: start; }
+.caption-lock { margin-top: var(--folio-caption-gap); }
+
+.align-start { align-self: start; }
+.align-mid { align-self: center; }
+.align-end { align-self: end; }
+.justify-start { justify-self: start; }
+.justify-mid { justify-self: center; }
+.justify-end { justify-self: end; }
+
+.media-anchor-top img { object-position: center 12%; }
+.media-anchor-mid img { object-position: center center; }
+.media-anchor-bottom img { object-position: center 82%; }
+.media-anchor-left img { object-position: 16% center; }
+.media-anchor-right img { object-position: 84% center; }
+.figure-stack { display: grid; gap: var(--folio-caption-gap); align-content: start; }
+.figure-stack .caption { margin-top: 0; }
+
+/* Authoring guides: add .show-guides to body while checking composition. */
+body.show-guides .slide::before,
+body.show-guides .slide::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 50;
+}
+body.show-guides .slide::before {
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: var(--safe-y);
+  bottom: calc(var(--safe-y) + var(--nav-safe));
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(var(--accent-rgb), 0.16) 0,
+      rgba(var(--accent-rgb), 0.16) calc((100% - (11 * var(--folio-gutter))) / 12),
+      transparent calc((100% - (11 * var(--folio-gutter))) / 12),
+      transparent calc(((100% - (11 * var(--folio-gutter))) / 12) + var(--folio-gutter))
+    );
+  outline: 1px solid rgba(var(--accent-rgb), 0.32);
+}
+body.show-guides .slide::after {
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(var(--ink-rgb), 0.08) 0,
+      rgba(var(--ink-rgb), 0.08) 1px,
+      transparent 1px,
+      transparent var(--folio-baseline)
+    );
+}
 
 /* 不对称 split */
 .split { display: grid; gap: var(--sp-7); }
@@ -1168,6 +1300,16 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
   .grid-12 { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
   .grid-3  { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
   .grid-4  { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .layout-frame {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: var(--folio-module-gap);
+    align-content: start;
+  }
+  .layout-frame > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
 
   /* gallery → auto-fill 紧凑模式 */
   .layout-gallery { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
@@ -1383,11 +1525,11 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 2: Asymmetric Split (Image Left, Text Right) --- -->
   <section class="slide layout-split-image-text" data-layout="split-4-8" data-chapter="1">
-    <div class="content split split-4-8" style="align-items:stretch;">
-      <div class="img h-full" data-anim data-delay="1">
+    <div class="content layout-frame density-airy audience-beginner">
+      <div class="frame-media-left img h-full media-anchor-mid" data-anim data-delay="1">
         <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Office">
       </div>
-      <div class="text-panel" data-anim data-delay="2">
+      <div class="frame-copy-right text-panel align-mid" data-anim data-delay="2">
         <div class="caption kicker accent">From Form to Systems</div>
         <h2 class="display-1 mb-5">从形式到<br>系统</h2>
         <p class="lead mb-4">当代设计不再停留在造型与风格，而是扩展到服务、规则、反馈与行为的整体编排。</p>
@@ -1398,13 +1540,15 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 3: Image + Text Overlap --- -->
   <section class="slide layout-overlay" data-layout="overlap-right" data-chapter="1">
-    <div class="full-bleed img-backdrop" data-anim>
+    <div class="full-bleed img-backdrop media-anchor-mid" data-anim>
       <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" alt="Team collaboration">
     </div>
-    <div class="overlay-panel right" data-anim data-delay="2">
-      <div class="caption accent mb-3">Systems Lens</div>
-      <h2 class="display-2 mb-4">系统思维</h2>
-      <p class="lead">优秀设计把单点解决方案连接成连续体验：从入口、路径到反馈，每一步都在塑造用户如何理解世界。</p>
+    <div class="content layout-frame density-airy audience-beginner" style="position:relative;z-index:2;">
+      <div class="overlay-panel frame-copy-right align-mid justify-end" data-anim data-delay="2">
+        <div class="caption accent mb-3">Systems Lens</div>
+        <h2 class="display-2 mb-4">系统思维</h2>
+        <p class="lead">优秀设计把单点解决方案连接成连续体验：从入口、路径到反馈，每一步都在塑造用户如何理解世界。</p>
+      </div>
     </div>
   </section>
 
@@ -1421,12 +1565,12 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 5: Editorial Text (CSS Columns) --- -->
   <section class="slide layout-editorial" data-layout="editorial" data-chapter="2">
-    <div class="content">
-      <div class="article-header" data-anim>
+    <div class="content layout-frame density-balanced audience-expert">
+      <div class="article-header frame-title" data-anim>
         <div class="caption accent mb-3">Essay</div>
         <h2 class="display-1">设计思维如何<br>穿过媒介</h2>
       </div>
-      <div class="article-body body" data-anim data-delay="2">
+      <div class="article-body body" data-anim data-delay="2" style="grid-column:1 / span 10;grid-row:3 / span 5;align-self:start;">
         <p class="dropcap">今天的设计实践已经不再局限于屏幕、海报或空间本身。它更像一种穿透媒介的思维方式：用结构理解问题，用原型测试假设，用节奏组织复杂信息，让抽象愿景转化为可以感知、可以行动的现实。</p>
         <p>这也是为什么越来越多的团队开始把设计语言嵌入策略、服务和运营。好的设计并不总是显眼；它往往隐藏在一次无摩擦的注册、一条清晰的动线、一次恰到好处的提醒，或一份让人迅速达成共识的提案里。</p>
         <p>当技术持续提速，设计的重要性反而被放大。因为工具可以生成更多形式，但不能自动判断什么值得生成、什么需要被删去、什么应该被赋予情感重量。这些选择，仍然依赖人类对上下文、文化和细微差别的敏感。</p>
@@ -1437,9 +1581,9 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 6: Stats (Data Hero) --- -->
   <section class="slide dark" data-layout="stats" data-chapter="2" style="background:#1a1814;">
-    <div class="content" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="caption" data-anim style="color:var(--accent);margin-bottom:var(--sp-7);text-align:center;">The Numbers</div>
-      <div class="layout-stats" data-anim data-delay="1">
+    <div class="content layout-frame density-compact audience-expert">
+      <div class="caption frame-title align-end" data-anim style="color:var(--accent);text-align:center;grid-column:1 / -1;">The Numbers</div>
+      <div class="layout-stats frame-full align-mid" data-anim data-delay="1" style="grid-row:3 / span 4;">
         <div style="text-align:center;">
           <div class="stat-nb anim-scale">68%</div>
           <div class="stat-label">设计团队将系统化组件<br>视为增长杠杆</div>
@@ -1458,17 +1602,17 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 7: Image Gallery --- -->
   <section class="slide" data-layout="gallery" data-chapter="2">
-    <div class="content-v" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp-5);padding-top:var(--safe-y);">
-      <div data-anim>
+    <div class="content-v layout-frame density-airy audience-beginner" style="padding-top:var(--safe-y);">
+      <div class="frame-title" data-anim>
         <div class="caption accent">Gallery</div>
         <h2 class="display-2">设计语汇</h2>
       </div>
-      <div class="layout-gallery" style="flex:1;">
-        <div class="img-gallery-item img" data-anim data-delay="1"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Meeting"><span class="img-cap">Service Blueprint</span></div>
-        <div class="img-gallery-item img" data-anim data-delay="2"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="Strategy"><span class="img-cap">Material Study</span></div>
-        <div class="img-gallery-item img" data-anim data-delay="3"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Planning"><span class="img-cap">Interface Ritual</span></div>
-        <div class="img-gallery-item img" data-anim data-delay="4"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Team"><span class="img-cap">Spatial Prototype</span></div>
-        <div class="img-gallery-item img" data-anim data-delay="5"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Office"><span class="img-cap">Spec Library</span></div>
+      <div class="layout-gallery" style="grid-column:1 / -1;grid-row:2 / span 6;">
+        <div class="img-gallery-item img media-anchor-mid" data-anim data-delay="1"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Meeting"><span class="img-cap">Service Blueprint</span></div>
+        <div class="img-gallery-item img media-anchor-left" data-anim data-delay="2"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="Strategy"><span class="img-cap">Material Study</span></div>
+        <div class="img-gallery-item img media-anchor-mid" data-anim data-delay="3"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Planning"><span class="img-cap">Interface Ritual</span></div>
+        <div class="img-gallery-item img media-anchor-mid" data-anim data-delay="4"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Team"><span class="img-cap">Spatial Prototype</span></div>
+        <div class="img-gallery-item img media-anchor-right" data-anim data-delay="5"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Office"><span class="img-cap">Spec Library</span></div>
       </div>
     </div>
   </section>
@@ -1484,13 +1628,13 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 9: Timeline --- -->
   <section class="slide layout-timeline" data-layout="timeline" data-chapter="3">
-    <div class="content layout-timeline">
-      <div class="timeline-intro">
+    <div class="content layout-frame density-balanced audience-expert">
+      <div class="timeline-intro frame-copy-left align-start" style="grid-row:1 / span 4;">
         <div class="caption accent mb-3" data-anim data-delay="1">Timeline</div>
         <h2 class="display-1 anim-fade-scale" data-anim data-delay="2">设计史上的<br>四个转向</h2>
         <p class="lead mt-4" data-anim data-delay="3">从物件到系统、从平面到体验，设计不断把“形态”扩展为一种影响行为与意义的框架。</p>
       </div>
-      <div class="timeline-events">
+      <div class="timeline-events" style="grid-column:6 / span 7;grid-row:1 / span 7;">
         <article class="timeline-event" data-anim data-delay="2">
           <span class="meta timeline-date">1919 · Bauhaus</span>
           <h3 class="display-2 timeline-title">形式被重新连接到工业生产</h3>
@@ -1533,26 +1677,26 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 11: Comparison --- -->
   <section class="slide" data-layout="compare" data-chapter="3">
-    <div class="content-v" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp-6);padding-top:var(--safe-y);">
-      <div>
+    <div class="content-v layout-frame density-compact audience-expert" style="padding-top:var(--safe-y);">
+      <div class="frame-title" style="grid-column:1 / span 7;">
         <div class="caption accent mb-3" data-anim data-delay="1">Comparison</div>
         <h2 class="display-1 anim-fade-scale" data-anim data-delay="2">三种设计路径的<br>差异</h2>
       </div>
-      <div class="layout-compare">
+      <div class="layout-compare" style="grid-column:1 / -1;grid-row:3 / span 5;">
         <article class="compare-item" data-anim data-delay="2">
-          <div class="img r-4x3"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&q=80" alt="Styling approach"></div>
+          <div class="img r-4x3 media-anchor-mid"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&q=80" alt="Styling approach"></div>
           <div class="caption accent">Styling</div>
           <h3 class="display-2">形式驱动</h3>
           <p class="body">强调视觉差异与即时吸引力，适合快速建立印象，却容易在复杂场景中失去延展性。</p>
         </article>
         <article class="compare-item" data-anim data-delay="3">
-          <div class="img r-4x3"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=700&q=80" alt="Systems approach"></div>
+          <div class="img r-4x3 media-anchor-mid"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=700&q=80" alt="Systems approach"></div>
           <div class="caption accent">Systems</div>
           <h3 class="display-2">系统驱动</h3>
           <p class="body">通过组件、规范与流程保持一致性，让品牌或产品在不同触点下仍然说同一种语言。</p>
         </article>
         <article class="compare-item" data-anim data-delay="4">
-          <div class="img r-4x3"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80" alt="Adaptive approach"></div>
+          <div class="img r-4x3 media-anchor-mid"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80" alt="Adaptive approach"></div>
           <div class="caption accent">Adaptive</div>
           <h3 class="display-2">情境驱动</h3>
           <p class="body">设计根据数据、反馈与行为持续调整，在变化中维持清晰体验，而不是固守单一答案。</p>
@@ -1563,12 +1707,12 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 12: Numbered Listicle --- -->
   <section class="slide dark" data-layout="list" data-chapter="3" style="background:#101822;">
-    <div class="content" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp-7);align-content:center;">
-      <div>
+    <div class="content layout-frame density-balanced audience-beginner">
+      <div class="frame-title" style="grid-column:1 / span 5;">
         <div class="caption accent mb-3" data-anim data-delay="1">Listicle</div>
         <h2 class="display-1 anim-fade-scale" data-anim data-delay="2" style="color:var(--paper);">四条原则，<br>更新设计判断</h2>
       </div>
-      <div class="layout-list">
+      <div class="layout-list" style="grid-column:6 / span 7;grid-row:1 / span 7;align-self:center;">
         <article class="list-row" data-anim data-delay="2">
           <div class="list-number">01</div>
           <div class="list-copy">
@@ -1613,12 +1757,12 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 14: Data Table --- -->
   <section class="slide layout-table" data-layout="table" data-chapter="4">
-    <div class="content" style="align-content:center;">
-      <div data-anim>
+    <div class="content layout-frame density-compact audience-expert">
+      <div class="frame-title" data-anim style="grid-column:1 / span 7;">
         <div class="caption accent mb-3">Reference</div>
         <h2 class="display-1">设计方法对照</h2>
       </div>
-      <div class="table-grid" data-anim data-delay="2">
+      <div class="table-grid" data-anim data-delay="2" style="grid-column:1 / -1;grid-row:3 / span 5;">
         <div class="table-head">
           <span class="meta">Method</span>
           <span class="meta">Tempo</span>
@@ -1655,14 +1799,14 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 15: Inset Image --- -->
   <section class="slide layout-inset" data-layout="inset" data-chapter="5">
-    <div class="content">
-      <div class="inset-header" data-anim>
+    <div class="content layout-frame density-balanced audience-expert">
+      <div class="inset-header frame-title" data-anim style="grid-column:1 / span 7;">
         <div class="caption accent mb-3">Case Study</div>
         <h2 class="display-1">把评审会变成<br>共享判断现场</h2>
       </div>
-      <div class="inset-body body" data-anim data-delay="2">
-        <figure class="inset-figure">
-          <div class="img r-4x3"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Editorial design review"></div>
+      <div class="inset-body body" data-anim data-delay="2" style="grid-column:1 / span 10;grid-row:3 / span 5;">
+        <figure class="inset-figure figure-stack">
+          <div class="img r-4x3 media-anchor-mid"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Editorial design review"></div>
           <figcaption class="caption">Design Review Room · From static updates to live critique</figcaption>
         </figure>
         <p>一家消费科技团队曾经把设计评审视为“结果汇报”：设计师展示几张完成度很高的视觉稿，产品和市场团队再逐项提出修改意见。问题在于，这样的评审通常发生得太晚，大家只能对结果发表意见，而不是共同塑造方向。</p>
@@ -1674,12 +1818,12 @@ body.low-power .nav-status { transition: none !important; transform: none !impor
 
   <!-- --- Slide 16: Pull-quote Editorial --- -->
   <section class="slide layout-pullquote" data-layout="pullquote" data-chapter="5">
-    <div class="content">
-      <div class="pullquote-header" data-anim>
+    <div class="content layout-frame density-airy audience-expert">
+      <div class="pullquote-header frame-title" data-anim style="grid-column:1 / span 9;">
         <div class="caption accent mb-3">Closing Essay</div>
         <h2 class="display-1">设计的任务，是把复杂性变成可进入的秩序</h2>
       </div>
-      <div class="pullquote-grid body">
+      <div class="pullquote-grid body" style="grid-column:1 / -1;grid-row:3 / span 5;">
         <div class="pullquote-copy" data-anim data-delay="2">
           <p>前沿设计往往不是最新技术的展示台，而是新关系的编排器。它让人知道如何开始、如何判断、何时继续、何时停下。这样的设计并不喧哗，却能在团队、产品与空间中不断累积信任。</p>
           <p>这也是为什么越来越多组织重新定义设计角色：不再只负责最后一层表达，而是进入策略制定、服务组织与体验治理。设计师参与得越早，系统越有机会在复杂度爆炸之前获得清晰结构。</p>

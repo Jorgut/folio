@@ -45,7 +45,7 @@ async function verifyHtml(htmlPath) {
     return Array.from(document.querySelectorAll('.slide')).map(s => s.getAttribute('data-layout') || '(none)');
   });
 
-  const knownLayouts = ['cover', 'split-4-8', 'overlap-right', 'bleed-quote', 'editorial', 'stats', 'gallery', 'closing', 'timeline', 'spread', 'compare', 'list'];
+  const knownLayouts = ['cover', 'split-4-8', 'overlap-right', 'bleed-quote', 'editorial', 'stats', 'gallery', 'closing', 'timeline', 'spread', 'compare', 'list', 'chapter', 'table', 'inset', 'pullquote'];
   const unknownLayouts = layouts.filter(l => l !== '(none)' && !knownLayouts.includes(l));
   if (unknownLayouts.length > 0) {
     report(WARN, 'Unknown layouts', unknownLayouts.join(', '));
@@ -63,6 +63,41 @@ async function verifyHtml(htmlPath) {
     report(WARN, 'Near-empty slides', `Slides ${emptySlides.join(', ')} have very little text`);
   } else {
     report(PASS, 'Content check', 'All slides have content');
+  }
+
+  const composition = await page.evaluate(() => {
+    const frameOptional = new Set(['cover', 'chapter', 'closing', 'bleed-quote', 'spread']);
+    const missingFrames = [];
+    const missingImageAnchors = [];
+
+    document.querySelectorAll('.slide').forEach((slide, index) => {
+      const slideNumber = index + 1;
+      const layout = slide.getAttribute('data-layout') || 'unknown';
+      if (!frameOptional.has(layout) && !slide.querySelector('.layout-frame')) {
+        missingFrames.push(`#${slideNumber} (${layout})`);
+      }
+
+      slide.querySelectorAll('.img').forEach((imageBox, imageIndex) => {
+        const hasAnchor = Array.from(imageBox.classList).some(className => className.startsWith('media-anchor-'));
+        if (!hasAnchor) {
+          missingImageAnchors.push(`#${slideNumber}.${imageIndex + 1}`);
+        }
+      });
+    });
+
+    return { missingFrames, missingImageAnchors };
+  });
+
+  if (composition.missingFrames.length > 0) {
+    report(WARN, 'Composition frame', `Missing .layout-frame on ${composition.missingFrames.join(', ')}`);
+  } else {
+    report(PASS, 'Composition frame', 'Grid frame present where expected');
+  }
+
+  if (composition.missingImageAnchors.length > 0) {
+    report(WARN, 'Image anchors', `Missing media-anchor-* on image boxes ${composition.missingImageAnchors.join(', ')}`);
+  } else {
+    report(PASS, 'Image anchors', 'All image boxes declare crop anchors');
   }
 
   if (consoleErrors.length > 0) {
