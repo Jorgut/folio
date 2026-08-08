@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.1
+version: 1.0.3
 tags:
   - presentation
   - slides
@@ -134,6 +134,39 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 2. 密度：`density-airy` / `density-balanced` / `density-compact`
 3. 构图家族：Hero + Rail / Portrait Feature / Evidence Board / Sidebar Report / Strip Narrative / Centerpiece / Dense Compare
 4. 版心和锚点：`.content.layout-frame` + `frame-*` + `media-anchor-*`
+
+### Step 2.5: 作品集/空间类 deck 的页型原则
+
+当用户给的是作品集、空间提案、室内方案、品牌空间或视觉合集时，先把每页分成固定职责，而不是只看图片数量：
+
+| 页型 | 作用 | 版式要点 |
+|------|------|----------|
+| Project Opener | 交代项目身份 | 标题、地点、年份、类型、1 张主图或 2 图主辅 |
+| Proof Spread | 证明设计判断 | 1 张主图 + 2-4 张辅图，突出材质/动线/灯光/尺度 |
+| Gallery Board | 展示图集 | 允许多图，但必须有主次，不要平均分配 |
+| Detail / Atmosphere | 讲局部与气氛 | 图可以少，但要说明它证明了什么 |
+| Closing | 收束与留白 | 只保留最关键的 1 句话或感谢页 |
+
+混合竖图/横图时，优先遵循以下顺序：
+
+1. 同级信息必须找齐：优先顶边、底边或同一基线对齐
+2. 如果一张图只是辅助图，就把它放进明确的次级栏位，不要让它自由漂浮
+3. 同一组图片要共享一个主轴，不要每张图各自居中
+4. 只有在刻意制造非对称时，才允许局部错位
+
+继续页（continuation）不要只放图片。它至少要回答一件事：
+
+- 这是在证明什么
+- 这组图属于哪一段空间体验
+- 这一页和上一页是什么关系
+
+如果用户在做的是作品集复盘，默认先看：
+
+1. 页面职责是否清楚
+2. 图文是否服从同一套网格
+3. 主图/辅图是否有明显层级
+4. 混合比例图片是否找齐
+5. 继续页是否补了上下文
 
 ### Step 3: 拷贝模板
 

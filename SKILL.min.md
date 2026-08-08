@@ -1,7 +1,7 @@
 ---
 name: folio-min
 description: Minimal Folio skill for platforms that do not support full skill loading or large instruction files.
-version: 1.0.1
+version: 1.0.3
 tags:
   - presentation
   - slides
@@ -41,6 +41,8 @@ Goal: turn structured content into a clean, editable deck, starting with HTML an
 5. Use asymmetrical editorial layouts when possible
 6. Keep one theme across the whole deck
 7. Avoid random animation or decorative clutter
+8. For portfolio or spatial decks, give each page a clear role: opener, proof spread, gallery board, detail page, or closing
+9. When mixing tall and wide images on the same page, align them by top edge, bottom edge, or shared baseline before deciding the final crop
 
 ## Minimum workflow
 

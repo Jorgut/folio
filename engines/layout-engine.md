@@ -9,6 +9,7 @@
 3. **全出血** — 图片突破安全区边界创造沉浸感
 4. **节奏变化** — 连续 2 页相同布局后必须换布局
 5. **封面 / 章节 / 收束页** — 必须用居中或大字布局
+6. **主辅分层** — 同一页的图片不应平均分配，必须有主图、辅图和证明图的层级
 
 ## 构图协议
 
@@ -65,6 +66,17 @@ Folio 的布局不是把元素放到页面上，而是先建立版心，再决�
 
 图片和说明文字用 `figure-stack`，caption gap 固定为 `--folio-caption-gap`。
 
+### 混合比例对齐规则
+
+当一页同时出现竖图和横图，或不同高度的图片时，先做“找齐”，再做“好看”：
+
+- 同级图片优先共享顶边、底边或中轴线，避免一张图像漂浮在另一张图旁边
+- 如果一张图是主图，辅图必须服从主图的高度、边线或网格槽位
+- 辅图不要按自身比例独立决定版心；应优先按整组模块的高度与节奏裁切
+- 若无法同时满足顶边和底边，优先保住主图的完整性，再让辅图适度裁切
+- 竖图与横图并置时，尽量让它们落在同一视觉组里，而不是各自单独居中
+- 只有在刻意制造节奏断裂时，才允许局部错位
+
 ### 对齐规则
 
 - 标题左边缘和正文左边缘必须共线，除非使用 Cover / Chapter / Closing。
@@ -73,6 +85,7 @@ Folio 的布局不是把元素放到页面上，而是先建立版心，再决�
 - 正文模块之间用 `--folio-module-gap`；章节级留白用 `--folio-section-gap`。
 - 全出血图片可以突破安全区，但覆盖文字仍必须回到 `content-start/content-end` 内。
 - 连续页可以换视觉，但外边距、列沟和 caption gap 必须保持一致。
+- 作品集/空间类页面优先显式标出页型：`project opener` / `proof spread` / `gallery board` / `detail page` / `closing`。
 
 ## 版式丰富度系统
 
@@ -171,7 +184,7 @@ Cover
 |---------|------------|------|
 | 产品路演 | Cover → Split → Gallery → Stats → Closing | 先摆产品再讲故事 |
 | 研究报告 | Cover → Timeline → Split → Table → Stats → Closing | 先时间线建立信任 |
-| 设计作品集 | Cover → Bleed → Gallery → Overlap → Spread → Closing | 视觉驱动 |
+| 设计作品集 | Cover → Project Opener → Proof Spread → Gallery Board → Detail Page → Closing | 视觉驱动，但要有页型分工 |
 | 商业模式 | Cover → List → Compare → Stats → Table → Closing | 逻辑驱动 |
 | 学术汇报 | Cover → Editorial → Table → Stats → Split → Closing | 内容驱动 |
 
