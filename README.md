@@ -31,10 +31,7 @@ You describe what you need → Folio generates the deck → export to any format
 
 Single source, multiple outputs: **HTML / PPTX / PDF / Figma / IDML**. Auto-generated layout, manually editable after export.
 
-<p align="center">
-  <img src="assets/screenshots/slide-cover.png" width="45%" alt="Cover slide preview" />
-  <img src="assets/screenshots/slide-editorial.png" width="45%" alt="Editorial slide preview" />
-</p>
+> Preview images are generated locally when needed; they are not checked into this branch.
 
 ---
 
@@ -216,9 +213,7 @@ Open `templates/wireframe-sheet.html` in your browser, then print or use it as a
 templates/wireframe-sheet.html
 ```
 
-<p align="center">
-  <img src="assets/screenshots/wireframe-sheet.png" width="80%" alt="Wireframe sheet preview" />
-</p>
+> Wireframe previews are generated from `templates/wireframe-sheet.html` during local use.
 
 Each card represents a slide with:
 - Title / subtitle area
@@ -363,8 +358,6 @@ folio/
 │   ├── layout-mapping.mjs  ← Layout mapping engine
 │   ├── figma-clipboard.mjs ← Experimental clipboard encoder
 │   └── .env.example        ← C2D API key template
-├── assets/
-│   └── screenshots/        ← Style previews (slide-cover, slide-editorial, wireframe-sheet)
 ├── templates/
 │   └── wireframe-sheet.html← Wireframe sketch template
 ├── references/             ← Design references
@@ -416,10 +409,7 @@ MIT · Copyright (c) 2026 Jorgut
 
 一次输出：**HTML / PPTX / PDF / Figma / IDML**。自动排版，导出后可手动精修。
 
-<p align="center">
-  <img src="assets/screenshots/slide-cover.png" width="45%" alt="封面幻灯片预览" />
-  <img src="assets/screenshots/slide-editorial.png" width="45%" alt="杂志风格幻灯片预览" />
-</p>
+> 预览图按需在本地生成，当前分支不提交截图文件。
 
 ---
 
@@ -603,9 +593,7 @@ node scripts/export-indesign.mjs 项目路径/index.html
 templates/wireframe-sheet.html
 ```
 
-<p align="center">
-  <img src="assets/screenshots/wireframe-sheet.png" width="80%" alt="线框图预览" />
-</p>
+> 线框图预览可直接打开 `templates/wireframe-sheet.html` 查看。
 
 每张卡片包含：
 - 标题 / 副标题区域
@@ -750,8 +738,6 @@ folio/
 │   ├── layout-mapping.mjs  ← 布局映射引擎
 │   ├── figma-clipboard.mjs ← 实验性剪贴板编码器
 │   └── .env.example        ← C2D API Key 配置模板
-├── assets/
-│   └── screenshots/        ← 风格预览图（cover, editorial, wireframe）
 ├── templates/
 │   └── wireframe-sheet.html← 线框图速写模板
 ├── references/             ← 设计参考资料

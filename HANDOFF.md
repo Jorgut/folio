@@ -86,7 +86,6 @@ folio/
 ├── design/             设计系统
 ├── engines/            决策引擎规则 (7 文件)
 ├── scripts/            导出脚本 + 更新脚本 + Figma 插件
-├── assets/screenshots/ 预览截图
 ├── templates/          线框图模板
 └── references/         设计参考资料
 ```
