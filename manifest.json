@@ -1,6 +1,6 @@
 {
   "name": "folio",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "manifest_version": 1,
   "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
   "release_date": "2026-08-08",
@@ -22,9 +22,9 @@
     "supports_manifest_only_check": true
   },
   "release_highlights": [
-    "Added explicit portfolio page-type guidance for opener, proof, gallery, detail, and closing pages.",
-    "Added alignment rules for mixed-ratio image groups so top/bottom/grid alignment is intentional.",
-    "Fixed the lightweight PDF export so it now paginates one slide per page instead of collapsing into a single sheet.",
-    "Removed README and handoff references to screenshot assets that are not checked into this branch."
+    "Added Architecture / Interior Portfolio QA Workflow with manifest intake, layout contract, project page planning, ratio solving, global audit, visual regression reporting, and hard-stop conditions.",
+    "Made project/image manifest completion a required gate before portfolio layout work starts.",
+    "Added geometry verification requirements for figure bounding boxes, gaps, radii, footer safety, overflow, and HTML/PDF consistency.",
+    "Clarified that user-reported page issues must trigger whole-book scanning of the same problem class."
   ]
 }
