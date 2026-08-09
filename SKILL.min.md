@@ -1,7 +1,7 @@
 ---
 name: folio-min
 description: Minimal Folio skill for platforms that do not support full skill loading or large instruction files.
-version: 1.0.3
+version: 1.0.5
 tags:
   - presentation
   - slides
@@ -43,6 +43,13 @@ Goal: turn structured content into a clean, editable deck, starting with HTML an
 7. Avoid random animation or decorative clutter
 8. For portfolio or spatial decks, give each page a clear role: opener, proof spread, gallery board, detail page, or closing
 9. When mixing tall and wide images on the same page, align them by top edge, bottom edge, or shared baseline before deciding the final crop
+10. Default portfolio images to square corners (`border-radius: 0`) unless the user explicitly asks for rounded images
+11. Keep image gaps intentional: tight 12-14px for portfolio image groups, 16-18px for normal layouts, 24-32px only for large editorial separation
+12. When fixing one alignment issue, scan every project page for matching edge alignment, radius consistency, and gap consistency
+13. For architecture/interior portfolios, do not start layout until project/image manifest, ratio classes, crop risks, and image ownership are known
+14. Define a layout contract before designing pages: page size, margins, image frame, gap, radius, text-image distance, footer safe area, opener frame, continuation frame, and PDF safe area
+15. Do geometry verification before delivery: figure left/right/top/bottom, gap, radius, overflow, footer safety, HTML/PDF consistency
+16. Hard stop if image ownership is unknown, manifest counts do not match, project-page edges do not align, radius is inconsistent, or PDF and HTML diverge visually
 
 ## Minimum workflow
 

@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.3
+version: 1.0.5
 tags:
   - presentation
   - slides
@@ -154,6 +154,30 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 3. 同一组图片要共享一个主轴，不要每张图各自居中
 4. 只有在刻意制造非对称时，才允许局部错位
 
+图片外观和间距默认遵循作品集级别的硬规则：
+
+- 默认所有作品集图片使用直角：`border-radius: 0`。除非用户明确要求软圆角，否则不要对图片或 figure 加圆角
+- 同一个 deck 里不允许有的图片圆角、有的图片直角；如果无法稳定控制，就全局禁用圆角
+- 同一项目跨页必须共享同一条 image frame 右边界，不能第 1 页图组短一截、第 2 页贴到版心边
+- 同一项目跨页若有文字页和 continuation 页，至少要统一右边界；能统一左边界时也要统一左边界
+- 作品集图片 gap 默认用 `tight`，不要凭感觉留大缝
+
+图片间距按图像密度选择：
+
+| 模式 | Gap | 使用场景 |
+|------|-----|----------|
+| `tight` | 12-14px | 作品集图组、同项目连续页、2x2/多图证明页 |
+| `standard` | 16-18px | 普通图文页、少量图像、需要呼吸感 |
+| `wide` | 24-32px | 章节页、强留白页、单图和文字之间的大关系 |
+
+如果用户指出某一页有对齐问题，不要只修那一页。必须扫描同一 deck 的所有项目页：
+
+1. 图片圆角是否全局一致
+2. 同项目跨页 image frame 左/右边界是否一致
+3. 多图组是否共享顶边、底边或主轴
+4. gap 是否按 `tight / standard / wide` 有意选择
+5. continuation 页是否和项目 opener / proof spread 属于同一套版心
+
 继续页（continuation）不要只放图片。它至少要回答一件事：
 
 - 这是在证明什么
@@ -167,6 +191,150 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 3. 主图/辅图是否有明显层级
 4. 混合比例图片是否找齐
 5. 继续页是否补了上下文
+
+### Step 2.6: Architecture / Interior Portfolio QA Workflow
+
+建筑、室内、空间、展览、品牌空间类作品集不能当成“图片重排任务”。必须当成“全书版式系统任务”处理：先建立资料和版心合同，再排版，再做全书几何验收，最后导出。
+
+#### 1. Portfolio Intake：先锁资料 manifest
+
+没有完成 manifest，不进入排版。先建立项目和图片清单：
+
+| 字段 | 必填内容 |
+|------|----------|
+| project_id | 项目唯一 ID |
+| project_title | 项目名 |
+| project_type | residential / hospitality / retail / exhibition / F&B / other |
+| page_count | 计划页数 |
+| image_file | 图片文件名 |
+| image_project | 图片归属项目 |
+| image_role | hero / proof / detail / atmosphere / plan / process |
+| ratio | 实测宽高比 |
+| ratio_class | 16:9 / 4:3 / 3:4 / 9:16 / special |
+| quality | high / usable / weak |
+| crop_risk | none / low / high |
+| notes | 是否拼贴、是否旧图、是否需要拆分或替换 |
+
+硬规则：
+
+- 项目图片数量必须等于 manifest 中该项目图片数量
+- 任意图片项目归属不明时，停止排版
+- 拼贴图、旧合成图、重复图必须先标记，不能混入最终图组
+- 不允许把 A 项目的图片排进 B 项目
+- 图片命名必须能读出项目和语义；不要只用 `image-1.jpg`
+
+#### 2. Layout Contract：先锁全局版心合同
+
+每本作品集必须在第一轮排版前定义全局合同：
+
+| 合同项 | 必填 |
+|--------|------|
+| page_size | HTML viewport 和 PDF 页面尺寸 |
+| margin_left / margin_right | 左右边距 |
+| margin_top / margin_bottom | 上下边距 |
+| image_frame | 项目图组外框 |
+| image_gap | tight / standard / wide 的具体 px |
+| image_radius | 默认 `0px`，除非用户明确要求 |
+| caption_gap | caption 与图像关系 |
+| text_image_gap | 文字栏与图组距离 |
+| footer_safe_area | 页脚避让区 |
+| opener_frame | project opener 图像版心 |
+| continuation_frame | continuation 页图像版心 |
+| pdf_safe_area | PDF 裁切和页脚安全区 |
+
+硬规则：
+
+- 版心合同先于页面局部造型
+- 同一项目跨页至少共享同一条右边界
+- 多项目同类型页面必须共享同一套 margin / gap / footer safe area
+- 禁止边做边调导致“一页好、一页坏”
+
+#### 3. Project Page Planning：先定页面职责
+
+每个项目先写页面职责，再决定图片放哪里：
+
+| 页型 | 允许内容 | 禁止 |
+|------|----------|------|
+| opener | 项目身份、主图、1-2 张辅助图 | 无上下文图片堆叠 |
+| proof spread | 证明设计判断的主辅图组 | 平均分配所有图片 |
+| gallery board | 多图展示但有主次和统一图框 | 每张图各自居中 |
+| detail atmosphere | 材质、灯光、局部、尺度说明 | 只放漂亮局部而不说明作用 |
+| continuation | 承接上一页，延续同一 image frame | 无标题、无关系、无语义的纯图片页 |
+
+#### 4. Ratio Solver：比例先解，再裁切
+
+图片比例处理必须显式：
+
+- 横图优先映射到 16:9 或 4:3
+- 竖图优先映射到 3:4 或 9:16
+- 正方图或非常规比例标记为 `special`
+- 如果裁切会破坏主体，必须记录 `crop_risk: high`，改用 special ratio 或询问用户
+- 不允许静默把竖图硬裁成横图，也不允许为了填满网格裁掉主要空间信息
+
+#### 5. Global Audit：用户指出一页，全书扫同类问题
+
+用户指出任何一页的版式问题，都必须扫描同一 deck 的所有项目页，不只修截图页：
+
+| 检查项 | 必须验证 |
+|--------|----------|
+| radius | 所有 figure / img 圆角是否一致 |
+| image gap | 所有图组 gap 是否符合合同 |
+| image frame | 同项目跨页左/右边界是否一致 |
+| group alignment | 多图是否共享顶边、底边、中轴线或主轴 |
+| text distance | 图片与文字距离是否安全 |
+| footer safe area | 图片是否压到页脚、页码、项目标签 |
+| overflow | 页面是否横向溢出或裁切 |
+| manifest match | 项目图片是否完整、归属是否正确 |
+| continuation context | 继续页是否说明和上一页的关系 |
+
+#### 6. Geometry Verification：不要只凭肉眼
+
+视觉看起来通过不等于通过。必须用浏览器或脚本检查每个 `figure` 的几何盒：
+
+- `left`
+- `right`
+- `top`
+- `bottom`
+- `width`
+- `height`
+- computed `gap`
+- computed `border-radius`
+- 与 page footer / text block 的距离
+
+至少要验证：
+
+- HTML desktop
+- HTML mobile 或窄屏
+- PDF 页面截图
+
+如果用户看到的截图和本地截图不同，先排查 viewport、浏览器缩放、file/local server 缓存、PDF 导出渲染差异，不要直接宣称“已经修好”。
+
+#### 7. Visual Regression Report：改完必须可复核
+
+每次修改作品集后，回复里必须说明：
+
+- 改了哪几个项目
+- 每个项目改了哪一页
+- 使用了哪些图片
+- 删除、替换或新增了哪些图片
+- 调整了哪些 layout contract 值
+- HTML 验证结果
+- PDF 是否同步导出和截图验证
+- 仍有哪些 pending 或 out-of-scope
+
+#### 8. Hard Stop：以下情况不能说完成
+
+只要出现以下任一情况，不能交付、不能说完成：
+
+- 项目图片数量不等于 manifest
+- 任意图片项目归属不明
+- 任意 project figure 圆角不一致
+- 任意图片压到页脚、页码或文字
+- 任意页面横向溢出
+- 同一项目跨页 image frame 没有找齐且无明确理由
+- PDF 与 HTML 视觉明显不一致
+- 交付 PDF 超过用户指定目标大小
+- 没有做全书同类问题扫描
 
 ### Step 3: 拷贝模板
 
