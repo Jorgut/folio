@@ -1,7 +1,7 @@
 ---
 name: folio-min
 description: Minimal Folio skill for platforms that do not support full skill loading or large instruction files.
-version: 1.0.5
+version: 1.0.9
 tags:
   - presentation
   - slides
@@ -50,6 +50,9 @@ Goal: turn structured content into a clean, editable deck, starting with HTML an
 14. Define a layout contract before designing pages: page size, margins, image frame, gap, radius, text-image distance, footer safe area, opener frame, continuation frame, and PDF safe area
 15. Do geometry verification before delivery: figure left/right/top/bottom, gap, radius, overflow, footer safety, HTML/PDF consistency
 16. Hard stop if image ownership is unknown, manifest counts do not match, project-page edges do not align, radius is inconsistent, or PDF and HTML diverge visually
+17. For portfolio work, optionally use the maintained reference board `https://www.pinterest.com/jorgutyn/visualizationlayouts-%D0%BC%D0%B0%D0%BA%D0%B5%D1%82%D1%8B/layout/`; extract grid, hierarchy, gap, alignment, and whitespace patterns, but do not copy source imagery or template details
+18. Before designing architecture/interior portfolios, check `reference-layouts/taxonomy.md`, `reference-layouts/templates.md`, `reference-layouts/catalog.md`, and `reference-layouts/previews/index.html`; choose 1-3 wireframe templates as structural starting points
+19. Every page must declare a bleed mode before layout: `no-bleed`, `soft-bleed`, `edge-bleed`, `full-bleed`, or `print-bleed`; keep text, captions, footers, and page numbers inside the safe line unless there is a documented exception
 
 ## Minimum workflow
 

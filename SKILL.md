@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.5
+version: 1.0.9
 tags:
   - presentation
   - slides
@@ -196,6 +196,47 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 
 建筑、室内、空间、展览、品牌空间类作品集不能当成“图片重排任务”。必须当成“全书版式系统任务”处理：先建立资料和版心合同，再排版，再做全书几何验收，最后导出。
 
+#### 0. Reference Board Intake：先吸收持续案例库
+
+Folio 可以使用用户维护的外部版式参考板作为灵感输入，但必须把案例转译成规则，不要照抄单张图。
+
+默认参考板：
+
+- Pinterest：`https://www.pinterest.com/jorgutyn/visualizationlayouts-%D0%BC%D0%B0%D0%BA%D0%B5%D1%82%D1%8B/layout/`
+- 主题：Visualization / Layouts / Макеты → Layout
+- 用途：作品集、室内设计展示板、mood board、presentation board、图组布局、网格关系、留白节奏参考
+
+使用方式：
+
+1. 在开始作品集 layout contract 前，打开参考板或使用用户提供的截图
+2. 选择 3-5 个和当前项目最接近的参考方向
+3. 只提取结构信息：版心、列数、主辅图比例、gap、文字位置、留白、跨页关系
+4. 把观察结果写进 layout contract 或 page planning
+5. 不复制具体图片、文案、品牌资产或他人模板细节
+6. 如果 Pinterest 无法访问、要求登录或加载不完整，要求用户提供截图；不要假装已经看过全部案例
+7. 若任务是作品集或空间提案，优先读取 `reference-layouts/taxonomy.md` 和 `reference-layouts/templates.md`，从模板库选择 1-3 个线框作为起点
+
+参考板归纳模板：
+
+| 字段 | 必填 |
+|------|------|
+| reference_source | board URL / screenshot / pin URL |
+| useful_for | opener / proof spread / gallery board / detail atmosphere |
+| grid_pattern | single hero / 2-column / 3-column / masonry / strip / board |
+| image_hierarchy | hero + support / equal grid / rhythm strip / text-led |
+| spacing_pattern | tight / standard / wide |
+| alignment_rule | shared top / shared bottom / shared right edge / baseline / axis |
+| bleed_mode | no-bleed / soft-bleed / edge-bleed / full-bleed / print-bleed |
+| boundary_rule | content frame / safe line / trim line / bleed line |
+| adaptation | 当前 deck 如何转译，不照抄什么 |
+
+内置参考模板库：
+
+- `reference-layouts/taxonomy.md` — 参考图分类法、判断规则和转译流程
+- `reference-layouts/templates.md` — 可复用线框模板库
+- `reference-layouts/catalog.md` — Pinterest 参考板全量 pin 分类目录
+- `reference-layouts/previews/index.html` — 灰阶视觉预览，可直接在浏览器打开检查
+
 #### 1. Portfolio Intake：先锁资料 manifest
 
 没有完成 manifest，不进入排版。先建立项目和图片清单：
@@ -237,6 +278,8 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 | image_radius | 默认 `0px`，除非用户明确要求 |
 | caption_gap | caption 与图像关系 |
 | text_image_gap | 文字栏与图组距离 |
+| bleed_mode | no-bleed / soft-bleed / edge-bleed / full-bleed / print-bleed |
+| bleed_line / trim_line / safe_line / content_frame | 出血、裁切、安全区和 12 列版心边界 |
 | footer_safe_area | 页脚避让区 |
 | opener_frame | project opener 图像版心 |
 | continuation_frame | continuation 页图像版心 |
@@ -247,7 +290,18 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 - 版心合同先于页面局部造型
 - 同一项目跨页至少共享同一条右边界
 - 多项目同类型页面必须共享同一套 margin / gap / footer safe area
+- 每页必须先声明 `bleed_mode`，再决定图片是否可以突破 content frame、safe line 或 trim line
 - 禁止边做边调导致“一页好、一页坏”
+
+Bleed mode 选择表：
+
+| 模式 | 允许范围 | 使用场景 |
+|------|----------|----------|
+| `no-bleed` | 所有内容都在 safe/content frame 内 | 文字页、密集图板、contact sheet、系统说明页 |
+| `soft-bleed` | 图片轻微突破 content frame，但不碰页面边缘 | gallery、proof spread、混合比例图组 |
+| `edge-bleed` | 图片贴住一到两条 trim edge，文字仍在 safe line 内 | project opener、强视觉转场、campaign board |
+| `full-bleed` | 图片铺满整页，文字少量覆盖且必须在 safe line 内 | 封面、章节页、沉浸式大图页 |
+| `print-bleed` | 图片超出 trim line，PDF/印刷通常按 3mm 出血 | 需要真正印刷裁切的 edge-to-edge 页面 |
 
 #### 3. Project Page Planning：先定页面职责
 
@@ -360,7 +414,7 @@ mkdir -p 项目/images
 
 1. 读 `design/style-guide.md` → 按风格参数调字体/颜色/间距/特效
 2. 读 `engines/layout-engine.md` → 先定构图协议，再选布局组合（16 种布局，不对称优先）
-3. 每页先写 `data-layout`，再放 `.content.layout-frame` 或明确说明为什么使用 `full-bleed`
+3. 每页先写 `data-layout` 和 `data-bleed-mode`，再放 `.content.layout-frame` 或明确说明为什么使用 `full-bleed` / `print-bleed`
 4. 每页必须声明受众/密度意图：通过 `audience-*`、`density-*` class 或在构图选择中体现
 5. 图文页必须声明列跨、垂直锚点、图片焦点锚点和 caption gap
 6. 粘 `<section data-layout="cover">`，改文案和图片路径
@@ -433,6 +487,8 @@ node scripts/export-figma.mjs --mode local index.html   # 强制本地插件
 | 视觉特效（Glass/Aurora/Noise/Glow） | `engines/visual-effects-engine.md` |
 | 导出参数（PPTX/PDF/Figma 配置） | `engines/export-engine.md` |
 | 设计原理（Gestalt / UX Laws） | `design/principles.md` |
+| 参考图分类与模板库 | `reference-layouts/taxonomy.md` + `reference-layouts/templates.md` + `reference-layouts/catalog.md` |
+| 灰阶线框预览 | `reference-layouts/previews/index.html` |
 
 ## 约束（违反 = 重做）
 

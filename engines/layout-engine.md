@@ -11,6 +11,7 @@
 5. **封面 / 章节 / 收束页** — 必须用居中或大字布局
 6. **主辅分层** — 同一页的图片不应平均分配，必须有主图、辅图和证明图的层级
 7. **图片外观一致** — 作品集图片默认直角；不要在同一 deck 中混用圆角和直角
+8. **参考先归纳** — 外部案例板只用于提取版心、图组、gap、留白和对齐规则，不直接照抄模板
 
 ## 构图协议
 
@@ -21,6 +22,7 @@ Folio 的布局不是把元素放到页面上，而是先建立版心，再决�
 | 问题 | 必填答案 |
 |------|----------|
 | 版心 | `content` / `content-v` / `content-h` / `full-bleed` |
+| 出血模式 | `no-bleed` / `soft-bleed` / `edge-bleed` / `full-bleed` / `print-bleed` |
 | 网格 | 默认 `layout-frame`，12 列 + 8 行 |
 | 主视觉 | `frame-media-left` / `frame-media-right` / `frame-media-wide` / `frame-full` |
 | 文案锚点 | `frame-copy-left` / `frame-copy-right` / `frame-title` / `frame-body` |
@@ -29,7 +31,7 @@ Folio 的布局不是把元素放到页面上，而是先建立版心，再决�
 默认结构：
 
 ```html
-<section class="slide" data-layout="split-4-8">
+<section class="slide" data-layout="split-4-8" data-bleed-mode="no-bleed">
   <div class="content layout-frame">
     <div class="frame-copy-left align-mid">...</div>
     <figure class="frame-media-right figure-stack">
@@ -44,6 +46,10 @@ Folio 的布局不是把元素放到页面上，而是先建立版心，再决�
 
 | 线 | 作用 |
 |----|------|
+| bleed line | 图片为印刷或视觉冲击允许超出的外延线 |
+| trim line | 最终页面边缘；PDF 和截图应以此为可见边界 |
+| safe line | 标题、正文、caption、页码、页脚必须留在此线内 |
+| content frame | 12-column 工作版心，默认图文模块都应对齐到这里 |
 | `--safe-x` | 左右外边距，所有非出血内容必须落在此线内 |
 | `--safe-y` | 上下外边距，标题、元数据、图片边缘优先对齐 |
 | `--nav-safe` | 底部导航避让区，正文和图片说明不能压到这里 |
@@ -52,6 +58,47 @@ Folio 的布局不是把元素放到页面上，而是先建立版心，再决�
 | baseline 8px | 控制文字段落、caption、模块间距节奏 |
 
 调试时在 `<body>` 加 `show-guides`，检查列、边距和 baseline 是否成立。交付前移除。
+
+### 出血模式
+
+出血不是装饰效果，而是版心合同的一部分。每页必须先声明 `data-bleed-mode`，再决定图片是否能突破内容框。
+
+| 模式 | 边界规则 |
+|------|----------|
+| `no-bleed` | 图像、文字、caption 全部对齐 content frame 或 safe line |
+| `soft-bleed` | 主图可以轻微突破 content frame，但不能触碰 trim line |
+| `edge-bleed` | 主图可以贴住一条或两条 trim line，文字和 caption 仍必须留在 safe line 内 |
+| `full-bleed` | 主图铺满 trim line 内的整页，文字覆盖层必须回到 safe line |
+| `print-bleed` | 主图超出 trim line，PDF/印刷按 3mm 等效出血处理，导出前必须检查裁切 |
+
+出血验收：
+
+- `no-bleed` 页面不得有图片越过 safe line，除非在 page planning 中说明理由
+- `soft-bleed` 页面必须仍能看见稳定 content frame，不能像随机溢出
+- `edge-bleed` 和 `full-bleed` 页面必须检查文字、页码、项目标签没有贴边
+- `print-bleed` 只用于需要印刷裁切的导出；普通 HTML 预览不要假装已经有真实 3mm 裁切
+
+### 参考板转译
+
+作品集和空间类 deck 可以先看用户维护的持续参考板：
+
+`https://www.pinterest.com/jorgutyn/visualizationlayouts-%D0%BC%D0%B0%D0%BA%D0%B5%D1%82%D1%8B/layout/`
+
+使用参考板时必须输出“转译结论”，不要只说“参考 Pinterest 风格”：
+
+- 这组参考适合哪种页型：opener / proof spread / gallery board / detail atmosphere
+- 它的网格是什么：single hero / 2-column / 3-column / masonry / strip / board
+- 它的图像层级是什么：hero + support / equal grid / rhythm strip / text-led
+- 它的 gap 属于 tight / standard / wide 哪一档
+- 它依赖哪条对齐线：共享顶边、底边、右边界、baseline 或主轴
+- 当前 deck 只继承结构原则，不复制图片、文案、品牌和模板细节
+
+内置参考库：
+
+- `reference-layouts/taxonomy.md`：把参考图分成 hero opener、2-column board、moodboard grid、split proof spread 等类型
+- `reference-layouts/templates.md`：把类型转译成可复用线框模板
+- `reference-layouts/catalog.md`：记录 Pinterest 参考板 43 个 pin 的全量分类映射
+- `reference-layouts/previews/index.html`：灰阶线框预览，用于快速挑选版式方向
 
 ### 作品集版心合同
 
