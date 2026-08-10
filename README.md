@@ -31,7 +31,32 @@ You describe what you need → Folio generates the deck → export to any format
 
 Single source, multiple outputs: **HTML / PPTX / PDF / Figma / IDML**. Auto-generated layout, manually editable after export.
 
-> Preview images are generated locally when needed; they are not checked into this branch.
+> Key preview images are checked into `assets/screenshots/`; extra debug captures can still be generated locally when needed.
+
+### Visual Preview
+
+These are real renders from Folio, not mockups. The goal is simple: people should see the output before they decide to trust the claims.
+
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <img src="assets/screenshots/slide-cover.png" alt="Folio cover preview" width="100%">
+      <br><sub>Cover / opener</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/screenshots/slide-editorial.png" alt="Folio editorial preview" width="100%">
+      <br><sub>Editorial spread</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/screenshots/wireframe-sheet.png" alt="Folio wireframe sheet preview" width="100%">
+      <br><sub>Wireframe planning sheet</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/screenshots/reference-layouts-preview.png" alt="Folio reference layout preview" width="100%">
+      <br><sub>Reference layout library</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -409,7 +434,7 @@ MIT · Copyright (c) 2026 Jorgut
 
 一次输出：**HTML / PPTX / PDF / Figma / IDML**。自动排版，导出后可手动精修。
 
-> 预览图按需在本地生成，当前分支不提交截图文件。
+> 顶部已经放了真实渲染预览图，先看效果，再看功能说明。
 
 ---
 
