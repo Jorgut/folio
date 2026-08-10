@@ -1,9 +1,9 @@
 {
   "name": "folio",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "manifest_version": 1,
   "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
-  "release_date": "2026-08-08",
+  "release_date": "2026-08-10",
   "update_channel": "stable",
   "repo": "https://github.com/Jorgut/folio",
   "raw_manifest_url": "https://raw.githubusercontent.com/Jorgut/folio/main/manifest.json",
@@ -22,9 +22,8 @@
     "supports_manifest_only_check": true
   },
   "release_highlights": [
-    "Added Architecture / Interior Portfolio QA Workflow with manifest intake, layout contract, project page planning, ratio solving, global audit, visual regression reporting, and hard-stop conditions.",
-    "Made project/image manifest completion a required gate before portfolio layout work starts.",
-    "Added geometry verification requirements for figure bounding boxes, gaps, radii, footer safety, overflow, and HTML/PDF consistency.",
-    "Clarified that user-reported page issues must trigger whole-book scanning of the same problem class."
+    "Added a formal bleed/trim/safe/content line system to the Reference Layout preview sheet.",
+    "Added five required bleed modes: no-bleed, soft-bleed, edge-bleed, full-bleed, and print-bleed.",
+    "Updated Folio layout contracts and reference-template docs so every page declares how images relate to bleed, trim, safe, and content boundaries."
   ]
 }

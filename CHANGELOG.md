@@ -2,6 +2,36 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.9 - 2026-08-10
+
+- Added a formal bleed/trim/safe/content line system to the Reference Layout preview sheet
+- Added five required bleed modes: `no-bleed`, `soft-bleed`, `edge-bleed`, `full-bleed`, and `print-bleed`
+- Added per-template recommended bleed modes and visible `bleed_mode` labels in `reference-layouts/previews/index.html`
+- Updated `SKILL.md`, `SKILL.min.md`, `reference-layouts/taxonomy.md`, `reference-layouts/templates.md`, and `engines/layout-engine.md` so bleed behavior is part of the layout contract
+
+## 1.0.8 - 2026-08-10
+
+- Added `reference-layouts/catalog.md`, a full observed catalog of all 43 pins from the maintained Pinterest layout board
+- Expanded the Reference Layout Library from 8 to 13 template families
+- Added new template families: `layout-system-sheet`, `deck-contact-sheet`, `vertical-portfolio-stack`, `brand-guideline-board`, and `campaign-deliverables-board`
+- Updated `previews/index.html` with the new full-template preview set
+- Connected the full catalog to `SKILL.md`, `SKILL.min.md`, and `engines/layout-engine.md`
+
+## 1.0.7 - 2026-08-10
+
+- Added the initial Reference Layout Library under `reference-layouts/`
+- Added `taxonomy.md` for classifying Pinterest/reference-board layouts into reusable structural types
+- Added `templates.md` with 8 reusable portfolio wireframe families: hero opener, 2-column board, moodboard grid, caption rail gallery, split proof spread, strip narrative, dense presentation board, and controlled masonry gallery
+- Added `previews/index.html`, a gray wireframe preview sheet for quickly reviewing the visual layout system in a browser
+- Connected the template library to `SKILL.md`, `SKILL.min.md`, and `engines/layout-engine.md`
+
+## 1.0.6 - 2026-08-10
+
+- Added Reference Board Intake for the maintained Pinterest layout board: https://www.pinterest.com/jorgutyn/visualizationlayouts-%D0%BC%D0%B0%D0%BA%D0%B5%D1%82%D1%8B/layout/
+- Added rules for extracting layout structure from external references: grid pattern, image hierarchy, spacing, alignment, whitespace, and page-type fit
+- Clarified that external references must be translated into layout contracts and page planning, not copied as images, text, brand assets, or template details
+- Added fallback guidance for Pinterest access, login, or incomplete loading cases
+
 ## 1.0.5 - 2026-08-09
 
 - Added Architecture / Interior Portfolio QA Workflow covering manifest intake, layout contract, project page planning, ratio solving, global audit, visual regression reporting, and hard-stop conditions
