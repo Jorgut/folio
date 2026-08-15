@@ -301,13 +301,13 @@ All export scripts live in `scripts/` and follow the `export-*.mjs` naming conve
 | Script | Command | Output |
 |--------|---------|--------|
 | **HTML** | `open path/to/index.html` | Browser preview with keyboard nav |
-| **PPTX** | `node export-native-pptx.mjs path/to/index.html` | `index.pptx` — editable text |
-| **PDF** | `node export-pdf.mjs path/to/index.html` | `index.pdf` — lightweight, selectable text |
-| **PDF Print** | `node export-print-pdf.mjs path/to/index.html` | `index.print.pdf` — 3mm bleed + crop marks |
-| **Figma** | `node export-figma.mjs path/to/index.html` | Clipboard or plugin JSON (see below) |
-| **IDML** | `node export-idml.mjs path/to/index.html` | `index.idml` — InDesign native format |
-| **InDesign PDF** | `node export-indesign.mjs path/to/index.html` | `index.indesign.pdf` — native PDF elements |
-| **Verify** | `node export-verify.mjs path/to/index.html` | Output validation report |
+| **PPTX** | `node scripts/export-native-pptx.mjs path/to/index.html` | `index.pptx` — editable text |
+| **PDF** | `node scripts/export-pdf.mjs path/to/index.html` | `index.pdf` — lightweight, selectable text |
+| **PDF Print** | `node scripts/export-print-pdf.mjs path/to/index.html` | `index.print.pdf` — 3mm bleed + crop marks |
+| **Figma** | `node scripts/export-figma.mjs path/to/index.html` | Clipboard or plugin JSON (see below) |
+| **IDML** | `node scripts/export-idml.mjs path/to/index.html` | `index.idml` — InDesign native format |
+| **InDesign PDF** | `node scripts/export-indesign.mjs path/to/index.html` | `index.indesign.pdf` — native PDF elements |
+| **Verify** | `node scripts/export-verify.mjs path/to/index.html` | Output validation report |
 
 ### Utility Scripts
 
@@ -681,13 +681,13 @@ templates/wireframe-sheet.html
 | 脚本 | 命令 | 输出 |
 |------|------|------|
 | **HTML** | `open 项目路径/index.html` | 浏览器预览，键盘导航 |
-| **PPTX** | `node export-native-pptx.mjs 项目路径/index.html` | `index.pptx` — 文字可编辑 |
-| **PDF** | `node export-pdf.mjs 项目路径/index.html` | `index.pdf` — 轻量，文字可选 |
-| **PDF 印刷** | `node export-print-pdf.mjs 项目路径/index.html` | `index.print.pdf` — 3mm 出血 + 裁切标记 |
-| **Figma** | `node export-figma.mjs 项目路径/index.html` | 剪贴板粘贴 或 插件 JSON |
-| **IDML** | `node export-idml.mjs 项目路径/index.html` | `index.idml` — InDesign 原生格式 |
-| **InDesign PDF** | `node export-indesign.mjs 项目路径/index.html` | `index.indesign.pdf` — 原生 PDF 元素 |
-| **验证** | `node export-verify.mjs 项目路径/index.html` | 输出质量验证报告 |
+| **PPTX** | `node scripts/export-native-pptx.mjs 项目路径/index.html` | `index.pptx` — 文字可编辑 |
+| **PDF** | `node scripts/export-pdf.mjs 项目路径/index.html` | `index.pdf` — 轻量，文字可选 |
+| **PDF 印刷** | `node scripts/export-print-pdf.mjs 项目路径/index.html` | `index.print.pdf` — 3mm 出血 + 裁切标记 |
+| **Figma** | `node scripts/export-figma.mjs 项目路径/index.html` | 剪贴板粘贴 或 插件 JSON |
+| **IDML** | `node scripts/export-idml.mjs 项目路径/index.html` | `index.idml` — InDesign 原生格式 |
+| **InDesign PDF** | `node scripts/export-indesign.mjs 项目路径/index.html` | `index.indesign.pdf` — 原生 PDF 元素 |
+| **验证** | `node scripts/export-verify.mjs 项目路径/index.html` | 输出质量验证报告 |
 
 ### 工具脚本
 
