@@ -234,7 +234,7 @@
       min-width: 0;
       min-height: 0;
       height: 100%;
-      padding: 24px 26px 22px;
+      padding: 24px 26px 34px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -256,7 +256,8 @@
     .magazine-runhead,
     .magazine-folio { display: flex; justify-content: space-between; color: #79736a; font-size: 6px; line-height: 1; text-transform: uppercase; }
     .magazine-runhead { padding-bottom: 5px; border-bottom: 1px solid #c9c2b8; }
-    .magazine-folio { margin-top: auto; padding-top: 5px; border-top: 1px solid #c9c2b8; }
+    .magazine-folio { position: absolute; left: 26px; right: 26px; bottom: 16px; height: 10px; margin: 0; padding-top: 5px; border-top: 1px solid #c9c2b8; }
+    .magazine-page:first-child .magazine-folio span:last-child { order: -1; }
     .magazine-headline { display: grid; gap: 4px; margin: auto 0; }
     .magazine-headline i { display: block; height: 9px; width: 92%; background: #302d29; }
     .magazine-headline i:nth-child(2) { width: 78%; }
@@ -612,24 +613,24 @@
         <h2>magazine-feature-opener · thesis + lead image · no-bleed</h2>
         <div class="slide magazine-spread magazine-opener bleed-no">
           <div class="guide-system" aria-hidden="true"><span class="safe-line"></span><span class="content-line"></span></div><div class="magazine-guides" aria-hidden="true"></div>
-          <section class="magazine-page"><div class="magazine-runhead"><span>SECTION / FEATURE</span><span>01</span></div><div class="magazine-headline"><i></i><i></i><i></i></div><div class="magazine-byline"></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus, sed commodo nunc.</p></div><div class="magazine-folio"><span>FEATURE TITLE</span><span>01</span></div></section>
-          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE TITLE</span><span>02</span></div><div class="magazine-visual">LEAD IMAGE</div><div class="magazine-caption">CAPTION PLACEHOLDER · SOURCE / DATE</div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus.</p></div><div class="magazine-folio"><span>SECTION / ISSUE</span><span>02</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>SECTION / FEATURE</span><span>OPENING</span></div><div class="magazine-headline"><i></i><i></i><i></i></div><div class="magazine-byline"></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus, sed commodo nunc.</p></div><div class="magazine-folio"><span>FEATURE TITLE</span><span>01</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE TITLE</span><span>IMAGE / CAPTION</span></div><div class="magazine-visual">LEAD IMAGE</div><div class="magazine-caption">CAPTION PLACEHOLDER · SOURCE / DATE</div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus.</p></div><div class="magazine-folio"><span>SECTION / ISSUE</span><span>02</span></div></section>
         </div>
       </article>
       <article>
         <h2>magazine-dense-reading · three-column body + pull statement · no-bleed</h2>
         <div class="slide magazine-spread bleed-no">
           <div class="guide-system" aria-hidden="true"><span class="safe-line"></span><span class="content-line"></span></div><div class="magazine-guides" aria-hidden="true"></div>
-          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / REPORTING</span><span>04</span></div><div class="magazine-columns"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat.</p><p>Vivamus at neque vitae sem consequat faucibus.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit lectus sed sapien facilisis.</p><p>Nullam sed tellus id nisi.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempor mi sit amet felis malesuada.</p><p>Sed at consequat nunc.</p></div></div><div class="magazine-pull">PULL STATEMENT PLACEHOLDER</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>04</span></div></section>
-          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / REPORTING</span><span>05</span></div><div class="magazine-columns"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti.</p><p>Donec euismod sapien vitae dictum.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed tellus id nisi.</p><p>Duis at lacus nec magna.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna.</p><p>Sed at consequat nunc.</p></div></div><div class="magazine-pull">SECONDARY CALLOUT</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>05</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / REPORTING</span><span>BODY COPY</span></div><div class="magazine-columns"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat.</p><p>Vivamus at neque vitae sem consequat faucibus.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit lectus sed sapien facilisis.</p><p>Nullam sed tellus id nisi.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempor mi sit amet felis malesuada.</p><p>Sed at consequat nunc.</p></div></div><div class="magazine-pull">PULL STATEMENT PLACEHOLDER</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>04</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / REPORTING</span><span>BODY COPY</span></div><div class="magazine-columns"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti.</p><p>Donec euismod sapien vitae dictum.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed tellus id nisi.</p><p>Duis at lacus nec magna.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna.</p><p>Sed at consequat nunc.</p></div></div><div class="magazine-pull">SECONDARY CALLOUT</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>05</span></div></section>
         </div>
       </article>
       <article>
         <h2>magazine-image-evidence · image field + text columns · no-bleed</h2>
         <div class="slide magazine-spread bleed-no">
           <div class="guide-system" aria-hidden="true"><span class="safe-line"></span><span class="content-line"></span></div><div class="magazine-guides" aria-hidden="true"></div>
-          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / EVIDENCE</span><span>08</span></div><div class="magazine-evidence"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna.</p><p>Vivamus at neque vitae sem.</p></div><div><div class="magazine-visual" style="height:100%">DOCUMENTARY IMAGE</div><div class="magazine-caption">FIGURE 01 · CAPTION PLACEHOLDER</div></div></div><div class="magazine-pull">EVIDENCE-LED STATEMENT</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>08</span></div></section>
-          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / EVIDENCE</span><span>09</span></div><div class="magazine-visual">SUPPORTING IMAGE</div><div class="magazine-caption">FIGURE 02 · SOURCE / DATE</div><div class="magazine-columns" style="grid-template-columns:1fr 1fr"><div class="magazine-column"><p>Lorem ipsum dolor sit amet.</p><p>Nullam sed tellus.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet.</p><p>Integer non justo.</p></div></div><div class="magazine-folio"><span>FEATURE TITLE</span><span>09</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / EVIDENCE</span><span>IMAGE + NOTE</span></div><div class="magazine-evidence"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna.</p><p>Vivamus at neque vitae sem.</p></div><div><div class="magazine-visual" style="height:100%">DOCUMENTARY IMAGE</div><div class="magazine-caption">FIGURE 01 · CAPTION PLACEHOLDER</div></div></div><div class="magazine-pull">EVIDENCE-LED STATEMENT</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>08</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / EVIDENCE</span><span>IMAGE + NOTES</span></div><div class="magazine-visual">SUPPORTING IMAGE</div><div class="magazine-caption">FIGURE 02 · SOURCE / DATE</div><div class="magazine-columns" style="grid-template-columns:1fr 1fr"><div class="magazine-column"><p>Lorem ipsum dolor sit amet.</p><p>Nullam sed tellus.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet.</p><p>Integer non justo.</p></div></div><div class="magazine-folio"><span>FEATURE TITLE</span><span>09</span></div></section>
         </div>
       </article>
     </section>

@@ -69,6 +69,7 @@ Shared structure:
 - Pair translations by semantic module when bilingual content is requested. Translation is optional; never duplicate text solely to fill a column.
 - Treat images as pacing devices between text sections. Keep image crops and captions subordinate to the article's argument.
 - Keep the visual skin (typeface, color, rules, ornaments) independent from the structural template.
+- Gray guide lines, safe/content-frame outlines, and alignment marks are construction aids, not default final artwork. Carry a line into the finished layout only when it has a necessary grouping, navigation, or expressive role; never preserve a guide merely because it appeared in the wireframe.
 
 ## `magazine-investigative-feature`
 
@@ -77,6 +78,8 @@ Page role: a print-inspired feature sequence with dense body copy, emphatic edit
 Shared structure:
 
 - Plan as a sequence of facing-page pairs with stable outer margins, gutter clearance, running folios, and a recurring issue/section marker.
+- On every spread, align the left- and right-page folios to one shared bottom baseline. Place page numbers at the outer bottom corners, with the same bottom offset; keep them outside the center gutter. Running heads carry publication/section labels, not a second copy of the page number.
+- In HTML previews, position paired folios from the spread container's shared footer row; separate page content boxes can have different heights. Confirm the rendered page-number baselines match before delivery.
 - Use narrow columns only when the final reading size supports comfortable line length and leading; three columns is a starting point, not a mandate.
 - Alternate dense reading pages with image-led pauses, evidence images, and short statements that span one or more columns.
 - Use a strong accent for pull statements sparingly; the statement should summarize or quote approved content, never be invented as filler.

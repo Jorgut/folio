@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.14
+version: 1.0.15
 tags:
   - presentation
   - slides
@@ -41,18 +41,17 @@ Folio includes a cross-platform update core:
 
 Trigger rules:
 
-1. If the host supports **startup hooks** or **automated skill entry actions**, run:
+1. **Before every Folio task, run this check as the first action** (the script caches remote results for 30 minutes):
    ```bash
    node <SKILL_ROOT>/scripts/check-update.mjs
    ```
-   when Folio is loaded.
-2. If the host does **not** support startup hooks, run the same check on **first use in the session**.
-3. If script execution or network access is unavailable, **skip the check and continue normally**.
-4. If an update is found, **inform the user and ask whether to run**:
+   A host startup hook may check earlier, but it does not replace the check on actual use. Skill instructions alone cannot register a host hook: the agent must execute the command.
+2. If script execution or network access is unavailable, **state that the check was skipped and continue normally**. Do not claim the installation is current.
+3. If an update is found, show its release highlights, **inform the user and ask whether to run**:
    ```bash
    node <SKILL_ROOT>/scripts/self-update.mjs
    ```
-5. When an update is found, **show the concrete maintained features or release highlights first**, so the user can decide whether the upgrade is worth applying.
+   Continue the requested work while awaiting a decision unless the upgrade is necessary for that work.
 
 Do not silently overwrite the local skill. Update checks may be automatic, but upgrades must remain user-confirmed.
 
@@ -135,18 +134,24 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 3. 构图家族：Hero + Rail / Portrait Feature / Evidence Board / Sidebar Report / Strip Narrative / Centerpiece / Dense Compare
 4. 版心和锚点：`.content.layout-frame` + `frame-*` + `media-anchor-*`
 
-如果内容是一篇需要连续阅读的文章、工作室观点或可选双语专题，不要套用普通演示页的默认两栏。优先考虑 `editorial-longform-feature`：根据页面职责组合 `editorial-opener`、`editorial-image-break`、`editorial-modular-rail`。文档输出优先使用竖版页面；先定页面尺寸、版心、安全边距、重复页眉与页码，再填内容。双语只在用户需要时按语义模块配对；字体、颜色、分隔线和编号样式由项目风格决定。预览见 `reference-layouts/previews/index.html`，结构规范见 `reference-layouts/templates.md`。
+如果内容是一篇需要连续阅读的文章、工作室观点或可选双语专题，不要套用普通演示页的默认两栏。优先考虑 `editorial-longform-feature`：根据页面职责组合 `editorial-opener`、`editorial-image-break`、`editorial-modular-rail`。文档输出优先使用竖版页面；先定页面尺寸、版心、安全边距、重复页眉与页码，再填内容。双语只在用户需要时按语义模块配对；字体、颜色、分隔线和编号样式由项目风格决定。跨页的左右页必须共享同一页脚/页码基线，页码分别落在左右页外侧角并保持相同的底边偏移；页眉只标刊名/栏目等导航信息，不重复页码。预览见 `reference-layouts/previews/index.html`，结构规范见 `reference-layouts/templates.md`。
 
 如果内容适合杂志式调查报道或高密度专题，考虑 `magazine-investigative-feature` 跨页家族：组合 thesis/byline 开页、窄栏密集阅读页与图像证据页，交替安排长文、少量跨栏强调句和图片停顿。线框探索阶段正文可使用 Lorem Ipsum 检验栏宽、行数和跨页节奏；标题、引语、图注使用中性占位符，最终交付必须替换为经确认的真实内容。跨页中缝两侧均留安全区，页码和正文不得跨入装订槽；密栏最终须按实际阅读尺寸检查字级、行长、行距、溢出与断栏。预览见 `reference-layouts/previews/index.html`，规则见 `reference-layouts/templates.md`。
 
-### Step 2.5: 作品集/空间类 deck 的页型原则
+线框中的灰色细线、内容框与安全区边界是排版参照，不默认进入最终成稿。只在分组、导航或视觉表达确实需要线条时保留，并逐条说明其作用；跨栏 highlight 应按强调信息的层级放大并占据明确的跨栏区域，不要缩成某一正文栏的尾注，也不要为了填补留白添加装饰性边框。
 
-当用户给的是作品集、空间提案、室内方案、品牌空间或视觉合集时，先把每页分成固定职责，而不是只看图片数量：
+从线框转成稿时，先给每张图选定 `full-bleed`、`edge-bleed` 或带图注的图框，不混用半出血和悬空页码；需满幅的图用裁切填满，并检查主体焦点，不允许 `contain` 产生意外侧边。连续双开页共享页码基线、图注与页码各有安全区；独立的横向布局研究须标为附录或单独展示，不混入正文页码序列。成稿交付前逐页目检实际渲染，包括桌面、窄屏和打印：检查裁切、溢出、图文重叠、页码底线及残留参照线。结构检查或 AI 概念图不能代替实际成稿截图；若无法渲染，应明确标记未验证，不宣称视觉完成。
+
+### Step 2.5: 设计类 deck 的页型原则
+
+Folio 的版式语法跨设计领域通用，可用于平面/编辑、品牌与视觉识别、产品/工业设计、时尚/纺织、建筑/室内/空间、作品集、研究和营销内容。先按用户 brief 判断内容领域，再选结构；不要因为现有参考图、默认图片或模板命名而把内容自动导向建筑/空间。领域决定图像、术语和证据类型，版式家族只决定内容层级和组织方式。
+
+当用户给的是作品集、品牌、产品、视觉合集或空间提案时，先把每页分成固定职责，而不是只看图片数量：
 
 | 页型 | 作用 | 版式要点 |
 |------|------|----------|
 | Project Opener | 交代项目身份 | 标题、地点、年份、类型、1 张主图或 2 图主辅 |
-| Proof Spread | 证明设计判断 | 1 张主图 + 2-4 张辅图，突出材质/动线/灯光/尺度 |
+| Proof Spread | 证明设计判断 | 1 个主证据 + 2-4 个辅助证据；按领域展示材质、信息层级、使用流程、工艺、动线或尺度 |
 | Gallery Board | 展示图集 | 允许多图，但必须有主次，不要平均分配 |
 | Detail / Atmosphere | 讲局部与气氛 | 图可以少，但要说明它证明了什么 |
 | Closing | 收束与留白 | 只保留最关键的 1 句话或感谢页 |

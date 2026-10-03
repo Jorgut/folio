@@ -1,8 +1,10 @@
 # Reference Layout Taxonomy
 
-This taxonomy turns visual references into reusable Folio layout structures.
+This taxonomy turns visual references into reusable, domain-neutral Folio layout structures.
 
-Use it for architecture, interior, spatial design, brand space, portfolio, and presentation-board decks. The goal is not to copy a reference image. The goal is to classify its structure, extract the layout logic, and translate it into a repeatable wireframe.
+Use it across editorial and graphic design, brand identity, product/industrial design, fashion/textiles, architecture/interiors/spatial design, portfolios, research, campaigns, and presentation boards. The source library contains many spatial-design references, but that is a bias in the examples, not a limit on Folio's domain. Choose subject matter, imagery, and vocabulary from the user's brief; classify the reference by composition and information hierarchy. Do not copy its source image, wording, brand assets, or visual identity.
+
+Keep two decisions separate: **domain** determines what the content is about and what counts as evidence; **layout family** determines how that content is organized. A feature opener, proof spread, gallery, or dense reading layout can serve many design fields.
 
 ## Source Board
 

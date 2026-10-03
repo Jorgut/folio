@@ -114,9 +114,9 @@ Folio ships with a cross-platform update core, but hosts trigger it differently.
 
 | Host capability | Recommended behavior |
 |----------------|----------------------|
-| Startup hook + script execution + network | Run `check-update.mjs` when Folio loads |
-| Script execution + network, but no startup hook | Run `check-update.mjs` on first use in the session |
-| No script execution or no network | Skip auto-check and fall back to manual update |
+| Startup hook + script execution + network | Optionally check when Folio loads; check again at task entry using the 30-minute cache |
+| Script execution + network, but no startup hook | Run `check-update.mjs` as the first action of every Folio task |
+| No script execution or no network | State that the check was skipped and continue normally |
 
 ### Upgrade rules
 
