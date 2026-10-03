@@ -9,6 +9,31 @@
 3. **行距与行长** — 正文 1.5-1.8 行距，每行 ≤ 80 字符
 4. **层级清晰** — 标题 → 副标题 → 正文 → 元数据 → 标注
 
+## Text Fit QA
+
+Treat rendered text boxes as part of the layout geometry.
+
+For every dense slide, table slide, bilingual slide, and final export candidate, check:
+
+| Check | Failure signal |
+|------|----------------|
+| Bounding box | Text extends outside slide, safe line, or intended text frame |
+| Line count | Rendered lines exceed the planned frame height |
+| Long line | CJK sentence becomes a single hard-to-scan line; Latin metadata becomes an unbroken strip |
+| Shrink-to-fit | PowerPoint or export tooling silently reduces type size to make copy fit |
+| Footer safety | Source notes, page numbers, or disclaimers collide with body/caption content |
+| Script fit | Chinese and Latin text both remain legible with their actual rendered fonts |
+| Export consistency | HTML, PPTX, and PDF preserve line breaks, size, and hierarchy |
+
+Severity:
+
+- `P0`: clipped, hidden, off-slide, or overlapping text.
+- `P1`: readable only through excessive shrink, unsafe footer collision, or too-small body/table text.
+- `P2`: awkward line breaks, widows/orphans, weak rhythm, or overlong metadata.
+
+Do not use shrink-to-fit as the default fix. Prefer reducing copy, splitting the slide, changing to a denser page type, or moving secondary information into notes/appendix.
+
+
 ## 字体配对矩阵
 
 | 风格 | 标题 | 正文 | 元数据 | 语感 |

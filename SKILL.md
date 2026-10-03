@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.9
+version: 1.0.10
 tags:
   - presentation
   - slides
@@ -384,11 +384,54 @@ Bleed mode 选择表：
 - 任意图片项目归属不明
 - 任意 project figure 圆角不一致
 - 任意图片压到页脚、页码或文字
+- 任意正文、caption、表格单元格或页脚文字被裁切、互相重叠，或依赖反复 shrink-to-fit 才能装下
 - 任意页面横向溢出
 - 同一项目跨页 image frame 没有找齐且无明确理由
 - PDF 与 HTML 视觉明显不一致
 - 交付 PDF 超过用户指定目标大小
 - 没有做全书同类问题扫描
+
+### Step 2.7: Text Layout QA Workflow
+
+Folio deck failures are often caused by text after the image grid already looks correct. Treat text as geometry, not decoration.
+
+Before final export, build a text manifest for every visible text box:
+
+| Field | Required check |
+|------|----------------|
+| text_role | cover title / slide title / lead / body / caption / footnote / table cell / nav |
+| language_script | CJK / Latin / mixed / numeric |
+| box | left / top / width / height |
+| font | family / size / weight / line-height |
+| lines | rendered line count and longest rendered line |
+| fit_status | fits / tight / shrunk / clipped / overflow-risk |
+| safe_distance | distance to images, footer, page number, and slide edge |
+| export_status | HTML / PPTX / PDF visual result compared |
+
+Severity rules:
+
+- `P0`: text is clipped, hidden, outside the slide, or overlaps another object.
+- `P1`: text is technically visible but cannot be read at normal presentation/PDF size, is forced into excessive shrink-to-fit, or collides with footer/page-number safe areas.
+- `P2`: text is readable but typographically weak: awkward Chinese break, overly long single line, bad orphan/widow, inconsistent caption rhythm, or excessive microcopy in a visual slide.
+
+Hard rules:
+
+- Do not claim completion from package integrity alone. If a validator says slide text or native rendering was not inspected, report that boundary and do a visual/text-box review.
+- Any slide with a table, dense comparison matrix, more than 24 text boxes, or more than 5 visual modules needs a dedicated text-fit pass.
+- CJK body text should prefer shorter semantic lines. Long one-line Chinese sentences in narrow boxes must be manually wrapped or rewritten before export.
+- Latin all-caps metadata and long slash-separated lists must be checked for line length; split into two lines or a rail when they become a grey texture.
+- Footer, page number, source note, and disclaimer text must reserve their own safe area. Do not let body/caption text borrow that space.
+- Avoid relying on PowerPoint `shrinkText` as the primary fit solution. If shrink-to-fit is needed repeatedly, reduce copy, change page type, or split the slide.
+- For bilingual slides, check both scripts separately; passing the Latin font policy does not prove Chinese glyph weight, line-height, or wrapping is correct.
+
+Long-deck scan:
+
+1. Generate a contact sheet or slide montage.
+2. Flag slides that are visually denser than their neighbors.
+3. For flagged slides, inspect text boxes, tables, and footer safe areas.
+4. If one page type fails, scan all slides using the same page type.
+5. Record the result in the final report: checked slides, flagged slides, fixes made, and remaining validation boundary.
+
 
 ### Step 3: 拷贝模板
 
@@ -499,6 +542,7 @@ node scripts/export-figma.mjs --mode local index.html   # 强制本地插件
 - **Audience Fit** — 专业受众用 compact/evidence/table，对大众受众用 airy/hero/centerpiece
 - **Image Anchors** — 图片必须用 `media-anchor-*` 指定裁切焦点
 - **Baseline Rhythm** — caption / module / section 间距分别用 `--folio-caption-gap` / `--folio-module-gap` / `--folio-section-gap`
+- **Text Fit QA** — every dense/table/bilingual slide must be checked for clipping, shrink-to-fit, footer collision, long CJK lines, and HTML/PPTX/PDF text consistency
 - **不对称优先** — 别用 50/50，用 4/8、3/9、7/5
 - **字号对比 ≥ 6:1** — 主标题 vs 正文
 - **一个 deck 一套主题色** — 中途不换
