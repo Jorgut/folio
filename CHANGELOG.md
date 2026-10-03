@@ -2,6 +2,12 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.12 - 2026-10-03
+
+- Corrected the editorial-longform preview so all page content stays inside the visible content boundary
+- Removed bleed-mode labels from inside the editorial page frames and moved the mode to the external variant headings
+- Clarified the content-line inset in preview geometry; all three wireframe variants use no bleed
+
 ## 1.0.11 - 2026-10-03
 
 - Added the `editorial-longform` layout family for continuous articles, studio viewpoints, and optional bilingual features

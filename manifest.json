@@ -1,6 +1,6 @@
 {
   "name": "folio",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "manifest_version": 1,
   "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
   "release_date": "2026-10-03",
@@ -22,8 +22,8 @@
     "supports_manifest_only_check": true
   },
   "release_highlights": [
-    "Added an editorial-longform layout family for continuous articles and studio viewpoints.",
-    "Added three portrait-page wireframes: article opener, image-led section break, and narrative with modular side rail.",
-    "Kept language pairing and visual styling optional while requiring readable text, recurring folios, and clear page pacing."
+    "Corrected editorial-longform wireframe geometry so page content stays inside the content boundary.",
+    "Moved bleed-mode labels outside the page frames; all three editorial variants are explicitly no-bleed.",
+    "Retained three portrait wireframes: article opener, image-led section break, and narrative with modular side rail."
   ]
 }
