@@ -1,7 +1,7 @@
 ---
 name: folio-min
 description: Minimal Folio skill for platforms that do not support full skill loading or large instruction files.
-version: 1.0.10
+version: 1.0.11
 tags:
   - presentation
   - slides
@@ -54,6 +54,7 @@ Goal: turn structured content into a clean, editable deck, starting with HTML an
 18. Before designing architecture/interior portfolios, check `reference-layouts/taxonomy.md`, `reference-layouts/templates.md`, `reference-layouts/catalog.md`, and `reference-layouts/previews/index.html`; choose 1-3 wireframe templates as structural starting points
 19. Every page must declare a bleed mode before layout: `no-bleed`, `soft-bleed`, `edge-bleed`, `full-bleed`, or `print-bleed`; keep text, captions, footers, and page numbers inside the safe line unless there is a documented exception
 20. Before delivery, run text layout QA on dense, table, bilingual, or long-deck slides: check clipping, overlap, shrink-to-fit, long CJK/Latin lines, footer safe area, and HTML/PPTX/PDF consistency
+21. For continuous articles or studio viewpoints, consider the `editorial-longform-feature` portrait-page family: combine opener, image-break, and modular-rail variants; pair languages only when requested, preserve recurring folios, and shorten or split copy instead of shrinking body text. See `reference-layouts/templates.md` and `reference-layouts/previews/index.html`.
 
 ## Minimum workflow
 

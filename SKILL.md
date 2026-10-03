@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.10
+version: 1.0.11
 tags:
   - presentation
   - slides
@@ -134,6 +134,8 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 2. 密度：`density-airy` / `density-balanced` / `density-compact`
 3. 构图家族：Hero + Rail / Portrait Feature / Evidence Board / Sidebar Report / Strip Narrative / Centerpiece / Dense Compare
 4. 版心和锚点：`.content.layout-frame` + `frame-*` + `media-anchor-*`
+
+如果内容是一篇需要连续阅读的文章、工作室观点或可选双语专题，不要套用普通演示页的默认两栏。优先考虑 `editorial-longform-feature`：根据页面职责组合 `editorial-opener`、`editorial-image-break`、`editorial-modular-rail`。文档输出优先使用竖版页面；先定页面尺寸、版心、安全边距、重复页眉与页码，再填内容。双语只在用户需要时按语义模块配对；字体、颜色、分隔线和编号样式由项目风格决定。预览见 `reference-layouts/previews/index.html`，结构规范见 `reference-layouts/templates.md`。
 
 ### Step 2.5: 作品集/空间类 deck 的页型原则
 
