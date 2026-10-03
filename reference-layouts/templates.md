@@ -48,12 +48,127 @@ image_frame: aligned to safe / content / edge / bleed
 | `interior-proof-1plus3` | `split-proof-spread` | One main space + supporting details | balanced | `soft-bleed` |
 | `strip-narrative-process` | `strip-narrative` | Sequence, walkthrough, process | compact | `no-bleed` |
 | `dense-presentation-board` | `dense-presentation-board` | Expert review page | compact | `no-bleed` |
+| `editorial-longform-feature` | `editorial-longform` | Continuous essays, studio viewpoints, and bilingual features | balanced | `no-bleed` |
 | `controlled-masonry-gallery` | `controlled-masonry-gallery` | Mixed image ratios with order | balanced | `soft-bleed` |
 | `layout-system-sheet` | `layout-system-sheet` | Explaining layout grammar and available compositions | compact | `no-bleed` |
 | `deck-contact-sheet` | `deck-contact-sheet` | Reviewing deck rhythm across many pages | compact | `no-bleed` |
 | `vertical-portfolio-stack` | `vertical-portfolio-stack` | Tall case-study stacks and scrollable portfolio pages | balanced | `no-bleed` |
 | `brand-guideline-board` | `brand-guideline-board` | Brand systems, typography, color, and usage rules | compact | `no-bleed` |
 | `campaign-deliverables-board` | `campaign-deliverables-board` | Social/media/deliverables grouped by format | balanced | `edge-bleed` |
+
+## `editorial-longform-feature`
+
+Page role: a paced, multi-page article or editorial feature. This family is intended for continuous reading rather than a conventional widescreen pitch deck. Use portrait pages when the output is a document; adapt the same hierarchy to landscape only when the delivery format requires it.
+
+Shared structure:
+
+- Repeat a small running header and a quiet footer/folio across the article.
+- Use a stable portrait content frame and align recurring title, image, and text edges to it.
+- Give each page one clear reading job; vary the page composition while preserving navigation and typography roles.
+- Pair translations by semantic module when bilingual content is requested. Translation is optional; never duplicate text solely to fill a column.
+- Treat images as pacing devices between text sections. Keep image crops and captions subordinate to the article's argument.
+- Keep the visual skin (typeface, color, rules, ornaments) independent from the structural template.
+
+### Variant A: `editorial-opener`
+
+Use for the first page of an essay, studio point of view, or feature.
+
+Wireframe:
+
+```text
+┌──────────────────────────────┐
+│ RUNNING HEADER          ISSUE│
+├──────────────────────────────┤
+│ HEADLINE / DECK               │
+│ Optional translated subtitle │
+├──────────────────────────────┤
+│                              │
+│          LEAD IMAGE           │
+│                              │
+├──────────────────┬───────────┤
+│ EDITORIAL LEAD    │ SECTION 1 │
+│ Main argument     │ Support   │
+│ Translation       │ Translation│
+├──────────────────┴───────────┤
+│ RUNNING FOOTER          FOLIO │
+└──────────────────────────────┘
+```
+
+Rules:
+
+- Keep the headline to a deliberate, readable block; do not let oversized type consume the space needed by the lead image and first paragraph.
+- Let the lead image span the content frame unless the story benefits from a clear text rail.
+- Use the lower columns for distinct roles (editorial lead and supporting section), not two arbitrary halves of the same copy.
+
+### Variant B: `editorial-image-break`
+
+Use inside a long article when a new case, place, or argument benefits from a visual pause.
+
+Wireframe:
+
+```text
+┌──────────────────────────────┐
+│ RUNNING HEADER          ISSUE│
+├──────────────────────────────┤
+│ 02 │ SECTION TITLE           │
+│    │ Optional translated deck│
+├──────────────────┬───────────┤
+│ INTRO / LANGUAGE A│ LANGUAGE B│
+│ Short paragraph   │ Short para│
+├──────────────────┴───────────┤
+│                              │
+│          WIDE IMAGE           │
+│                              │
+├──────────────────────────────┤
+│ Caption / location / source  │
+├──────────────────┬───────────┤
+│ Key thought      │ Follow-on │
+│ or pull quote    │ paragraph │
+├──────────────────┴───────────┤
+│ RUNNING FOOTER          FOLIO │
+└──────────────────────────────┘
+```
+
+Rules:
+
+- Keep the intro concise enough to let the image create a real pause.
+- The caption must identify or contextualize the image; do not repeat the headline.
+- The lower module may become a pull quote, short continuation, or source note according to the page's job.
+
+### Variant C: `editorial-modular-rail`
+
+Use for later pages that combine a continuous argument with practical criteria, partner profiles, regions, or project types.
+
+Wireframe:
+
+```text
+┌──────────────────────────────┐
+│ RUNNING HEADER          ISSUE│
+├──────────────────────────────┤
+│ 03 │ SECTION TITLE           │
+│    │ Optional translated deck│
+├────────────────────┬─────────┤
+│ MAIN NARRATIVE     │ 04 MODULE│
+│ Body / translation │ Short item│
+│                    ├─────────┤
+│ Pull quote /       │ 05 MODULE│
+│ continuation       │ Short item│
+│                    ├─────────┤
+│                    │ 06 MODULE│
+│                    │ Short item│
+├────────────────────┴─────────┤
+│ RUNNING FOOTER          FOLIO │
+└──────────────────────────────┘
+```
+
+Rules:
+
+- The main column carries the argument; the rail carries scannable, independently titled modules.
+- Limit the rail to a few concise modules. If each module needs full paragraphs, move it to its own page or use `editorial-image-break`.
+- Use dividers only to clarify module boundaries; spacing and alignment should do most of the organizing.
+- Do not shrink body text to make every planned module fit. Shorten copy, remove a module, or add a page.
+
+Across all variants, define the document page size and safe margins before adapting the frame. Reflow to one column on narrow screens while preserving the reading order: header, title, primary content, secondary modules, footer. Run the text-fit checks in `SKILL.md` for every language independently.
 
 ## `portfolio-opener-hero-rail`
 
