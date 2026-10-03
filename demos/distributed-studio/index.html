@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A ten-page editorial sample and three landscape layout studies from Folio's magazine layout system.">
+  <title>Lorem Ipsum — Folio Editorial Sample</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f3f0e9;
+      --page: #fffefa;
+      --ink: #242522;
+      --muted: #72746d;
+      --red: #b3232d;
+      --green: #536858;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    a { color: inherit; }
+    .topbar {
+      min-height: 64px;
+      padding: 0 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: var(--paper);
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .topbar strong { color: var(--ink); font-size: 12px; }
+    .topbar nav { display: flex; gap: 22px; }
+    .topbar nav a { text-decoration: none; }
+    .topbar nav a:hover { color: var(--red); }
+    main { width: min(1360px, calc(100% - 64px)); margin: 40px auto 80px; }
+    .sample-note {
+      margin: 0 0 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .spread {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
+      aspect-ratio: 420 / 297;
+      position: relative;
+      margin: 0 0 36px;
+      background: var(--page);
+      box-shadow: 0 10px 28px rgba(35, 35, 31, .08);
+    }
+    .spread-folios {
+      position: absolute;
+      z-index: 2;
+      left: 4.5%;
+      right: 4.5%;
+      bottom: 5%;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+    .spread-folios b { color: var(--ink); font: 14px var(--serif); }
+    .closing-spread .spread-folios b:last-child { color: #f8f5ee; }
+    .page {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      margin: 0;
+      position: relative;
+      padding: 9% 9% 9%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--page);
+    }
+    .running-head, .folio {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 8px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .running-head { padding-bottom: 8px; }
+    .folio { position: absolute; left: 9%; right: 9%; bottom: 5%; height: 18px; margin: 0; padding: 0; border: 0; }
+    .folio-left { justify-content: flex-start; }
+    .folio-right { justify-content: flex-end; }
+    .folio b { color: var(--ink); font: 14px var(--serif); }
+    .spread .page .folio { display: none; }
+    .eyebrow {
+      margin: 28px 0 12px;
+      color: var(--red);
+      font-size: 9px;
+      line-height: 1.2;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p, figure, blockquote { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
+    h1 { margin-bottom: 20px; font-size: 54px; line-height: .98; }
+    h2 { margin-bottom: 14px; font-size: 31px; line-height: 1.04; }
+    h3 { margin-bottom: 8px; font-size: 19px; line-height: 1.1; }
+    .cover-page { padding: 9% 10% 14%; }
+    .cover-page .eyebrow { margin-top: auto; }
+    .cover-page .dek { max-width: 300px; color: var(--red); font: 20px/1.25 var(--serif); }
+    .byline { margin: 22px 0 0; color: var(--muted); font-size: 9px; line-height: 1.5; text-transform: uppercase; }
+    .image-page { padding: 0 0 14%; }
+    .image-page img { min-height: 0; width: 100%; flex: 1; object-fit: cover; display: block; }
+    .image-page figcaption { padding: 12px 9%; color: var(--muted); font: 10px/1.35 var(--serif); }
+    .image-page figcaption span { color: var(--red); font: 700 8px/1.2 var(--sans); text-transform: uppercase; }
+    .chapter-page .section-no { color: var(--red); font: 48px/.9 var(--serif); }
+    .chapter-page .chapter-head { display: grid; grid-template-columns: 52px 1fr; align-items: start; gap: 12px; margin: 34px 0 24px; }
+    .chapter-page .chapter-head h2 { margin: 0; }
+    .copy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .copy-grid p, .body-copy { margin: 0 0 13px; color: #41423d; font: 11px/1.55 var(--serif); }
+    .copy-grid p + p { text-indent: 12px; }
+    .pull {
+      margin: 20px 0;
+      padding: 12px 0 12px 16px;
+      border-left: 3px solid var(--red);
+      color: var(--red);
+      font: 23px/1.12 var(--serif);
+    }
+    .pull small { display: block; margin-top: 10px; color: var(--muted); font: 700 8px/1.2 var(--sans); text-transform: uppercase; }
+    .story-image { margin: 18px 0 16px; min-height: 0; flex: 1; overflow: hidden; }
+    .story-image img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: cover; }
+    .caption { margin: 0; padding-top: 8px; color: var(--muted); font: 9px/1.35 var(--serif); }
+    .caption b { color: var(--red); font: 700 8px/1.2 var(--sans); text-transform: uppercase; }
+    .evidence-page { padding: 0 0 9%; }
+    .evidence-page img { min-height: 0; width: 100%; height: 68%; object-fit: cover; display: block; }
+    .evidence-page figcaption { margin: auto 9% 9%; padding-top: 10px; color: var(--muted); font: 10px/1.4 var(--serif); }
+    .evidence-page figcaption b { display: block; margin-bottom: 5px; color: var(--red); font: 800 8px/1.2 var(--sans); text-transform: uppercase; }
+    .dense-page .eyebrow { margin-top: 30px; }
+    .dense-page .dense-copy { columns: 2; column-gap: 18px; color: #41423d; font: 10px/1.5 var(--serif); }
+    .dense-page .dense-copy p { margin: 0 0 12px; break-inside: avoid; }
+    .dense-page .pull { font-size: 21px; }
+    .closing-page { background: #28352e; color: #f8f5ee; }
+    .closing-page .running-head, .closing-page .folio { color: #c1c8bd; border-color: rgba(255,255,255,.28); }
+    .closing-page .folio b { color: #f8f5ee; }
+    .closing-page .eyebrow { color: #d8a0a0; }
+    .closing-page h2 { margin: 36px 0 24px; font-size: 38px; }
+    .closing-page .body-copy { color: #e1e0d9; }
+    .closing-page blockquote { margin: auto 0 32px; color: #fff; font: 30px/1.08 var(--serif); }
+    .closing-page blockquote span { color: #d8a0a0; }
+    .credits {
+      margin: 48px auto 0;
+      padding-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+    .credits h2 { margin: 0; color: var(--ink); font: 700 10px/1.2 var(--sans); text-transform: uppercase; }
+    .credits ul { margin: 0; padding-left: 18px; }
+    .credits a { color: var(--ink); text-underline-offset: 2px; }
+    .license-note { grid-column: 2; max-width: 760px; margin: 0; }
+    .landscape-studies { margin-top: 96px; }
+    .studies-head { margin-bottom: 36px; }
+    .studies-head .appendix-label { margin: 0 0 12px; color: var(--red); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+    .studies-head h2 { margin: 0 0 10px; font-size: 36px; }
+    .studies-head p:last-child { max-width: 620px; margin: 0; color: var(--muted); font: 14px/1.5 var(--serif); }
+    .landscape-study { margin: 0 0 36px; }
+    .study-label { margin: 0 0 8px; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 9px; font-weight: 700; text-transform: uppercase; }
+    .landscape-board { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--page); box-shadow: 0 10px 28px rgba(35, 35, 31, .08); }
+    .board-folio { position: absolute; bottom: 4.5%; left: 5%; right: 5%; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 8px; line-height: 1.2; font-weight: 700; text-transform: uppercase; }
+    .board-folio b { color: var(--ink); font: 17px var(--serif); }
+    .board-open { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 36px; }
+    .board-open .board-copy { grid-column: 1; grid-row: 1; padding: 6% 9%; display: flex; flex-direction: column; }
+    .board-open .board-image { grid-column: 2; grid-row: 1; }
+    .board-open .board-folio { position: static; grid-column: 1 / -1; grid-row: 2; margin: 0 5%; }
+    .board-kicker { margin: 0 0 14px; color: var(--red); font-size: 8px; line-height: 1.2; font-weight: 800; text-transform: uppercase; }
+    .board-open h3 { max-width: 470px; margin: auto 0 16px; font-size: 42px; line-height: .98; }
+    .board-open .board-dek { max-width: 330px; margin: 0 0 auto; color: #55564f; font: 16px/1.4 var(--serif); }
+    .board-open .board-byline { margin: 28px 0 0; color: var(--muted); font-size: 8px; font-weight: 700; text-transform: uppercase; }
+    .board-image { min-width: 0; min-height: 0; overflow: hidden; }
+    .board-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .board-dense { padding: 5% 5% 7%; display: flex; flex-direction: column; }
+    .board-dense .board-title { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 4%; }
+    .board-dense h3 { max-width: 58%; margin: 0; font-size: 30px; line-height: 1.03; }
+    .board-dense .board-title p { max-width: 28%; margin: 0; color: var(--muted); font: 10px/1.45 var(--serif); }
+    .board-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4%; }
+    .board-columns p { margin: 0; color: #41423d; font: 10px/1.5 var(--serif); }
+    .board-columns p + p { margin-top: 10px; }
+    .board-pull { margin: auto 0 2%; max-width: 85%; color: var(--red); font: 58px/1.05 var(--serif); }
+    .board-evidence { display: grid; grid-template-columns: 58% 42%; grid-template-rows: minmax(0, 1fr) 36px; }
+    .board-evidence .board-image { grid-column: 1; grid-row: 1; min-height: 0; }
+    .board-evidence .evidence-copy { grid-column: 2; grid-row: 1; padding: 7% 9% 8%; display: flex; flex-direction: column; }
+    .board-evidence .board-folio { position: static; grid-column: 1 / -1; grid-row: 2; margin: 0 5%; }
+    .board-evidence h3 { margin: 0 0 18px; font-size: 30px; line-height: 1.03; }
+    .board-evidence .evidence-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; color: #41423d; font: 10px/1.5 var(--serif); }
+    .board-evidence .evidence-columns p { margin: 0; }
+    .board-evidence .evidence-caption { margin: auto 0 18px; padding-top: 10px; color: var(--muted); font: 9px/1.4 var(--serif); }
+    @media (min-width: 761px) and (max-width: 1100px) {
+      .board-pull { font-size: 44px; }
+    }
+    @media (max-width: 760px) {
+      .topbar { min-height: 58px; padding: 0 18px; }
+      .topbar nav { gap: 12px; }
+      .topbar nav a:nth-child(2) { display: none; }
+      .topbar nav a:nth-child(3) { display: none; }
+      main { width: min(520px, calc(100% - 24px)); margin: 22px auto 48px; }
+      .sample-note { padding: 0 4px; font-size: 8px; }
+      .spread { grid-template-columns: 1fr; grid-template-rows: auto; aspect-ratio: auto; margin-bottom: 18px; }
+      .spread-folios { display: none; }
+      .spread .page .folio { display: flex; }
+      .page { height: auto; aspect-ratio: auto; min-height: min(125vw, 650px); padding: 9% 9% 16%; overflow: visible; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 27px; }
+      .cover-page { padding: 9% 10% 16%; }
+      .image-page { aspect-ratio: 210 / 280; padding: 0 0 14%; }
+      .story-image { min-height: 180px; }
+      .evidence-page { aspect-ratio: 210 / 270; padding: 0 0 9%; }
+      .landscape-studies { margin-top: 48px; }
+      .studies-head { margin-bottom: 24px; }
+      .studies-head h2 { font-size: 28px; }
+      .landscape-study { margin-bottom: 22px; }
+      .study-label { font-size: 8px; }
+      .landscape-board { aspect-ratio: auto; }
+      .board-open { grid-template-columns: 1fr; grid-template-rows: auto auto 34px; }
+      .board-open .board-image { grid-column: 1; grid-row: 2; aspect-ratio: 4 / 5; }
+      .board-open .board-copy { grid-column: 1; grid-row: 1; min-height: 280px; padding: 24px 22px; }
+      .board-open h3 { margin: auto 0 12px; font-size: 28px; }
+      .board-open .board-dek { font-size: 15px; }
+      .board-open .board-byline { margin-top: 18px; font-size: 8px; }
+      .board-dense { padding: 24px 20px 64px; }
+      .board-dense .board-title { align-items: start; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+      .board-dense h3 { max-width: 100%; font-size: 24px; }
+      .board-dense .board-title p { max-width: 100%; font-size: 10px; }
+      .board-columns { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .board-columns p { font-size: 10px; line-height: 1.45; }
+      .board-columns p + p { margin-top: 8px; }
+      .board-pull { margin: 38px 0 16px; max-width: 100%; font-size: 30px; }
+      .board-evidence { grid-template-columns: 1fr; grid-template-rows: 230px auto 34px; }
+      .board-evidence .evidence-copy { grid-column: 1; grid-row: 2; min-height: 280px; padding: 24px 20px; }
+      .board-evidence h3 { margin-bottom: 14px; font-size: 24px; }
+      .board-evidence .evidence-columns { gap: 12px; font-size: 10px; line-height: 1.45; }
+      .board-evidence .evidence-caption { margin-bottom: 12px; font-size: 9px; }
+      .board-folio { bottom: 4%; font-size: 7px; }
+      .board-folio b { font-size: 14px; }
+      .credits { grid-template-columns: 1fr; gap: 12px; }
+      .license-note { grid-column: 1; }
+    }
+    @media print {
+      @page { size: A3 landscape; margin: 0; }
+      body { background: white; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .topbar, .sample-note, .studies-head, .study-label { display: none; }
+      main { width: auto; margin: 0; }
+      .spread { width: 420mm; margin: 0; box-shadow: none; break-after: page; }
+      .page { width: 210mm; height: 297mm; aspect-ratio: auto; }
+      .landscape-studies { display: block; margin: 0; }
+      .landscape-study { width: 420mm; height: 297mm; margin: 0; display: flex; align-items: center; break-after: page; }
+      .landscape-board { width: 420mm; flex: none; box-shadow: none; }
+      .credits { width: 420mm; min-height: 297mm; margin: 0; padding: 24mm; border: 0; break-before: page; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <strong>Folio / Editorial Sample</strong>
+    <nav aria-label="Sample sections">
+      <a href="#opening">Opening</a>
+      <a href="#feature">Feature</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#landscape">Landscape</a>
+      <a href="#credits">Credits</a>
+    </nav>
+  </header>
+  <main>
+    <p class="sample-note"><span>Folio 1.0.15 / Editorial study</span><span>Lorem Ipsum copy / 10 pages</span></p>
+
+    <section class="spread" id="opening" aria-label="Opening spread">
+      <article class="page cover-page" data-bleed-mode="no-bleed">
+        <div class="running-head"><span>FOLIO / FIELD NOTES</span><span>STUDIO JOURNAL</span></div>
+        <p class="eyebrow">Lorem ipsum / Dolor sit amet</p>
+        <h1>Lorem ipsum<br>dolor sit<br>amet.</h1>
+        <p class="dek">Consectetur adipiscing elit. Integer vitae arcu sed neque.</p>
+        <p class="byline">Lorem ipsum<br>Studio journal / 2026</p>
+        <div class="folio folio-left"><b>01</b></div>
+      </article>
+      <figure class="page image-page" data-bleed-mode="edge-bleed">
+        <img src="assets/editorial-objects.png" alt="Sculptural arrangement of red acrylic, folded paper, metal, and green textile">
+        <figcaption><span>Fig. 00 / Lorem ipsum</span><br>A still life arrangement from the studio, 2026. Image generated for this study.</figcaption>
+        <div class="folio folio-right"><b>02</b></div>
+      </figure>
+      <div class="spread-folios" aria-label="Pages 01 and 02"><b>01</b><b>02</b></div>
+    </section>
+
+    <section class="spread" id="feature" aria-label="Feature spread">
+      <article class="page chapter-page" data-bleed-mode="no-bleed">
+        <div class="running-head"><span>Lorem ipsum</span><span>FEATURE / OPENER</span></div>
+        <div class="chapter-head"><span class="section-no">01</span><h2>Consectetur<br>adipiscing elit</h2></div>
+        <div class="copy-grid">
+          <div>
+            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus, sed commodo nunc. Aenean suscipit lectus sed sapien facilisis.</p>
+            <p>Praesent vitae magna at lectus consequat tristique. Donec euismod sapien vitae dictum posuere. Sed at consequat nunc. Nulla facilisi. Mauris interdum, lorem a porta cursus, neque erat commodo sapien.</p>
+          </div>
+          <div>
+            <p>Quisque sit amet nibh quis arcu tincidunt varius. Curabitur placerat, magna nec aliquet consequat, mi sem gravida augue, vitae posuere erat justo at erat.</p>
+            <blockquote class="pull">“Lorem ipsum dolor sit amet, consectetur adipiscing elit.”<small>— Lorem ipsum / 01</small></blockquote>
+          </div>
+        </div>
+        <div class="folio folio-left"><b>03</b></div>
+      </article>
+      <figure class="page image-page" data-bleed-mode="edge-bleed">
+        <img src="assets/textile-study.png" alt="Art-directed study of green silk, sheer fabric, red thread, and a metal ruler">
+        <figcaption><span>Fig. 01 / Lorem ipsum</span><br>Dolor sit amet, consectetur adipiscing elit. Image generated for this study.</figcaption>
+        <div class="folio folio-right"><b>04</b></div>
+      </figure>
+      <div class="spread-folios" aria-label="Pages 03 and 04"><b>03</b><b>04</b></div>
+    </section>
+
+    <section class="spread" id="evidence" aria-label="Image evidence spread">
+      <figure class="page evidence-page" data-bleed-mode="edge-bleed">
+        <img src="assets/architecture-light.jpg" alt="Geometric modern office facade with strong light and shadow">
+        <figcaption><b>Fig. 02 / Lorem ipsum</b>Integer non justo sed urna feugiat volutpat. Aenean suscipit lectus sed sapien facilisis. Photo: Sebastian Schuster.</figcaption>
+        <div class="folio folio-left"><b>05</b></div>
+      </figure>
+      <article class="page dense-page" data-bleed-mode="no-bleed">
+        <div class="running-head"><span>Consectetur / Feature</span><span>REPORTING</span></div>
+        <p class="eyebrow">02 / Lorem ipsum</p>
+        <h2>Integer non justo sed urna feugiat volutpat</h2>
+        <div class="dense-copy">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus, sed commodo nunc. Aenean suscipit lectus sed sapien facilisis. Nullam sed tellus id nisi posuere ultrices.</p>
+          <p>Praesent vitae magna at lectus consequat tristique. Donec euismod sapien vitae dictum posuere. Sed at consequat nunc. Nulla facilisi. Mauris interdum, lorem a porta cursus, neque erat commodo sapien, in dignissim lectus nulla sit amet purus.</p>
+          <p>Quisque sit amet nibh quis arcu tincidunt varius. Curabitur placerat, magna nec aliquet consequat, mi sem gravida augue. Integer vitae arcu sed neque gravida porttitor. In hac habitasse platea dictumst.</p>
+          <p>Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Pellentesque euismod, risus non facilisis dictum, justo felis feugiat nulla, at porta lorem lectus vel sapien.</p>
+          <p>Morbi tempor nibh sit amet velit consequat, vel euismod est elementum. Donec viverra, dui non tempor porttitor, erat lectus fermentum mauris, vitae feugiat risus nibh sed lorem.</p>
+        </div>
+        <div class="folio folio-right"><b>06</b></div>
+      </article>
+      <div class="spread-folios" aria-label="Pages 05 and 06"><b>05</b><b>06</b></div>
+    </section>
+
+    <section class="spread" aria-label="Reading and image spread">
+      <article class="page dense-page" data-bleed-mode="no-bleed">
+        <div class="running-head"><span>Folio / Field notes</span><span>READING</span></div>
+        <p class="eyebrow">03 / Dolor sit amet</p>
+        <h2>Vivamus at neque vitae sem consequat</h2>
+        <blockquote class="pull">“Integer non justo sed urna feugiat volutpat.”<small>Consectetur / 03</small></blockquote>
+        <div class="dense-copy">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit lectus sed sapien facilisis. Nullam sed tellus id nisi posuere ultrices. Praesent vitae magna at lectus consequat tristique.</p>
+          <p>Donec euismod sapien vitae dictum posuere. Sed at consequat nunc. Nulla facilisi. Mauris interdum lorem a porta cursus, neque erat commodo sapien. Curabitur placerat magna nec aliquet consequat.</p>
+          <p>Integer vitae arcu sed neque gravida porttitor. In hac habitasse platea dictumst. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+          <p>Pellentesque euismod risus non facilisis dictum. Morbi tempor nibh sit amet velit consequat, vel euismod est elementum. Donec viverra dui non tempor porttitor.</p>
+        </div>
+        <div class="folio folio-left"><b>07</b></div>
+      </article>
+      <figure class="page image-page" data-bleed-mode="edge-bleed">
+        <img src="assets/graphic-study.png" alt="Art-directed arrangement of red and black screen prints on tactile paper">
+        <figcaption><span>Fig. 03 / Lorem ipsum</span><br>Vivamus at neque vitae sem consequat faucibus. Image generated for this study.</figcaption>
+        <div class="folio folio-right"><b>08</b></div>
+      </figure>
+      <div class="spread-folios" aria-label="Pages 07 and 08"><b>07</b><b>08</b></div>
+    </section>
+
+    <section class="spread closing-spread" aria-label="Closing spread">
+      <article class="page chapter-page" data-bleed-mode="no-bleed">
+        <div class="running-head"><span>Lorem ipsum / Studio</span><span>Conclusion</span></div>
+        <div class="chapter-head"><span class="section-no">04</span><h2>Ut enim ad minim veniam</h2></div>
+        <div class="copy-grid">
+          <div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus.</p>
+            <p>Aenean suscipit lectus sed sapien facilisis. Nullam sed tellus id nisi posuere ultrices. Praesent vitae magna at lectus consequat tristique.</p>
+          </div>
+          <div>
+            <p>Donec euismod sapien vitae dictum posuere. Sed at consequat nunc. Nulla facilisi. Mauris interdum lorem a porta cursus.</p>
+            <p>Curabitur placerat magna nec aliquet consequat, mi sem gravida augue, vitae posuere erat justo at erat.</p>
+          </div>
+        </div>
+        <div class="folio folio-left"><b>09</b></div>
+      </article>
+      <article class="page closing-page" data-bleed-mode="no-bleed">
+        <div class="running-head"><span>Folio / Field notes</span><span>END MATTER</span></div>
+        <p class="eyebrow">Lorem ipsum / Finis</p>
+        <h2>Consectetur<br>adipiscing elit.</h2>
+        <p class="body-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus, sed commodo nunc.</p>
+        <blockquote><span>“</span> Lorem ipsum dolor sit amet. <span>”</span></blockquote>
+        <div class="folio folio-right"><b>10</b></div>
+      </article>
+      <div class="spread-folios" aria-label="Pages 09 and 10"><b>09</b><b>10</b></div>
+    </section>
+
+    <section class="landscape-studies" id="landscape" aria-labelledby="landscape-heading">
+      <header class="studies-head">
+        <p class="appendix-label">Appendix / Independent layout studies</p>
+        <h2 id="landscape-heading">Landscape studies / 16:9</h2>
+        <p>Three standalone compositions adapted from Folio's magazine wireframes. These are layout studies, not a continuation of the ten-page story.</p>
+      </header>
+
+      <article class="landscape-study" id="landscape-opener">
+        <p class="study-label"><span>01 / Magazine feature opener</span><span>16:9 · Thesis + lead image</span></p>
+        <div class="landscape-board board-open">
+          <div class="board-copy">
+            <p class="board-kicker">Lorem ipsum / Field note 01</p>
+            <h3>Consectetur adipiscing elit. Sed do eiusmod.</h3>
+            <p class="board-dek">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae arcu sed neque.</p>
+            <p class="board-byline">Lorem ipsum / Studio journal / 2026</p>
+          </div>
+          <div class="board-image"><img src="assets/editorial-objects.png" alt="Sculptural arrangement of red acrylic, folded paper, metal, and green textile"></div>
+          <div class="board-folio"><span>Folio / Landscape feature</span><b>01</b></div>
+        </div>
+      </article>
+
+      <article class="landscape-study" id="landscape-reading">
+        <p class="study-label"><span>02 / Magazine dense reading</span><span>16:9 · Three columns + pull statement</span></p>
+        <div class="landscape-board board-dense">
+          <div class="board-title">
+            <h3>Integer non justo sed urna feugiat volutpat</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at neque vitae sem.</p>
+          </div>
+          <div class="board-columns">
+            <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus.</p><p>Aenean suscipit lectus sed sapien facilisis. Nullam sed tellus id nisi posuere ultrices.</p></div>
+            <div><p>Praesent vitae magna at lectus consequat tristique. Donec euismod sapien vitae dictum posuere. Sed at consequat nunc.</p><p>Nulla facilisi. Mauris interdum lorem a porta cursus.</p></div>
+            <div><p>Quisque sit amet nibh quis arcu tincidunt varius. Curabitur placerat magna nec aliquet consequat.</p><p>Integer vitae arcu sed neque gravida porttitor. Aliquam erat volutpat.</p></div>
+          </div>
+          <blockquote class="board-pull">Lorem ipsum dolor sit amet.</blockquote>
+          <div class="board-folio"><span>Folio / Landscape feature</span><b>02</b></div>
+        </div>
+      </article>
+
+      <article class="landscape-study" id="landscape-evidence">
+        <p class="study-label"><span>03 / Magazine image evidence</span><span>16:9 · Image field + evidence text</span></p>
+        <div class="landscape-board board-evidence">
+          <div class="board-image"><img src="assets/architecture-light.jpg" alt="Sculptural architectural facade shaped by strong light and shadow"></div>
+          <div class="evidence-copy">
+            <p class="board-kicker">Fig. 03 / Lorem ipsum</p>
+            <h3>Vivamus at neque vitae sem consequat</h3>
+            <div class="evidence-columns">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat.</p>
+              <p>Aenean suscipit lectus sed sapien facilisis. Nullam sed tellus id nisi posuere ultrices.</p>
+            </div>
+            <p class="evidence-caption">Lorem ipsum dolor sit amet. Photo: Sebastian Schuster.</p>
+          </div>
+          <div class="board-folio"><span>Folio / Landscape feature</span><b>03</b></div>
+        </div>
+      </article>
+    </section>
+    <footer class="credits" id="credits">
+      <h2>Image credits / sources</h2>
+      <ul>
+        <li>Opening still life, textile study, and graphic study — generated for this Folio demonstration with OpenAI ImageGen.</li>
+        <li>Architecture study — <a href="https://unsplash.com/photos/striking-modern-architecture-with-strong-lines-and-shadows-E04IKAUIKuM">Sebastian Schuster</a></li>
+      </ul>
+      <p class="license-note">The three generated images were made for this demonstration. The architecture photograph is included locally and credited to its creator under the <a href="https://unsplash.com/license">Unsplash License</a>. This demo is not affiliated with the photographer or depicted property; additional rights may apply to recognizable people, trademarks, and private property. All editorial copy is Lorem Ipsum placeholder text.</p>
+    </footer>
+  </main>
+</body>
+</html>

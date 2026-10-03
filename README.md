@@ -58,9 +58,15 @@ These are real renders from Folio, not mockups. The goal is simple: people shoul
   </tr>
 </table>
 
-The new [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
+The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
 
 The [`magazine-investigative-feature`](reference-layouts/templates.md#magazine-investigative-feature) family adds facing-page layouts for thesis-led openers, dense multi-column reading, and image-evidence spreads. Its preview uses Lorem Ipsum only to demonstrate text flow; replace filler with approved copy before delivery and keep live text clear of the center gutter.
+
+Folio 1.0.15 also tightens the reference-layout preview system: bleed, trim, safe, and content-frame guides are distinct, and the wireframes are checked for text escaping the safe area or colliding with image placeholders, labels, and swatches. The [editorial design sample](demos/distributed-studio/index.html) shows those principles as a complete, ten-page magazine rather than a wireframe sheet. It uses Lorem Ipsum copy, three original generated editorial images spanning still life, textiles, and graphic design, plus locally bundled, credited architecture photography. Facing-page folios share one bottom baseline at the outer corners. The opening image fills the upper field, with its caption and folio in a separate white footer. [Open the full sample](demos/distributed-studio/index.html).
+
+An appendix includes three standalone **16:9 landscape** adaptations of the existing magazine wireframes: [feature opener](demos/distributed-studio/index.html#landscape-opener), [dense reading](demos/distributed-studio/index.html#landscape-reading), and [image evidence](demos/distributed-studio/index.html#landscape-evidence). These are layout studies, not pages in the ten-page portrait magazine sequence.
+
+The sample is an illustrative layout demo, not approved editorial content. The opening still life was generated for the demo; the credited photographs are used under the [Unsplash License](https://unsplash.com/license). Recognizable people, brands, and properties may require additional permissions for a specific use.
 
 ---
 
@@ -109,11 +115,12 @@ Folio's update system is designed in two layers:
   - `scripts/check-update.mjs`
   - `scripts/self-update.mjs`
 - **Host trigger layer** supplied by the AI tool:
-  - Hosts with startup hooks can auto-run update checks when Folio loads
-  - Hosts without startup hooks should run the check on first use in the session
+  - Each Folio task starts by running the version check (remote results are cached for 30 minutes)
+  - A host startup hook may check earlier, but skill instructions alone do not install a hook
   - Hosts without script or network access should skip auto-checking and fall back to manual update
 
 Folio does **not** assume every platform can auto-run scripts at load time.
+The `SKILL.md` policy alone does not install a hook. The agent must actually run `check-update.mjs` at the start of each Folio task; if it skips the command, no check occurred. An update check never installs an upgrade without user confirmation, and `self-update.mjs` refuses a dirty Git checkout.
 
 When an update is found, Folio should show the **concrete maintained features** from the remote release metadata first, then ask the user whether they want to upgrade.
 
@@ -440,6 +447,14 @@ MIT · Copyright (c) 2026 Jorgut
 
 > 顶部已经放了真实渲染预览图，先看效果，再看功能说明。
 
+## 视觉样刊
+
+1.0.15 进一步校准了参考版式预览：出血、裁切、安全区和内容框各自独立，并检查文字是否越过安全线，或与图片占位、标签、色板发生重叠。新增的[编辑设计样刊](demos/distributed-studio/index.html)把这些原则延伸为一组完整的十页杂志，不只是线框缩略图。正文使用 Lorem Ipsum 占位；设计静物、纺织材质和平面印刷三张图像专为样刊生成，建筑摄影在本地打包并署名。开篇图片铺满上方图片区，下方独立白色页脚容纳图注与页码；双开页页码共用基线、置于外侧底角。[打开完整样刊](demos/distributed-studio/index.html)。
+
+样刊附录另有三张基于现有杂志 wireframe 的**16:9 横向成稿示例**：[专题开篇](demos/distributed-studio/index.html#landscape-opener)、[密排阅读](demos/distributed-studio/index.html#landscape-reading)、[图像证据](demos/distributed-studio/index.html#landscape-evidence)。它们是独立的版式研究，不属于前面十页竖版杂志的连续页。
+
+这是用于展示版式能力的虚拟样刊，不代表已审核的正式内容。三张专题图片为生成图像；署名建筑摄影依据 [Unsplash License](https://unsplash.com/license) 使用。具体用途若涉及可识别的人物、品牌或物业，仍可能需要额外授权。
+
 ---
 
 ## 平台兼容性
@@ -487,11 +502,12 @@ Folio 的更新系统分成两层：
   - `scripts/check-update.mjs`
   - `scripts/self-update.mjs`
 - **宿主工具负责的触发层**：
-  - 有 startup hook 的宿主：加载 Folio 时自动检查
-  - 没有 startup hook 的宿主：本次会话第一次真正使用 Folio 时检查
+  - 每次开始 Folio 任务时运行带 30 分钟缓存的版本检查
+  - 宿主可用 startup hook 提前检查，但 skill 文档本身不会安装 hook
   - 没有脚本权限或网络权限的宿主：跳过自动检查，退化为手动更新
 
 Folio **不会假设所有平台都能在加载 skill 时自动执行脚本**。
+`SKILL.md` 中的规则本身不会安装 hook。代理必须在每次 Folio 任务开始时真正运行 `check-update.mjs`；若未运行，就没有发生更新检查。检查不会自动升级；`self-update.mjs` 也会拒绝覆盖有未提交改动的 Git 工作区。
 
 当发现新版本时，Folio 应先展示远端版本维护/新增了哪些具体功能，再把“是否升级”的决定交给用户。
 
