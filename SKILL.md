@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.13
+version: 1.0.14
 tags:
   - presentation
   - slides
@@ -199,6 +199,18 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 ### Step 2.6: Architecture / Interior Portfolio QA Workflow
 
 建筑、室内、空间、展览、品牌空间类作品集不能当成“图片重排任务”。必须当成“全书版式系统任务”处理：先建立资料和版心合同，再排版，再做全书几何验收，最后导出。
+
+#### Reference Preview QA：线框预览发布前验收
+
+修改 `reference-layouts/previews/index.html` 时，不能只看单张截图或 DOM 外框。发布前必须：
+
+1. 在 1600px、1000px、700px 视口渲染完整预览，并检查各版式卡片的实际画板尺寸
+2. 用浏览器几何测量检查模块是否越过 safe line / content frame；只允许 `bleed_mode` 明确授权的图片越界
+3. 检查图片与文字框的交叠，并将 `::before` / `::after` 占位标签、色板标签、缩略图小字也纳入视觉检查
+4. 检查小模块是否被压成近零高度、标签是否越出自身容器、正文/图注是否裁切或互相覆盖
+5. 查看全页截图，并放大检查密集区域；自动测量通过不能替代视觉复核
+
+若用户指出一处图文重叠或边界问题，必须扫描所有同类模板和视口，并在修正后重新生成截图。只有测量和截图复核都通过，才可请求确认发布。
 
 #### 0. Reference Board Intake：先吸收持续案例库
 
