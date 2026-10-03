@@ -1,6 +1,6 @@
 {
   "name": "folio",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "manifest_version": 1,
   "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
   "release_date": "2026-10-03",
@@ -15,17 +15,16 @@
     "startup_hook_for_auto_check": false
   },
   "update_policy": {
-    "default_trigger": "first-use",
+    "default_trigger": "every-use-cached",
     "preferred_trigger": "startup-hook",
     "requires_user_confirmation": true,
     "supports_git_fast_forward": true,
     "supports_manifest_only_check": true
   },
   "release_highlights": [
-    "Reworked all 19 reference wireframes with responsive bleed, trim, safe, and content guides, and fixed overlapping or undersized placeholder labels.",
-    "Added a required 1600px, 1000px, and 700px browser QA pass covering pseudo-elements, nested cells, image-text overlap, and clipping.",
-    "Added a magazine investigative feature family with thesis-opener, dense-reading, and image-evidence spread variants.",
-    "Added Lorem Ipsum body-flow placeholders and explicit center-gutter, safe-frame, and live-copy guidance.",
-    "Retained the editorial-longform portrait family and its content-boundary correction."
+    "Added a ten-page editorial sample and three separate 16:9 layout studies with image credits.",
+    "Clarified that wireframe guides do not carry into finished layouts without an explicit design role.",
+    "Added image crop, shared facing-page folio, cross-column highlight, and rendered QA rules.",
+    "Require a cached update check at the start of each Folio task; upgrades still require user confirmation."
   ]
 }

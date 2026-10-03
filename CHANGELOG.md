@@ -2,6 +2,12 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.15 - 2026-10-03
+
+- Added a ten-page, multi-domain editorial sample and three clearly separated landscape layout studies with local image assets and source credits
+- Made wireframe guides construction-only by default; clarified cross-column highlights, image bleed and crop, shared facing-page folio baselines, and rendered QA requirements
+- Require the cached update check at the start of every Folio task, report unavailable checks, and keep installation changes behind user confirmation
+
 ## 1.0.14 - 2026-10-03
 
 - Reworked all 19 reference wireframes so bleed, trim, safe, and content guides remain distinct and content stays inside the intended frame across responsive sizes
