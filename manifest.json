@@ -1,9 +1,9 @@
 {
   "name": "folio",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "manifest_version": 1,
   "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
-  "release_date": "2026-08-10",
+  "release_date": "2026-10-03",
   "update_channel": "stable",
   "repo": "https://github.com/Jorgut/folio",
   "raw_manifest_url": "https://raw.githubusercontent.com/Jorgut/folio/main/manifest.json",
@@ -22,8 +22,8 @@
     "supports_manifest_only_check": true
   },
   "release_highlights": [
-    "Added a formal bleed/trim/safe/content line system to the Reference Layout preview sheet.",
-    "Added five required bleed modes: no-bleed, soft-bleed, edge-bleed, full-bleed, and print-bleed.",
-    "Updated Folio layout contracts and reference-template docs so every page declares how images relate to bleed, trim, safe, and content boundaries."
+    "Added Text Layout QA for dense, table, bilingual, and long-deck slides.",
+    "Added severity rules for clipped text, shrink-to-fit, footer collisions, and overlong CJK/Latin lines.",
+    "Clarified that package integrity and font policy checks must be paired with visual/text-box review before claiming completion."
   ]
 }

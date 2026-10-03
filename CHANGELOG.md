@@ -2,6 +2,13 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.10 - 2026-10-03
+
+- Added a Text Layout QA workflow for dense, table, bilingual, and long-deck slides
+- Added severity rules for clipped text, excessive shrink-to-fit, footer collisions, long CJK/Latin lines, and weak text rhythm
+- Clarified that package integrity or font policy checks alone are not enough when native slide text rendering was not visually inspected
+- Updated the minimal skill and typography engine so text-fit review is part of the delivery gate
+
 ## 1.0.9 - 2026-08-10
 
 - Added a formal bleed/trim/safe/content line system to the Reference Layout preview sheet
