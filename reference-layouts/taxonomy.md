@@ -36,6 +36,7 @@ If the board cannot be accessed or only loads partially, ask for screenshots and
 | `split-proof-spread` | Page must prove a design decision | One main proof image plus 2-4 support images | Proof spread |
 | `strip-narrative` | Content is sequential | Horizontal or vertical strip of scenes | Process, walkthrough |
 | `dense-presentation-board` | Reviewer needs many signals on one page | Many modules, tight grid, strict hierarchy | Expert review board |
+| `editorial-longform` | A continuous article needs pacing across portrait pages | Running header, lead image, paired columns, numbered sections, recurring folio | Essays, studio perspectives, bilingual features |
 | `controlled-masonry-gallery` | Image ratios vary but must remain orderly | Mixed image sizes inside fixed outer frame | Portfolio gallery |
 | `layout-system-sheet` | The reference explains many grid systems | Layout inventory, mini wireframes, numeric modules | Layout grammar reference |
 | `deck-contact-sheet` | The reference shows many complete slides/pages | Multi-slide overview with repeated thumbnails | Rhythm and deck sequencing |
@@ -88,4 +89,5 @@ Use `catalog.md` before creating new templates. If a new reference matches an ex
 - Do not treat Pinterest's outer masonry feed as the template. Classify the internal layout of each pin or screenshot.
 - Every extracted layout must become a wireframe with explicit frame, gap, hierarchy, and alignment rules.
 - Every extracted layout must name its bleed behavior and distinguish bleed line, trim line, safe line, and content frame.
+- For long-form editorial references, record page sequence, text/image pacing, language pairing, and recurring navigation separately; bilingual copy and ornamental styling are optional choices, not family requirements.
 - If a reference is visually interesting but structurally unclear, mark it as `inspiration-only` and do not turn it into a template.
