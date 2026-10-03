@@ -321,6 +321,7 @@ Cover
 |------|------|-----------|---------|
 | Cover | `<section data-layout="cover">` | 标题 + 副标题 | 高 |
 | Split 4-8 | `data-layout="split"` 默认 | 1 图 + 若干文字 | 中 |
+| Editorial Feature | `editorial-longform-feature` | 连续文章、观点稿、可选双语专题 | 中 |
 | Split 3-9 | `class="col-span-3"` 左侧 | 窄侧强调 | 中 |
 | Overlap | `data-layout="overlap"` | 全屏图 + 浮层文字 | 高 |
 | Bleed Quote | `data-layout="bleed-quote"` | 图 + 大字引语 | 很高 |
@@ -345,7 +346,31 @@ IF 需要叙事 → 选择 Timeline / List
 IF 需要对比 → 选择 Compare
 IF 品牌感 → 选择 Cover (全屏品牌色或视频背景)
 IF 内容密集 → 选择 Editorial / Split (右侧放内容)
+IF 连续阅读的文章/观点稿 → 选择 Editorial Feature，并按页面职责组合 opener / image-break / modular-rail
 ```
+
+### Editorial Feature · 长文编辑版式
+
+`editorial-longform-feature` 用于连续阅读的文章、工作室观点和可选双语专题；它不是普通 16:9 演示页的替代品。交付为文档时优先采用竖版页面，并在开始排版前锁定页面尺寸、版心、安全边距、页眉/页脚和页码规则。
+
+页面变体与职责：
+
+| 变体 | 页面职责 | 主要结构 |
+|------|----------|----------|
+| `editorial-opener` | 建立主题并开始论述 | 页眉 → 标题/导读 → 主图 → 导读与首节双栏 → 页脚 |
+| `editorial-image-break` | 章节转场或引入案例 | 编号标题 → 短导语 → 横向主图 → 图注 → 引语/续文 |
+| `editorial-modular-rail` | 连续论述旁提供可扫描信息 | 主叙事栏 + 少量编号侧栏模块 |
+
+规则：
+
+- 章节编号、页眉和 folio 可跨页重复；具体字体、颜色、分隔线和装饰由当前项目风格决定。
+- 中英配对按语义模块组织，只有用户需要双语时才加入；不逐段机械重复，不为凑版面重复译文。
+- 每页保留一个主阅读任务。图像负责叙事停顿或场景证据，不让装饰图挤压正文。
+- 侧栏只放短小、可独立扫描的模块；较长内容改用单独章节页。
+- 空间不足时先删减或拆页，不缩小正文去迁就预先设定的模块数量。
+- 窄屏按页眉、标题、主内容、次要模块、页脚的顺序改为单列；最终阅读尺寸分别检查每种语言的可读性。
+
+线框预览和可复制的结构样例位于 `reference-layouts/previews/index.html` 与 `reference-layouts/templates.md`。
 
 ## 组合禁忌
 
