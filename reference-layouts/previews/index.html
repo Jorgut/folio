@@ -107,7 +107,7 @@
     .editorial-family > p { margin-top: -10px; }
     .editorial-page {
       aspect-ratio: 210 / 297;
-      padding: 32px 30px 26px;
+      padding: 56px 54px 54px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -116,7 +116,7 @@
     }
     .editorial-page .safe-line { inset: 28px; }
     .editorial-page .content-line { inset: 48px; }
-    .editorial-page::before { content: "portrait safe margin"; }
+    .editorial-page::before,
     .editorial-page::after { display: none; }
     .editorial-running-head,
     .editorial-folio {
@@ -488,9 +488,9 @@
       <h2 id="editorial-family-title">editorial-longform-feature · three structural variants</h2>
       <p>Portrait-page wireframes for continuous reading. Placeholder bars show hierarchy only; language pairing and visual styling remain optional.</p>
       <article>
-        <h2>editorial-opener · argument + lead image</h2>
+        <h2>editorial-opener · argument + lead image · no-bleed</h2>
         <div class="slide editorial-page bleed-no">
-          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div><div class="mode-label">bleed_mode: no-bleed</div>
+          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div>
           <div class="editorial-running-head"><span>PUBLICATION / SERIES</span><span>ISSUE</span></div>
           <div class="editorial-title-block"><div class="editorial-title-lines"><i></i><i></i></div><div class="editorial-deck"></div></div>
           <div class="editorial-image"></div>
@@ -502,9 +502,9 @@
         </div>
       </article>
       <article>
-        <h2>editorial-image-break · chapter + image</h2>
+        <h2>editorial-image-break · chapter + image · no-bleed</h2>
         <div class="slide editorial-page bleed-no">
-          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div><div class="mode-label">bleed_mode: no-bleed</div>
+          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div>
           <div class="editorial-running-head"><span>PUBLICATION / SERIES</span><span>ISSUE</span></div>
           <div class="editorial-section-headline"><div class="editorial-index"></div><div class="editorial-section-title-group"><div class="editorial-section-title"></div><div class="editorial-deck"></div></div></div>
           <div class="editorial-parallel">
@@ -521,9 +521,9 @@
         </div>
       </article>
       <article>
-        <h2>editorial-modular-rail · narrative + modules</h2>
+        <h2>editorial-modular-rail · narrative + modules · no-bleed</h2>
         <div class="slide editorial-page bleed-no">
-          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div><div class="mode-label">bleed_mode: no-bleed</div>
+          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div>
           <div class="editorial-running-head"><span>PUBLICATION / SERIES</span><span>ISSUE</span></div>
           <div class="editorial-section-headline"><div class="editorial-index"></div><div class="editorial-section-title-group"><div class="editorial-section-title"></div><div class="editorial-deck"></div></div></div>
           <div class="editorial-modular-grid">
