@@ -121,7 +121,11 @@ async function getRemoteManifest(localManifest) {
   }
 
   const remoteManifest = await fetchJson(localManifest.raw_manifest_url);
-  writeCache({ checkedAt: Date.now(), remoteManifest });
+  try {
+    writeCache({ checkedAt: Date.now(), remoteManifest });
+  } catch {
+    // A read-only skill or home directory must not turn a successful check into a failure.
+  }
   return { remoteManifest, cacheUsed: false };
 }
 

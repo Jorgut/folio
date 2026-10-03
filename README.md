@@ -62,7 +62,7 @@ The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-long
 
 The [`magazine-investigative-feature`](reference-layouts/templates.md#magazine-investigative-feature) family adds facing-page layouts for thesis-led openers, dense multi-column reading, and image-evidence spreads. Its preview uses Lorem Ipsum only to demonstrate text flow; replace filler with approved copy before delivery and keep live text clear of the center gutter.
 
-Folio 1.0.15 also tightens the reference-layout preview system: bleed, trim, safe, and content-frame guides are distinct, and the wireframes are checked for text escaping the safe area or colliding with image placeholders, labels, and swatches. The [editorial design sample](demos/distributed-studio/index.html) shows those principles as a complete, ten-page magazine rather than a wireframe sheet. It uses Lorem Ipsum copy, three original generated editorial images spanning still life, textiles, and graphic design, plus locally bundled, credited architecture photography. Facing-page folios share one bottom baseline at the outer corners. The opening image fills the upper field, with its caption and folio in a separate white footer. [Open the full sample](demos/distributed-studio/index.html).
+Folio 1.0.16 also tightens the reference-layout preview system: bleed, trim, safe, and content-frame guides are distinct, and the wireframes are checked for text escaping the safe area or colliding with image placeholders, labels, and swatches. The [editorial design sample](demos/distributed-studio/index.html) shows those principles as a complete, ten-page magazine rather than a wireframe sheet. It uses Lorem Ipsum copy, three original generated editorial images spanning still life, textiles, and graphic design, plus locally bundled, credited architecture photography. Facing-page folios share one bottom baseline at the outer corners. The opening image fills the upper field, with its caption and folio in a separate white footer. [Open the full sample](demos/distributed-studio/index.html).
 
 An appendix includes three standalone **16:9 landscape** adaptations of the existing magazine wireframes: [feature opener](demos/distributed-studio/index.html#landscape-opener), [dense reading](demos/distributed-studio/index.html#landscape-reading), and [image evidence](demos/distributed-studio/index.html#landscape-evidence). These are layout studies, not pages in the ten-page portrait magazine sequence.
 
@@ -449,7 +449,7 @@ MIT · Copyright (c) 2026 Jorgut
 
 ## 视觉样刊
 
-1.0.15 进一步校准了参考版式预览：出血、裁切、安全区和内容框各自独立，并检查文字是否越过安全线，或与图片占位、标签、色板发生重叠。新增的[编辑设计样刊](demos/distributed-studio/index.html)把这些原则延伸为一组完整的十页杂志，不只是线框缩略图。正文使用 Lorem Ipsum 占位；设计静物、纺织材质和平面印刷三张图像专为样刊生成，建筑摄影在本地打包并署名。开篇图片铺满上方图片区，下方独立白色页脚容纳图注与页码；双开页页码共用基线、置于外侧底角。[打开完整样刊](demos/distributed-studio/index.html)。
+1.0.16 进一步校准了参考版式预览：出血、裁切、安全区和内容框各自独立，并检查文字是否越过安全线，或与图片占位、标签、色板发生重叠。新增的[编辑设计样刊](demos/distributed-studio/index.html)把这些原则延伸为一组完整的十页杂志，不只是线框缩略图。正文使用 Lorem Ipsum 占位；设计静物、纺织材质和平面印刷三张图像专为样刊生成，建筑摄影在本地打包并署名。开篇图片铺满上方图片区，下方独立白色页脚容纳图注与页码；双开页页码共用基线、置于外侧底角。[打开完整样刊](demos/distributed-studio/index.html)。
 
 样刊附录另有三张基于现有杂志 wireframe 的**16:9 横向成稿示例**：[专题开篇](demos/distributed-studio/index.html#landscape-opener)、[密排阅读](demos/distributed-studio/index.html#landscape-reading)、[图像证据](demos/distributed-studio/index.html#landscape-evidence)。它们是独立的版式研究，不属于前面十页竖版杂志的连续页。
 

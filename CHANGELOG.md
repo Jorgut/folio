@@ -2,6 +2,10 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.16 - 2026-10-03
+
+- Let the update check report a successfully fetched remote version even when its optional cache cannot be written
+
 ## 1.0.15 - 2026-10-03
 
 - Added a ten-page, multi-domain editorial sample and three clearly separated landscape layout studies with local image assets and source credits
