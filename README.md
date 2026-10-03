@@ -15,13 +15,36 @@
 
 Turn a brief into editorial presentations and portfolios. Start with HTML; refine or export to PPTX, PDF, Figma, or IDML.
 
-### Explore the latest work
+### Editorial sample
 
-Current wireframe library, shown directly below. The [interactive HTML version](reference-layouts/previews/index.html) includes bleed, trim, safe and content frames, including the latest editorial families.
+These are **actual exports from the editable [PowerPoint adaptation](demos/distributed-studio/folio-editorial-sample.pptx)** of the [HTML editorial sample](demos/distributed-studio/index.html), not screenshots of the HTML page. Slides 1–5 show the five facing-page spreads with the presentation canvas margins cropped away. Slides 6–8 show the complete 16:9 layout studies.
+
+![PPT export of Folio editorial opening spread, pages 01 and 02](assets/screenshots/editorial-sample/spread-01.png)
+
+<table>
+  <tr>
+    <td width="50%"><img src="assets/screenshots/editorial-sample/spread-02.png" alt="PPT export: pages 03 and 04"></td>
+    <td width="50%"><img src="assets/screenshots/editorial-sample/spread-03.png" alt="PPT export: pages 05 and 06"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screenshots/editorial-sample/spread-04.png" alt="PPT export: pages 07 and 08"></td>
+    <td><img src="assets/screenshots/editorial-sample/spread-05.png" alt="PPT export: pages 09 and 10"></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="33%"><img src="assets/screenshots/editorial-sample/landscape-06.png" alt="PPT export: landscape opener"></td>
+    <td width="33%"><img src="assets/screenshots/editorial-sample/landscape-07.png" alt="PPT export: landscape dense reading"></td>
+    <td width="33%"><img src="assets/screenshots/editorial-sample/landscape-08.png" alt="PPT export: landscape image evidence"></td>
+  </tr>
+</table>
+
+### Wireframe library
+
+The current wireframes are shown below. The [HTML preview](reference-layouts/previews/index.html) includes bleed, trim, safe and content guides, including the latest editorial families.
 
 ![Current Folio reference layout wireframes, including editorial spreads and portfolio boards](assets/screenshots/reference-layouts-current.png)
-
-The [finished editorial sample](demos/distributed-studio/index.html) contains ten portrait pages and three 16:9 layout studies. Its rendered page images are still being prepared; the wireframe image above is not the finished sample.
 
 The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
 
@@ -396,7 +419,7 @@ MIT · Copyright (c) 2026 Jorgut
 
 ## 视觉样刊
 
-上方直接展示的是**当前线框版式总览**；[线框 HTML 版](reference-layouts/previews/index.html)可单独浏览。仓库也包含[十页成稿样刊](demos/distributed-studio/index.html)及三张横版研究，但成稿的整页截图尚未加入 README；上方线框不能当作完成版样刊。
+README 上方已直接展示八张**PPT 适配版实际导出图**：前五张为裁去两侧画布留白的双开页，后三张为完整 16:9 横版。它们不是 HTML 网页截图。[下载可编辑 PPT](demos/distributed-studio/folio-editorial-sample.pptx)、[十页成稿 HTML](demos/distributed-studio/index.html)和[当前线框库](reference-layouts/previews/index.html)均可访问；线框总览图在英文区的展示图下方。
 
 1.0.16 进一步校准了参考版式预览：出血、裁切、安全区和内容框各自独立，并检查文字是否越过安全线，或与图片占位、标签、色板发生重叠。新增的[编辑设计样刊](demos/distributed-studio/index.html)把这些原则延伸为一组完整的十页杂志，不只是线框缩略图。正文使用 Lorem Ipsum 占位；设计静物、纺织材质和平面印刷三张图像专为样刊生成，建筑摄影在本地打包并署名。开篇图片铺满上方图片区，下方独立白色页脚容纳图注与页码；双开页页码共用基线、置于外侧底角。[打开完整样刊](demos/distributed-studio/index.html)。
 
