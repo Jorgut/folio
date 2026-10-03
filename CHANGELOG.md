@@ -2,6 +2,12 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.14 - 2026-10-03
+
+- Reworked all 19 reference wireframes so bleed, trim, safe, and content guides remain distinct and content stays inside the intended frame across responsive sizes
+- Fixed compressed moodboard cells, overlapping swatch labels, undersized deliverable image fields, and redundant contact-sheet labels
+- Added a multi-viewport browser and screenshot QA gate covering pseudo-element labels, nested cells, image-text overlap, and clipping
+
 ## 1.0.13 - 2026-10-03
 
 - Added the `magazine-investigative-spread` family and `magazine-investigative-feature` template
