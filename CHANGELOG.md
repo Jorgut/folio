@@ -2,6 +2,12 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.17 - 2026-10-03
+
+- Added an optional Codex `UserPromptSubmit` hook for explicit `/folio` and `$folio` calls; it checks the version and asks before any upgrade
+- Simplified README entry content and surfaced the current editorial sample and wireframe library without mislabeling older screenshots as current renders
+- Documented Codex hook setup and the remaining need for actual rendered page screenshots
+
 ## 1.0.16 - 2026-10-03
 
 - Let the update check report a successfully fetched remote version even when its optional cache cannot be written

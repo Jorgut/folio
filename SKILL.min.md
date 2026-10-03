@@ -1,7 +1,7 @@
 ---
 name: folio-min
 description: Minimal Folio skill for platforms that do not support full skill loading or large instruction files.
-version: 1.0.16
+version: 1.0.17
 tags:
   - presentation
   - slides

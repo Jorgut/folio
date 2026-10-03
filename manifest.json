@@ -1,6 +1,6 @@
 {
   "name": "folio",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "manifest_version": 1,
   "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
   "release_date": "2026-10-03",
@@ -22,8 +22,8 @@
     "supports_manifest_only_check": true
   },
   "release_highlights": [
-    "Fixed the version check so an unwritable cache does not hide a successful remote result.",
-    "Require a version check at the start of every Folio task and ask before upgrading.",
-    "Added an editorial demonstration with wireframe-to-artwork, image crop, folio, and visual QA rules."
+    "Added an optional Codex prompt hook that checks for updates on explicit /folio or $folio invocation without auto-upgrading.",
+    "Simplified the GitHub README and moved the current editorial sample and wireframe library to the top.",
+    "Clarified that existing artwork is not a rendered page preview; current-page screenshots remain pending."
   ]
 }
