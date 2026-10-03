@@ -49,6 +49,7 @@ image_frame: aligned to safe / content / edge / bleed
 | `strip-narrative-process` | `strip-narrative` | Sequence, walkthrough, process | compact | `no-bleed` |
 | `dense-presentation-board` | `dense-presentation-board` | Expert review page | compact | `no-bleed` |
 | `editorial-longform-feature` | `editorial-longform` | Continuous essays, studio viewpoints, and bilingual features | balanced | `no-bleed` |
+| `magazine-investigative-feature` | `magazine-investigative-spread` | Dense magazine features with pull statements, evidence images, and facing-page rhythm | compact | `no-bleed` |
 | `controlled-masonry-gallery` | `controlled-masonry-gallery` | Mixed image ratios with order | balanced | `soft-bleed` |
 | `layout-system-sheet` | `layout-system-sheet` | Explaining layout grammar and available compositions | compact | `no-bleed` |
 | `deck-contact-sheet` | `deck-contact-sheet` | Reviewing deck rhythm across many pages | compact | `no-bleed` |
@@ -68,6 +69,61 @@ Shared structure:
 - Pair translations by semantic module when bilingual content is requested. Translation is optional; never duplicate text solely to fill a column.
 - Treat images as pacing devices between text sections. Keep image crops and captions subordinate to the article's argument.
 - Keep the visual skin (typeface, color, rules, ornaments) independent from the structural template.
+
+## `magazine-investigative-feature`
+
+Page role: a print-inspired feature sequence with dense body copy, emphatic editorial statements, and documentary imagery. Use landscape spreads to plan facing pages, but keep each page's content inside its own safe/content frame. The reference direction is structural only; do not copy its wording, imagery, logos, exact page compositions, or visual identity.
+
+Shared structure:
+
+- Plan as a sequence of facing-page pairs with stable outer margins, gutter clearance, running folios, and a recurring issue/section marker.
+- Use narrow columns only when the final reading size supports comfortable line length and leading; three columns is a starting point, not a mandate.
+- Alternate dense reading pages with image-led pauses, evidence images, and short statements that span one or more columns.
+- Use a strong accent for pull statements sparingly; the statement should summarize or quote approved content, never be invented as filler.
+- Keep page numbers and all live text clear of the center gutter and inside the safe line.
+- Use real approved copy for final layout. In wireframes and layout explorations, use Lorem Ipsum paragraphs to test column flow; mark headlines, quotes, and image captions with neutral placeholders.
+
+### Variant A: `magazine-feature-opener`
+
+Use as the opening spread: one page establishes the thesis and byline, while the facing page introduces the first major image or evidence.
+
+```text
+┌────────────────────────┬────────────────────────┐
+│ RUNNING HEAD           │ ISSUE / FOLIO          │
+│                        │                        │
+│ LARGE THESIS           │                        │
+│ BYLINE / SHORT DECK    │      LEAD IMAGE        │
+│                        │      CAPTION           │
+│ INTRO COPY             │                        │
+└────────────────────────┴────────────────────────┘
+```
+
+### Variant B: `magazine-dense-reading`
+
+Use for the main argument and reporting. Balance two or three narrow text columns with a single oversized pull statement that interrupts, rather than fragments, the reading flow.
+
+```text
+┌────────────────────────┬────────────────────────┐
+│ HEAD / FOLIO            │ HEAD / FOLIO           │
+│ LOREM COLUMN │ LOREM    │ LOREM │ LOREM │ LOREM │
+│ LOREM COLUMN │ COLUMN   │ LOREM │ COLUMN│ COLUMN│
+│            PULL STATEMENT ACROSS COLUMNS         │
+│ LOREM COLUMN │ LOREM    │ LOREM │ LOREM │ LOREM │
+└────────────────────────┴────────────────────────┘
+```
+
+### Variant C: `magazine-image-evidence`
+
+Use when an image or documented artifact should carry evidence. Let the image occupy a clear field while copy wraps in separate, deliberately bounded columns; never overlay dense text on the image.
+
+```text
+┌────────────────────────┬────────────────────────┐
+│ LOREM COLUMN │ IMAGE   │ IMAGE FIELD │ LOREM    │
+│ LOREM COLUMN │ FIELD   │ CAPTION     │ COLUMN   │
+│ PULL STATEMENT / CAPTION│ LOREM COLUMN           │
+│ LOREM COLUMN            │ LOREM COLUMN           │
+└────────────────────────┴────────────────────────┘
+```
 
 ### Variant A: `editorial-opener`
 

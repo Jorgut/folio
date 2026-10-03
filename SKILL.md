@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.12
+version: 1.0.13
 tags:
   - presentation
   - slides
@@ -136,6 +136,8 @@ Do not silently overwrite the local skill. Update checks may be automatic, but u
 4. 版心和锚点：`.content.layout-frame` + `frame-*` + `media-anchor-*`
 
 如果内容是一篇需要连续阅读的文章、工作室观点或可选双语专题，不要套用普通演示页的默认两栏。优先考虑 `editorial-longform-feature`：根据页面职责组合 `editorial-opener`、`editorial-image-break`、`editorial-modular-rail`。文档输出优先使用竖版页面；先定页面尺寸、版心、安全边距、重复页眉与页码，再填内容。双语只在用户需要时按语义模块配对；字体、颜色、分隔线和编号样式由项目风格决定。预览见 `reference-layouts/previews/index.html`，结构规范见 `reference-layouts/templates.md`。
+
+如果内容适合杂志式调查报道或高密度专题，考虑 `magazine-investigative-feature` 跨页家族：组合 thesis/byline 开页、窄栏密集阅读页与图像证据页，交替安排长文、少量跨栏强调句和图片停顿。线框探索阶段正文可使用 Lorem Ipsum 检验栏宽、行数和跨页节奏；标题、引语、图注使用中性占位符，最终交付必须替换为经确认的真实内容。跨页中缝两侧均留安全区，页码和正文不得跨入装订槽；密栏最终须按实际阅读尺寸检查字级、行长、行距、溢出与断栏。预览见 `reference-layouts/previews/index.html`，规则见 `reference-layouts/templates.md`。
 
 ### Step 2.5: 作品集/空间类 deck 的页型原则
 

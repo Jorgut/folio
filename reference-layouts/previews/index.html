@@ -196,6 +196,59 @@
     .editorial-module .editorial-index { width: 15px; height: 15px; }
     .editorial-mini-title { width: 85%; height: 6px; }
     .editorial-module .editorial-copy-lines { gap: 3px; }
+    .magazine-family {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 18px;
+    }
+    .magazine-family > h2,
+    .magazine-family > p { grid-column: 1 / -1; }
+    .magazine-family > p { margin-top: -10px; }
+    .magazine-spread {
+      aspect-ratio: 1.42 / 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 24px 28px;
+      background: #fffdf8;
+      position: relative;
+      overflow: hidden;
+    }
+    .magazine-page {
+      min-width: 0;
+      padding: 20px 22px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      background: #fffdf8;
+    }
+    .magazine-page:first-child { border-right: 1px solid #d8d2c9; padding-right: 30px; }
+    .magazine-page:last-child { padding-left: 30px; }
+    .magazine-page .content-line { inset: 10px 12px; }
+    .magazine-page .safe-line { inset: 6px; }
+    .magazine-runhead,
+    .magazine-folio { display: flex; justify-content: space-between; color: #79736a; font-size: 6px; line-height: 1; text-transform: uppercase; }
+    .magazine-runhead { padding-bottom: 5px; border-bottom: 1px solid #c9c2b8; }
+    .magazine-folio { margin-top: auto; padding-top: 5px; border-top: 1px solid #c9c2b8; }
+    .magazine-headline { display: grid; gap: 4px; margin: auto 0; }
+    .magazine-headline i { display: block; height: 9px; width: 92%; background: #302d29; }
+    .magazine-headline i:nth-child(2) { width: 78%; }
+    .magazine-headline i:nth-child(3) { width: 61%; }
+    .magazine-byline { width: 35%; height: 4px; background: #938a7f; }
+    .magazine-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; min-height: 0; flex: 1; }
+    .magazine-column { min-width: 0; overflow: hidden; color: #625d55; font: 6px/1.55 Georgia, serif; }
+    .magazine-column p { margin: 0 0 7px; color: inherit; font: inherit; }
+    .magazine-pull { margin: 2px 0; padding: 6px 4px; color: #ad1720; font: 750 9px/1.1 Inter, ui-sans-serif, sans-serif; text-align: center; text-transform: uppercase; }
+    .magazine-visual { min-height: 74px; flex: 0 0 40%; border: 1px solid #aaa397; background: repeating-linear-gradient(135deg,#d8d3c9 0 10px,#c8c2b7 10px 20px); display: grid; place-items: center; color: #625d55; font-size: 7px; font-weight: 700; }
+    .magazine-caption { color: #625d55; font: 6px/1.35 Georgia,serif; }
+    .magazine-evidence { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8px; min-height: 0; flex: 1; }
+    .magazine-evidence .magazine-columns { grid-template-columns: 1fr 1fr; }
+    .magazine-opener .magazine-page:first-child { justify-content: center; }
+    .magazine-opener .magazine-page:last-child { justify-content: center; }
+    .magazine-guides { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+    .magazine-guides::before { content: "GUTTER SAFE ZONE"; position: absolute; top: 4px; bottom: 4px; left: 50%; width: 20px; transform: translateX(-50%); border-left: 1px dashed #d76464; border-right: 1px dashed #d76464; color: #b44b4b; font-size: 5px; writing-mode: vertical-rl; text-align: center; background: rgba(215,100,100,.07); }
     .slide::before,
     .slide::after {
       position: absolute;
@@ -461,7 +514,9 @@
       header { padding: 28px 20px 18px; }
       main { grid-template-columns: 1fr; padding: 20px; }
       .editorial-family { grid-template-columns: 1fr; }
+      .magazine-family { grid-template-columns: 1fr; }
       .editorial-page { max-width: 480px; margin: 0 auto; }
+      .magazine-spread { min-width: 460px; }
     }
   </style>
 </head>
@@ -535,6 +590,34 @@
             </div>
           </div>
           <div class="editorial-folio"><span>RUNNING FOOTER</span><span>03</span></div>
+        </div>
+      </article>
+    </section>
+    <section class="magazine-family" aria-labelledby="magazine-family-title">
+      <h2 id="magazine-family-title">magazine-investigative-feature · facing-page editorial system</h2>
+      <p>Three spread roles for a dense magazine feature. Body copy uses Lorem Ipsum to demonstrate column flow; headlines, pull statements, images, and captions remain placeholders. The center gutter is reserved.</p>
+      <article>
+        <h2>magazine-feature-opener · thesis + lead image · no-bleed</h2>
+        <div class="slide magazine-spread magazine-opener bleed-no">
+          <div class="guide-system" aria-hidden="true"><span class="safe-line"></span><span class="content-line"></span></div><div class="magazine-guides" aria-hidden="true"></div>
+          <section class="magazine-page"><div class="magazine-runhead"><span>SECTION / FEATURE</span><span>01</span></div><div class="magazine-headline"><i></i><i></i><i></i></div><div class="magazine-byline"></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus, sed commodo nunc.</p></div><div class="magazine-folio"><span>FEATURE TITLE</span><span>01</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE TITLE</span><span>02</span></div><div class="magazine-visual">LEAD IMAGE</div><div class="magazine-caption">CAPTION PLACEHOLDER · SOURCE / DATE</div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus.</p></div><div class="magazine-folio"><span>SECTION / ISSUE</span><span>02</span></div></section>
+        </div>
+      </article>
+      <article>
+        <h2>magazine-dense-reading · three-column body + pull statement · no-bleed</h2>
+        <div class="slide magazine-spread bleed-no">
+          <div class="guide-system" aria-hidden="true"><span class="safe-line"></span><span class="content-line"></span></div><div class="magazine-guides" aria-hidden="true"></div>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / REPORTING</span><span>04</span></div><div class="magazine-columns"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus. Praesent dignissim, velit at tincidunt malesuada, arcu nisi luctus erat.</p><p>Donec euismod, sapien vitae dictum viverra, mi odio pulvinar metus, in posuere risus justo non urna.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit lectus sed sapien facilisis, quis feugiat massa varius. Nullam sed tellus id nisi imperdiet cursus.</p><p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Cras tempor mi sit amet felis malesuada, a viverra eros faucibus.</p><p>Sed at consequat nunc, non facilisis lectus.</p></div></div><div class="magazine-pull">PULL STATEMENT PLACEHOLDER</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>04</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / REPORTING</span><span>05</span></div><div class="magazine-columns"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Suspendisse potenti. Phasellus vitae turpis at odio accumsan tincidunt.</p><p>Donec euismod, sapien vitae dictum viverra.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit lectus sed sapien facilisis. Nullam sed tellus id nisi imperdiet cursus. Duis at lacus nec magna viverra blandit.</p><p>Vestibulum ante ipsum primis.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Cras tempor mi sit amet felis malesuada.</p><p>Sed at consequat nunc, non facilisis lectus.</p></div></div><div class="magazine-pull">SECONDARY CALLOUT</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>05</span></div></section>
+        </div>
+      </article>
+      <article>
+        <h2>magazine-image-evidence · image field + text columns · no-bleed</h2>
+        <div class="slide magazine-spread bleed-no">
+          <div class="guide-system" aria-hidden="true"><span class="safe-line"></span><span class="content-line"></span></div><div class="magazine-guides" aria-hidden="true"></div>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / EVIDENCE</span><span>08</span></div><div class="magazine-evidence"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat. Vivamus at neque vitae sem consequat faucibus. Praesent dignissim velit at tincidunt.</p><p>Donec euismod sapien vitae dictum viverra.</p></div><div><div class="magazine-visual" style="height:100%">DOCUMENTARY IMAGE</div><div class="magazine-caption">FIGURE 01 · CAPTION PLACEHOLDER</div></div></div><div class="magazine-pull">EVIDENCE-LED STATEMENT</div><div class="magazine-folio"><span>FEATURE TITLE</span><span>08</span></div></section>
+          <section class="magazine-page"><div class="magazine-runhead"><span>FEATURE / EVIDENCE</span><span>09</span></div><div class="magazine-visual">SUPPORTING IMAGE</div><div class="magazine-caption">FIGURE 02 · SOURCE / DATE</div><div class="magazine-columns" style="grid-template-columns:1fr 1fr"><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit lectus sed sapien facilisis. Nullam sed tellus id nisi imperdiet cursus.</p><p>Vestibulum ante ipsum primis in faucibus orci luctus.</p></div><div class="magazine-column"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non justo sed urna feugiat volutpat.</p><p>Cras tempor mi sit amet felis malesuada.</p></div></div><div class="magazine-folio"><span>FEATURE TITLE</span><span>09</span></div></section>
         </div>
       </article>
     </section>

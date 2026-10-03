@@ -2,6 +2,13 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.13 - 2026-10-03
+
+- Added the `magazine-investigative-spread` family and `magazine-investigative-feature` template
+- Added thesis opener, dense multi-column reading, and image-evidence facing-spread wireframes
+- Used Lorem Ipsum to demonstrate body-copy flow and documented placeholder, gutter, safe-area, and final text-fit rules
+- Updated taxonomy, layout engine, full/minimal skills, README, preview sheet, and release metadata
+
 ## 1.0.12 - 2026-10-03
 
 - Corrected the editorial-longform preview so all page content stays inside the visible content boundary

@@ -37,6 +37,7 @@ If the board cannot be accessed or only loads partially, ask for screenshots and
 | `strip-narrative` | Content is sequential | Horizontal or vertical strip of scenes | Process, walkthrough |
 | `dense-presentation-board` | Reviewer needs many signals on one page | Many modules, tight grid, strict hierarchy | Expert review board |
 | `editorial-longform` | A continuous article needs pacing across portrait pages | Running header, lead image, paired columns, numbered sections, recurring folio | Essays, studio perspectives, bilingual features |
+| `magazine-investigative-spread` | A feature needs high-density reading across facing pages | Narrow multi-column copy, oversized pull statements, alternating image/text spreads, recurring folios | Investigative features, culture and sustainability stories |
 | `controlled-masonry-gallery` | Image ratios vary but must remain orderly | Mixed image sizes inside fixed outer frame | Portfolio gallery |
 | `layout-system-sheet` | The reference explains many grid systems | Layout inventory, mini wireframes, numeric modules | Layout grammar reference |
 | `deck-contact-sheet` | The reference shows many complete slides/pages | Multi-slide overview with repeated thumbnails | Rhythm and deck sequencing |
