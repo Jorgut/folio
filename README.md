@@ -6,57 +6,22 @@
 
 <a id="english"></a>
 
-# Folio · Design Intelligence Engine
+# Folio · Editorial Layout Skill
 
 [![skills.sh](https://img.shields.io/badge/skills.sh-Jorgut/folio-8A2BE2?style=flat-square)](https://skills.sh/Jorgut/folio)
 [![Install with npx](https://img.shields.io/badge/npx%20skills%20add-Jorgut%2Ffolio-000?style=flat-square)](https://github.com/Jorgut/folio)
 ![GitHub stars](https://img.shields.io/github/stars/Jorgut/folio?style=flat-square)
 ![License](https://img.shields.io/github/license/Jorgut/folio?style=flat-square)
-![Skill](https://img.shields.io/badge/Skill-Design%20Intelligence%20Engine-111111?style=flat-square)
-![HTML](https://img.shields.io/badge/HTML-Deck-0A7CFF?style=flat-square)
-![PPTX](https://img.shields.io/badge/PPTX-Editable-2EA44F?style=flat-square)
-![PDF](https://img.shields.io/badge/PDF-Print%20Ready-DC143C?style=flat-square)
-![Figma](https://img.shields.io/badge/Figma-Pixel%20Perfect-A259FF?style=flat-square)
-![IDML](https://img.shields.io/badge/IDML-InDesign%20Native-F6AB0A?style=flat-square)
-![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-6B5B95?style=flat-square)
-![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-222222?style=flat-square)
-![Open Code](https://img.shields.io/badge/Open%20Code-Compatible-111111?style=flat-square)
-![Codex](https://img.shields.io/badge/Codex-Compatible-222222?style=flat-square)
 
-> Magazine-style presentation engine. Structured content → template-driven layout → editable formats.
+Turn a brief into editorial presentations and portfolios. Start with HTML; refine or export to PPTX, PDF, Figma, or IDML.
 
-```text
-You describe what you need → Folio generates the deck → export to any format → refine in your tool of choice
-```
+### Explore the latest work
 
-Single source, multiple outputs: **HTML / PPTX / PDF / Figma / IDML**. Auto-generated layout, manually editable after export.
+**[Open the finished editorial sample](demos/distributed-studio/index.html)**: ten portrait pages plus three 16:9 layout studies. **[Open the current wireframe library](reference-layouts/previews/index.html)**: bleed, trim, safe and content frames, including the latest editorial families. Both are included in this repository and can be opened locally; GitHub does not run HTML previews in its README.
 
-> Key preview images are checked into `assets/screenshots/`; extra debug captures can still be generated locally when needed.
+![Original still-life artwork used in the finished editorial sample](demos/distributed-studio/assets/editorial-objects.png)
 
-### Visual Preview
-
-These are real renders from Folio, not mockups. The goal is simple: people should see the output before they decide to trust the claims.
-
-<table>
-  <tr>
-    <td align="center" width="25%">
-      <img src="assets/screenshots/slide-cover.png" alt="Folio cover preview" width="100%">
-      <br><sub>Cover / opener</sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="assets/screenshots/slide-editorial.png" alt="Folio editorial preview" width="100%">
-      <br><sub>Editorial spread</sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="assets/screenshots/wireframe-sheet.png" alt="Folio wireframe sheet preview" width="100%">
-      <br><sub>Wireframe planning sheet</sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="assets/screenshots/reference-layouts-preview.png" alt="Folio reference layout preview" width="100%">
-      <br><sub>Reference layout library</sub>
-    </td>
-  </tr>
-</table>
+*Artwork from the sample, not a screenshot of its page layout. Rendered page previews are still being prepared.*
 
 The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
 
@@ -115,12 +80,12 @@ Folio's update system is designed in two layers:
   - `scripts/check-update.mjs`
   - `scripts/self-update.mjs`
 - **Host trigger layer** supplied by the AI tool:
-  - Each Folio task starts by running the version check (remote results are cached for 30 minutes)
-  - A host startup hook may check earlier, but skill instructions alone do not install a hook
+  - Codex can install the [explicit-invocation hook](INSTALL.md#codex-explicit-invocation-hook) to check when a prompt starts with `/folio` or `$folio`
+  - Other hosts run the cached check at the start of each Folio task through `SKILL.md`
   - Hosts without script or network access should skip auto-checking and fall back to manual update
 
 Folio does **not** assume every platform can auto-run scripts at load time.
-The `SKILL.md` policy alone does not install a hook. The agent must actually run `check-update.mjs` at the start of each Folio task; if it skips the command, no check occurred. An update check never installs an upgrade without user confirmation, and `self-update.mjs` refuses a dirty Git checkout.
+The `SKILL.md` policy alone does not install a hook. Without the optional Codex hook, the agent must actually run `check-update.mjs` at the start of each Folio task; if it skips the command, no check occurred. An update check never installs an upgrade without user confirmation, and `self-update.mjs` refuses a dirty Git checkout.
 
 When an update is found, Folio should show the **concrete maintained features** from the remote release metadata first, then ask the user whether they want to upgrade.
 
@@ -426,28 +391,12 @@ MIT · Copyright (c) 2026 Jorgut
 
 ![GitHub stars](https://img.shields.io/github/stars/Jorgut/folio?style=flat-square)
 ![License](https://img.shields.io/github/license/Jorgut/folio?style=flat-square)
-![Skill](https://img.shields.io/badge/Skill-%E8%AE%BE%E8%AE%A1%E6%99%BA%E8%83%BD%E5%BC%95%E6%93%8E-111111?style=flat-square)
-![HTML](https://img.shields.io/badge/HTML-%E6%BC%94%E7%A4%BA-0A7CFF?style=flat-square)
-![PPTX](https://img.shields.io/badge/PPTX-%E5%8F%AF%E7%BC%96%E8%BE%91-2EA44F?style=flat-square)
-![PDF](https://img.shields.io/badge/PDF-%E5%8D%B0%E5%88%B7%E7%BA%A7-DC143C?style=flat-square)
-![Figma](https://img.shields.io/badge/Figma-%E5%83%8F%E7%B4%A0%E7%BA%A7%E8%BF%98%E5%8E%9F-A259FF?style=flat-square)
-![IDML](https://img.shields.io/badge/IDML-InDesign%20Native-F6AB0A?style=flat-square)
-![Claude Code](https://img.shields.io/badge/Claude%20Code-%E5%85%BC%E5%AE%B9-6B5B95?style=flat-square)
-![OpenClaw](https://img.shields.io/badge/OpenClaw-%E5%85%BC%E5%AE%B9-222222?style=flat-square)
-![Open Code](https://img.shields.io/badge/Open%20Code-%E5%85%BC%E5%AE%B9-111111?style=flat-square)
-![Codex](https://img.shields.io/badge/Codex-%E5%85%BC%E5%AE%B9-222222?style=flat-square)
 
-> 杂志级演示引擎。结构化内容 → 模板驱动排版 → 可编辑格式输出。
-
-```text
-你说要做个什么 → Folio 生成 deck → 导出到目标格式 → 在熟悉工具里精修
-```
-
-一次输出：**HTML / PPTX / PDF / Figma / IDML**。自动排版，导出后可手动精修。
-
-> 顶部已经放了真实渲染预览图，先看效果，再看功能说明。
+把主题和素材交给 Folio，先产出杂志式 HTML，再按需导出 PPTX、PDF、Figma 或 IDML。
 
 ## 视觉样刊
+
+**[打开最新十页成稿样刊](demos/distributed-studio/index.html)**，以及 **[打开当前线框版式库](reference-layouts/previews/index.html)**。仓库已包含两份完整 HTML；GitHub README 不会直接运行 HTML。上方图片是样刊所用原始艺术图像，**不是**整页排版截图；成稿截图仍待补入。
 
 1.0.16 进一步校准了参考版式预览：出血、裁切、安全区和内容框各自独立，并检查文字是否越过安全线，或与图片占位、标签、色板发生重叠。新增的[编辑设计样刊](demos/distributed-studio/index.html)把这些原则延伸为一组完整的十页杂志，不只是线框缩略图。正文使用 Lorem Ipsum 占位；设计静物、纺织材质和平面印刷三张图像专为样刊生成，建筑摄影在本地打包并署名。开篇图片铺满上方图片区，下方独立白色页脚容纳图注与页码；双开页页码共用基线、置于外侧底角。[打开完整样刊](demos/distributed-studio/index.html)。
 
@@ -502,12 +451,12 @@ Folio 的更新系统分成两层：
   - `scripts/check-update.mjs`
   - `scripts/self-update.mjs`
 - **宿主工具负责的触发层**：
-  - 每次开始 Folio 任务时运行带 30 分钟缓存的版本检查
-  - 宿主可用 startup hook 提前检查，但 skill 文档本身不会安装 hook
+  - Codex 可以安装[显式调用 hook](INSTALL.md#codex-explicit-invocation-hook)，以 `/folio` 或 `$folio` 开头的消息会立即检查
+  - 其他宿主按 `SKILL.md` 在每次 Folio 任务开始时执行缓存版检查
   - 没有脚本权限或网络权限的宿主：跳过自动检查，退化为手动更新
 
 Folio **不会假设所有平台都能在加载 skill 时自动执行脚本**。
-`SKILL.md` 中的规则本身不会安装 hook。代理必须在每次 Folio 任务开始时真正运行 `check-update.mjs`；若未运行，就没有发生更新检查。检查不会自动升级；`self-update.mjs` 也会拒绝覆盖有未提交改动的 Git 工作区。
+`SKILL.md` 中的规则本身不会安装 hook。不安装可选的 Codex hook 时，代理必须在每次 Folio 任务开始时真正运行 `check-update.mjs`；若未运行，就没有发生更新检查。检查不会自动升级；`self-update.mjs` 也会拒绝覆盖有未提交改动的 Git 工作区。
 
 当发现新版本时，Folio 应先展示远端版本维护/新增了哪些具体功能，再把“是否升级”的决定交给用户。
 
