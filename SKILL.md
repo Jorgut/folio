@@ -1,7 +1,7 @@
 ---
 name: folio
 description: Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.
-version: 1.0.16
+version: 1.0.17
 tags:
   - presentation
   - slides
@@ -37,6 +37,7 @@ Folio includes a cross-platform update core:
 - `VERSION` — human-readable local version
 - `CHANGELOG.md` — release notes
 - `scripts/check-update.mjs` — safe update check
+- `scripts/codex-prompt-hook.mjs` — optional Codex trigger for explicit `/folio` or `$folio` prompts (see `INSTALL.md`)
 - `scripts/self-update.mjs` — user-confirmed upgrade path
 
 Trigger rules:
@@ -45,7 +46,7 @@ Trigger rules:
    ```bash
    node <SKILL_ROOT>/scripts/check-update.mjs
    ```
-   A host startup hook may check earlier, but it does not replace the check on actual use. Skill instructions alone cannot register a host hook: the agent must execute the command.
+   The optional Codex prompt hook checks explicit calls before the agent starts; avoid repeating the check when that hook has already supplied a result. For implicit skill use or other hosts, the agent must execute the command. Skill instructions alone cannot register a host hook.
 2. If script execution or network access is unavailable, **state that the check was skipped and continue normally**. Do not claim the installation is current.
 3. If an update is found, show its release highlights, **inform the user and ask whether to run**:
    ```bash

@@ -96,6 +96,40 @@ If you just want the tool to start working with Folio, use:
 
 > Use the attached Folio skill instructions and repo as a presentation engine. Create an 8-slide deck about [topic], keep it clean and modern, and export HTML first.
 
+### Codex explicit-invocation hook
+
+The skill file cannot execute code merely by being named. In Codex, an optional `UserPromptSubmit` hook can check the version as soon as a prompt **starts with** `/folio` or `$folio`. It does not install updates, and ordinary discussion of Folio does not trigger it. The agent still follows the `SKILL.md` first-action check for implicit skill use and on hosts without hooks.
+
+Enable Codex hooks in `~/.codex/config.toml`:
+
+```toml
+[features]
+hooks = true
+```
+
+Add this entry under `hooks` in `~/.codex/hooks.json`, replacing `/absolute/path/to/folio` with the installed folder:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /absolute/path/to/folio/scripts/codex-prompt-hook.mjs",
+            "timeout": 20,
+            "statusMessage": "Checking Folio version"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Merge this into an existing hooks file rather than replacing other hooks. Restart Codex and approve the hook if the client requests trust. This integration is Codex-specific; other hosts need their own equivalent trigger. A network failure must not prevent the Folio task from continuing.
+
 ---
 
 ## 6. Update architecture
