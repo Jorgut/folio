@@ -96,6 +96,106 @@
       position: relative;
       overflow: visible;
     }
+    .editorial-family {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+    .editorial-family > h2,
+    .editorial-family > p { grid-column: 1 / -1; }
+    .editorial-family > p { margin-top: -10px; }
+    .editorial-page {
+      aspect-ratio: 210 / 297;
+      padding: 32px 30px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+      background: #fffdf8;
+    }
+    .editorial-page .safe-line { inset: 28px; }
+    .editorial-page .content-line { inset: 48px; }
+    .editorial-page::before { content: "portrait safe margin"; }
+    .editorial-page::after { display: none; }
+    .editorial-running-head,
+    .editorial-folio {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: #69645c;
+      font-size: 7px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .editorial-running-head { padding-bottom: 5px; border-bottom: 1px solid #bdb7ae; }
+    .editorial-folio { margin-top: auto; padding-top: 6px; border-top: 1px solid #bdb7ae; }
+    .editorial-title-block { display: grid; gap: 5px; }
+    .editorial-title-lines { display: grid; gap: 4px; }
+    .editorial-title-lines i,
+    .editorial-copy-lines i,
+    .editorial-deck,
+    .editorial-section-title,
+    .editorial-mini-title,
+    .editorial-index {
+      display: block;
+      height: 7px;
+      background: #514c45;
+      opacity: .82;
+    }
+    .editorial-title-lines i { height: 14px; }
+    .editorial-title-lines i:last-child { width: 68%; }
+    .editorial-deck { width: 76%; height: 6px; background: #928b80; }
+    .editorial-image {
+      min-height: 56px;
+      flex: 1 1 auto;
+      border: 1px solid #aaa397;
+      background: repeating-linear-gradient(135deg, #d8d3c9 0 9px, #c8c2b7 9px 18px);
+      position: relative;
+    }
+    .editorial-image::before {
+      content: "IMAGE PLACEHOLDER";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #5c574f;
+      font-size: 8px;
+      font-weight: 750;
+    }
+    .editorial-columns { display: grid; grid-template-columns: 1.08fr .92fr; gap: 12px; min-height: 0; }
+    .editorial-column { display: grid; align-content: start; gap: 6px; min-width: 0; }
+    .editorial-section-title { width: 72%; height: 8px; background: #8b5547; }
+    .editorial-copy-lines { display: grid; gap: 4px; }
+    .editorial-copy-lines i { height: 4px; background: #aaa49a; opacity: .9; }
+    .editorial-copy-lines i:nth-child(3n) { width: 82%; }
+    .editorial-caption { height: 4px; width: 52%; margin-top: -4px; background: #a39d92; }
+    .editorial-section-head { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: center; }
+    .editorial-index { width: 20px; height: 20px; background: #514c45; }
+    .editorial-section-title-group { display: grid; gap: 4px; }
+    .editorial-section-title-group .editorial-section-title { width: 78%; }
+    .editorial-section-title-group .editorial-deck { width: 62%; }
+    .editorial-section-headline { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: center; }
+    .editorial-section-headline .editorial-index { width: 20px; height: 20px; }
+    .editorial-parallel { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .editorial-wide-image { height: 112px; flex: none; }
+    .editorial-bottom-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .editorial-quote {
+      min-height: 38px;
+      padding: 7px;
+      border-left: 2px solid #a85c49;
+      background: #eeeae2;
+    }
+    .editorial-quote .editorial-copy-lines i { height: 5px; background: #8b5547; }
+    .editorial-modular-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 14px; min-height: 0; flex: 1; }
+    .editorial-main-story { display: grid; align-content: start; gap: 8px; }
+    .editorial-modules { display: grid; align-content: start; gap: 8px; }
+    .editorial-module { display: grid; grid-template-columns: 17px 1fr; gap: 6px; padding-bottom: 7px; border-bottom: 1px solid #d0cbc2; }
+    .editorial-module:last-child { border-bottom: 0; }
+    .editorial-module .editorial-index { width: 15px; height: 15px; }
+    .editorial-mini-title { width: 85%; height: 6px; }
+    .editorial-module .editorial-copy-lines { gap: 3px; }
     .slide::before,
     .slide::after {
       position: absolute;
@@ -360,13 +460,15 @@
     @media (max-width: 700px) {
       header { padding: 28px 20px 18px; }
       main { grid-template-columns: 1fr; padding: 20px; }
+      .editorial-family { grid-template-columns: 1fr; }
+      .editorial-page { max-width: 480px; margin: 0 auto; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Folio Reference Layout Previews</h1>
-    <p>Gray wireframes for translating reference-board layouts into reusable portfolio structures. These previews describe structure only; they do not copy source images, text, or template assets.</p>
+    <p>Gray wireframes for translating references into reusable portfolio and editorial structures. These previews describe structure only; they do not copy source images, text, or template assets.</p>
     <div class="legend">
       <span>IMAGE = image/photo area</span>
       <span>TITLE/BODY = text hierarchy</span>
@@ -382,6 +484,60 @@
     </div>
   </header>
   <main>
+    <section class="editorial-family" aria-labelledby="editorial-family-title">
+      <h2 id="editorial-family-title">editorial-longform-feature · three structural variants</h2>
+      <p>Portrait-page wireframes for continuous reading. Placeholder bars show hierarchy only; language pairing and visual styling remain optional.</p>
+      <article>
+        <h2>editorial-opener · argument + lead image</h2>
+        <div class="slide editorial-page bleed-no">
+          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div><div class="mode-label">bleed_mode: no-bleed</div>
+          <div class="editorial-running-head"><span>PUBLICATION / SERIES</span><span>ISSUE</span></div>
+          <div class="editorial-title-block"><div class="editorial-title-lines"><i></i><i></i></div><div class="editorial-deck"></div></div>
+          <div class="editorial-image"></div>
+          <div class="editorial-columns">
+            <div class="editorial-column"><div class="editorial-section-title"></div><div class="editorial-copy-lines"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="editorial-column"><div class="editorial-section-head"><div class="editorial-index"></div><div class="editorial-section-title-group"><div class="editorial-section-title"></div><div class="editorial-deck"></div></div></div><div class="editorial-copy-lines"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          </div>
+          <div class="editorial-folio"><span>RUNNING FOOTER</span><span>01</span></div>
+        </div>
+      </article>
+      <article>
+        <h2>editorial-image-break · chapter + image</h2>
+        <div class="slide editorial-page bleed-no">
+          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div><div class="mode-label">bleed_mode: no-bleed</div>
+          <div class="editorial-running-head"><span>PUBLICATION / SERIES</span><span>ISSUE</span></div>
+          <div class="editorial-section-headline"><div class="editorial-index"></div><div class="editorial-section-title-group"><div class="editorial-section-title"></div><div class="editorial-deck"></div></div></div>
+          <div class="editorial-parallel">
+            <div class="editorial-copy-lines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="editorial-copy-lines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="editorial-image editorial-wide-image"></div>
+          <div class="editorial-caption"></div>
+          <div class="editorial-bottom-modules">
+            <div class="editorial-quote"><div class="editorial-copy-lines"><i></i><i></i><i></i></div></div>
+            <div class="editorial-copy-lines"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="editorial-folio"><span>RUNNING FOOTER</span><span>02</span></div>
+        </div>
+      </article>
+      <article>
+        <h2>editorial-modular-rail · narrative + modules</h2>
+        <div class="slide editorial-page bleed-no">
+          <div class="guide-system" aria-hidden="true"><span class="bleed-line"></span><span class="trim-line"></span><span class="safe-line"></span><span class="content-line"></span></div><div class="mode-label">bleed_mode: no-bleed</div>
+          <div class="editorial-running-head"><span>PUBLICATION / SERIES</span><span>ISSUE</span></div>
+          <div class="editorial-section-headline"><div class="editorial-index"></div><div class="editorial-section-title-group"><div class="editorial-section-title"></div><div class="editorial-deck"></div></div></div>
+          <div class="editorial-modular-grid">
+            <div class="editorial-main-story"><div class="editorial-copy-lines"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="editorial-quote"><div class="editorial-copy-lines"><i></i><i></i><i></i></div></div><div class="editorial-copy-lines"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="editorial-modules">
+              <div class="editorial-module"><div class="editorial-index"></div><div><div class="editorial-mini-title"></div><div class="editorial-copy-lines"><i></i><i></i><i></i></div></div></div>
+              <div class="editorial-module"><div class="editorial-index"></div><div><div class="editorial-mini-title"></div><div class="editorial-copy-lines"><i></i><i></i><i></i></div></div></div>
+              <div class="editorial-module"><div class="editorial-index"></div><div><div class="editorial-mini-title"></div><div class="editorial-copy-lines"><i></i><i></i><i></i></div></div></div>
+            </div>
+          </div>
+          <div class="editorial-folio"><span>RUNNING FOOTER</span><span>03</span></div>
+        </div>
+      </article>
+    </section>
     <article>
       <h2>portfolio-opener-hero-rail</h2>
       <div class="slide hero-opener bleed-edge">
