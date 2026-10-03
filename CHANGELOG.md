@@ -2,6 +2,13 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## 1.0.11 - 2026-10-03
+
+- Added the `editorial-longform` layout family for continuous articles, studio viewpoints, and optional bilingual features
+- Added three portrait-page wireframe variants: opener, image break, and modular rail
+- Added placeholder-only preview renders and documented page pacing, language pairing, responsive reading order, and text-fit constraints
+- Updated the full/minimal skills, layout engine, README, and release metadata
+
 ## 1.0.10 - 2026-10-03
 
 - Added a Text Layout QA workflow for dense, table, bilingual, and long-deck slides

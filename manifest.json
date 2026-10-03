@@ -1,6 +1,6 @@
 {
   "name": "folio",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "manifest_version": 1,
   "description": "Magazine-style presentation skill that turns structured content into editable decks across HTML, PPTX, PDF, Figma, and IDML.",
   "release_date": "2026-10-03",
@@ -22,8 +22,8 @@
     "supports_manifest_only_check": true
   },
   "release_highlights": [
-    "Added Text Layout QA for dense, table, bilingual, and long-deck slides.",
-    "Added severity rules for clipped text, shrink-to-fit, footer collisions, and overlong CJK/Latin lines.",
-    "Clarified that package integrity and font policy checks must be paired with visual/text-box review before claiming completion."
+    "Added an editorial-longform layout family for continuous articles and studio viewpoints.",
+    "Added three portrait-page wireframes: article opener, image-led section break, and narrative with modular side rail.",
+    "Kept language pairing and visual styling optional while requiring readable text, recurring folios, and clear page pacing."
   ]
 }
