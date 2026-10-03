@@ -58,6 +58,8 @@ These are real renders from Folio, not mockups. The goal is simple: people shoul
   </tr>
 </table>
 
+The new [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
+
 ---
 
 ## Platform Compatibility
