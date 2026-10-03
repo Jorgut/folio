@@ -17,11 +17,11 @@ Turn a brief into editorial presentations and portfolios. Start with HTML; refin
 
 ### Explore the latest work
 
-**[Open the finished editorial sample](demos/distributed-studio/index.html)**: ten portrait pages plus three 16:9 layout studies. **[Open the current wireframe library](reference-layouts/previews/index.html)**: bleed, trim, safe and content frames, including the latest editorial families. Both are included in this repository and can be opened locally; GitHub does not run HTML previews in its README.
+Current wireframe library, shown directly below. The [interactive HTML version](reference-layouts/previews/index.html) includes bleed, trim, safe and content frames, including the latest editorial families.
 
-![Original still-life artwork used in the finished editorial sample](demos/distributed-studio/assets/editorial-objects.png)
+![Current Folio reference layout wireframes, including editorial spreads and portfolio boards](assets/screenshots/reference-layouts-current.png)
 
-*Artwork from the sample, not a screenshot of its page layout. Rendered page previews are still being prepared.*
+The [finished editorial sample](demos/distributed-studio/index.html) contains ten portrait pages and three 16:9 layout studies. Its rendered page images are still being prepared; the wireframe image above is not the finished sample.
 
 The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
 
@@ -396,7 +396,7 @@ MIT · Copyright (c) 2026 Jorgut
 
 ## 视觉样刊
 
-**[打开最新十页成稿样刊](demos/distributed-studio/index.html)**，以及 **[打开当前线框版式库](reference-layouts/previews/index.html)**。仓库已包含两份完整 HTML；GitHub README 不会直接运行 HTML。上方图片是样刊所用原始艺术图像，**不是**整页排版截图；成稿截图仍待补入。
+上方直接展示的是**当前线框版式总览**；[线框 HTML 版](reference-layouts/previews/index.html)可单独浏览。仓库也包含[十页成稿样刊](demos/distributed-studio/index.html)及三张横版研究，但成稿的整页截图尚未加入 README；上方线框不能当作完成版样刊。
 
 1.0.16 进一步校准了参考版式预览：出血、裁切、安全区和内容框各自独立，并检查文字是否越过安全线，或与图片占位、标签、色板发生重叠。新增的[编辑设计样刊](demos/distributed-studio/index.html)把这些原则延伸为一组完整的十页杂志，不只是线框缩略图。正文使用 Lorem Ipsum 占位；设计静物、纺织材质和平面印刷三张图像专为样刊生成，建筑摄影在本地打包并署名。开篇图片铺满上方图片区，下方独立白色页脚容纳图注与页码；双开页页码共用基线、置于外侧底角。[打开完整样刊](demos/distributed-studio/index.html)。
 
