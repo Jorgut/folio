@@ -11,6 +11,10 @@ Default geometry assumptions:
 - Safe area: preserve footer, page number, and project label
 - Every template must declare `bleed_mode` before final layout
 
+The preview library records a primary ratio, example canvas, intended medium, and adaptation note for every layout. These are design starting points, not universal platform upload requirements. Verify the current destination's specifications at export time; do not treat a phone's physical screen size as the layout canvas.
+
+For current HTML, PPTX, print PDF, Figma, and IDML coverage by layout family, see [capability-matrix.md](capability-matrix.md).
+
 ## Bleed Modes
 
 | Mode | Meaning | Use When |
@@ -21,12 +25,14 @@ Default geometry assumptions:
 | `full-bleed` | Image fills the entire page; text is minimal and overlaid inside the safe line | Covers, chapter openers, immersive image-led pages |
 | `print-bleed` | Image extends beyond trim for PDF/print, usually 3mm equivalent | Print-ready exports where edge-to-edge imagery must survive trimming |
 
-Line system:
+Line system, from outside inward in the wireframe preview:
 
-- `BLEED LINE`: optional image extension beyond final trim
-- `TRIM LINE`: final page edge
-- `SAFE LINE`: text, captions, page numbers, and footer safety boundary
-- `CONTENT FRAME`: 12-column working frame for most content
+- Red dashed `BLEED LINE`: optional image extension outside the final trim; absent for no-bleed pages
+- Black solid `TRIM LINE`: outer edge of the finished page
+- Green dashed `SAFE LINE`: outer limit for live text, captions, page numbers, and footers
+- Blue dotted `CONTENT FRAME`: preferred alignment area inside the safe line; content may use more of the safe area deliberately
+
+When enlarging a wireframe for inspection, scale the complete fixed-ratio page and all of its guides and placeholders together. Do not enlarge only the page frame while leaving pixel-sized interior modules at their thumbnail dimensions. Changing the actual delivery canvas is a separate reflow decision: revise image crop, column count, copy length, and folio placement, then inspect the export at its intended reading size.
 
 Required layout fields:
 
@@ -49,6 +55,11 @@ image_frame: aligned to safe / content / edge / bleed
 | `strip-narrative-process` | `strip-narrative` | Sequence, walkthrough, process | compact | `no-bleed` |
 | `dense-presentation-board` | `dense-presentation-board` | Expert review page | compact | `no-bleed` |
 | `editorial-longform-feature` | `editorial-longform` | Continuous essays, studio viewpoints, and bilingual features | balanced | `no-bleed` |
+| `portrait-social-feature` | `portrait-social-feature` | Single-page vertical social/editorial features | compact | `edge-bleed` image, safe text |
+| `portrait-adaptive-article-3x4` | `portrait-adaptive-article-3x4` | Taller digital article with comparable copy reflowed to two columns | compact | edge image, safe text |
+| `portrait-image-led-a4` | `portrait-image-led-a4` | Image-first print article with caption and running folio | compact | `no-bleed` |
+| `portrait-image-cover-pair` | `portrait-image-cover-pair` | Uncropped square-image cover followed by the full article | balanced | edge image on cover, safe text on continuation |
+| `portrait-magazine-essay` | `portrait-magazine-essay` | Title-led portrait magazine articles | compact | `no-bleed` |
 | `magazine-investigative-feature` | `magazine-investigative-spread` | Dense magazine features with pull statements, evidence images, and facing-page rhythm | compact | `no-bleed` |
 | `controlled-masonry-gallery` | `controlled-masonry-gallery` | Mixed image ratios with order | balanced | `soft-bleed` |
 | `layout-system-sheet` | `layout-system-sheet` | Explaining layout grammar and available compositions | compact | `no-bleed` |
@@ -56,6 +67,82 @@ image_frame: aligned to safe / content / edge / bleed
 | `vertical-portfolio-stack` | `vertical-portfolio-stack` | Tall case-study stacks and scrollable portfolio pages | balanced | `no-bleed` |
 | `brand-guideline-board` | `brand-guideline-board` | Brand systems, typography, color, and usage rules | compact | `no-bleed` |
 | `campaign-deliverables-board` | `campaign-deliverables-board` | Social/media/deliverables grouped by format | balanced | `edge-bleed` |
+
+## `portrait-social-feature`
+
+Page role: one composed 4:5 portrait feature for social feeds. Preserve the reference's four bands on the same page: full-width image, headline with side rail, three-column article, and cross-column closing statement. Its architecture subject, wording, photo, and visual identity are not part of the template.
+
+The refined Figma reference (`24:43`) confirms the image-first hierarchy. In the reusable 4:5 wireframe, the preferred full-width image field is 16:9, so it occupies 45% of the page height; the headline/rail remains about 14%, the closing band about 10%, and the body takes the remaining space. This is a deliberate adaptation of the reference, not a claim that its original image frame was exactly 16:9. The earlier Figma node (`2:4`) is a separate title-led magazine structure, recorded as `portrait-magazine-essay`.
+
+- Mark the preferred 16:9 image field with a dashed construction boundary. Also show 3:2, 4:3, and 1:1 as alternative source-image proportions; these are source options, not simultaneous overlapping crop guides in finished artwork.
+- For a different source ratio, first test subject-preserving `cover` cropping in the fixed image field. Keep the article's information density and text size stable; a 3:2, 4:3, or square source is not a reason to progressively remove body copy. If the subject cannot be cropped, switch to a different page role rather than silently converting the article into a cover.
+- Never use `contain` to create unintended side bars, and never stretch the photograph to force a ratio. Check the selected image's focal point after cropping.
+
+- The lead image may touch the trim edge. Keep any overlaid metadata inside the safe area and contrast-check it against the actual crop; remove labels that do not aid navigation.
+- Give the headline the strongest text weight. Integrate one accent phrase within its line flow; the narrow side rail contains only a short deck and secondary metadata.
+- Keep the three body columns aligned on one top baseline. Place one pull quote inside the first column without letting it become another headline. Let the final statement span the lower width, with a small optional side note.
+- Use a consistent horizontal text safe margin of at least 7% of the page width. The image alone may bleed; the headline, rail, body, quote, and conclusion may not.
+- At actual phone display size, check Chinese/Latin glyph size, line length, column order, crop, and bottom clearance. If readable copy does not fit, edit the text or add a continuation page; do not silently shrink the type or turn this template into a different two-page composition.
+- Gray guide lines and safety boundaries belong to the wireframe only. Keep a visible line in finished artwork only when it serves a specific navigation or expressive purpose.
+
+### Vertical adaptation roles
+
+Treat this family like responsive editorial composition: preserve the content hierarchy, but reflow it for the delivery page. These are distinct page formats, not four image-fit settings.
+
+| Role | Example page | Image policy | Text policy |
+|------|--------------|--------------|-------------|
+| `portrait-social-feature` | 4:5, 1080 × 1350 px | Keep a 16:9 full-width field; crop 16:9, 3:2, 4:3, or 1:1 sources around their focal point | Three-column article and closing statement remain on the page |
+| `portrait-adaptive-article-3x4` | 3:4, 1080 × 1440 px | Re-evaluate the crop for the taller page | Reflow comparable copy into two columns; do not merely scale the 4:5 page |
+| `portrait-image-led-a4` | A4, 210 × 297 mm | Place the image inside the print trim with an attached caption | Add running head and folio; use three columns only at legible print size |
+| `portrait-image-cover-pair` | Two 4:5 pages | Display an uncropped 1:1 source across the first page | Treat page one as a cover and place the complete article on page two |
+
+In wireframe previews, use Lorem ipsum to test column density and fill close to the footer without crossing the safe line. At final output size, replace it with the approved copy and verify every column for overflow and reading order. If copy cannot fit, revise the editorial scope or add a continuation page; do not hide overflow or reduce body type to preserve an arbitrary one-page count.
+
+```text
+┌──────────────────────────────────┐
+│ FULL-WIDTH IMAGE / SMALL META    │
+├──────────────────────────┬───────┤
+│ HEADLINE + ACCENT PHRASE │ DECK  │
+├───────────┬───────────┬──────────┤
+│ BODY      │ BODY      │ BODY     │
+│ PULL      │           │          │
+│ BODY      │           │          │
+├─────────────────────────┬────────┤
+│ CLOSING STATEMENT       │ NOTE   │
+└─────────────────────────┴────────┘
+```
+
+## `portrait-magazine-essay`
+
+Page role: one title-led A4 portrait magazine page (210:297, example canvas 210 × 297 mm). This is distinct from the 4:5 `portrait-social-feature`, where the lead image comes first. Adapt the structure, not the linked Figma file's article text, photograph, credits, typefaces, or exact styling. A social adaptation requires reflow into readable pages, not a scaled-down A4 image.
+
+- Fix the portrait trim, text safe margin, and footer baseline before fitting copy. `bleed_mode: no-bleed`; image, caption, headline, and footer all remain inside the safe line.
+- Establish one text hierarchy: quiet running head; dominant headline with at most one accented word; subordinate translation/subtitle; tertiary byline and production credits.
+- Let the wide image be the next major beat after the title. Its caption stays attached to the image, not between unrelated text blocks.
+- Use three equal-width body columns only when the delivered reading size remains legible. Align their top edges and preserve continuous reading order. A modest drop cap may open the first column, but it must not interrupt the first lines.
+- Place one pull quote after the body as a full-width conclusion, with optional translation and attribution below it. This is a distinct emphasis zone, not a fourth body column.
+- Keep decorative hairlines out of the finished page unless they serve navigation or necessary grouping. The preview's safe/content guides are construction marks only.
+- At actual page size, check headline wraps, translation balance, image crop, caption size, body line length, column overflow, quote height, and footer clearance. If the article does not fit legibly, continue on another page rather than shrinking the body.
+
+```text
+┌──────────────────────────────────┐
+│ RUNNING HEAD / ISSUE       FOLIO │
+│ KICKER                           │
+│ LARGE HEADLINE + ACCENT          │
+│ SUBTITLE / TRANSLATION           │
+│ BYLINE  PHOTO CREDIT  LOCATION   │
+│                                  │
+│           WIDE IMAGE             │
+│ CAPTION                          │
+│                                  │
+│ BODY       BODY       BODY       │
+│ BODY       BODY       BODY       │
+│                                  │
+│ FULL-WIDTH PULL QUOTE            │
+│ ATTRIBUTION                      │
+│ RUNNING FOOTER             PAGE  │
+└──────────────────────────────────┘
+```
 
 ## `editorial-longform-feature`
 
@@ -77,7 +164,7 @@ Page role: a print-inspired feature sequence with dense body copy, emphatic edit
 
 Shared structure:
 
-- Plan as a sequence of facing-page pairs with stable outer margins, gutter clearance, running folios, and a recurring issue/section marker.
+- Assemble a sequence from independent facing-page roles with stable outer margins, gutter clearance, running folios, and a recurring issue/section marker. A facing-page pair is a layout unit, not a mandatory place in the article.
 - On every spread, align the left- and right-page folios to one shared bottom baseline. Place page numbers at the outer bottom corners, with the same bottom offset; keep them outside the center gutter. Running heads carry publication/section labels, not a second copy of the page number.
 - In HTML previews, position paired folios from the spread container's shared footer row; separate page content boxes can have different heights. Confirm the rendered page-number baselines match before delivery.
 - Use narrow columns only when the final reading size supports comfortable line length and leading; three columns is a starting point, not a mandate.
@@ -85,6 +172,8 @@ Shared structure:
 - Use a strong accent for pull statements sparingly; the statement should summarize or quote approved content, never be invented as filler.
 - Keep page numbers and all live text clear of the center gutter and inside the safe line.
 - Use real approved copy for final layout. In wireframes and layout explorations, use Lorem Ipsum paragraphs to test column flow; mark headlines, quotes, and image captions with neutral placeholders.
+
+Special compositions are `magazine-feature-opener`, `magazine-spacious-opener`, and `magazine-statement-evidence`. Reusable reading and evidence roles are `magazine-dense-reading` and `magazine-image-evidence`; repeat them when the story needs more pages. The preview folios `L` and `R` only identify the left and right pages. Assign actual consecutive folios when assembling a publication, not in the reusable templates. For example, pages 02-03 can use a spacious opener, 04-05 and 06-07 can both use dense reading, 08-09 can use statement/evidence, and 10-11 can use image evidence. This sequence is illustrative, not required.
 
 ### Variant A: `magazine-feature-opener`
 
@@ -125,6 +214,35 @@ Use when an image or documented artifact should carry evidence. Let the image oc
 │ LOREM COLUMN │ FIELD   │ CAPTION     │ COLUMN   │
 │ PULL STATEMENT / CAPTION│ LOREM COLUMN           │
 │ LOREM COLUMN            │ LOREM COLUMN           │
+└────────────────────────┴────────────────────────┘
+```
+
+### Variant D: `magazine-spacious-opener`
+
+Use when the opening argument needs a deliberate pause. Center a short thesis and byline on the left page, place a brief introduction lower on that page, and give the facing image most of the right page. Keep both folios on the shared bottom baseline; this is not a license to leave required article copy out.
+
+```text
+┌────────────────────────┬────────────────────────┐
+│                        │                        │
+│     THESIS / BYLINE    │                        │
+│                        │       LEAD IMAGE       │
+│                        │                        │
+│          SHORT INTRO   │       IMAGE CREDIT     │
+│ FOLIO                  │                  FOLIO │
+└────────────────────────┴────────────────────────┘
+```
+
+### Variant E: `magazine-statement-evidence`
+
+Use for an emphatic editorial claim supported by reporting. Give the pull statement a large left-page field while a narrow copy column continues beside it; place one supporting image below that copy. On the facing page, pair the continuing article with a separate image-and-caption field. Preserve the asymmetric rhythm without overlaying text on imagery or reproducing the reference magazine's wording, photos, or masthead.
+
+```text
+┌────────────────────────┬────────────────────────┐
+│ PULL       │ REPORTING  │ REPORTING │ IMAGE      │
+│ STATEMENT  │ COLUMN     │ COLUMN    │ CAPTION    │
+│            │            │           │            │
+│            │ IMAGE      │           │            │
+│ FOLIO                  │                  FOLIO │
 └────────────────────────┴────────────────────────┘
 ```
 

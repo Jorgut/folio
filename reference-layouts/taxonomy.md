@@ -39,7 +39,12 @@ If the board cannot be accessed or only loads partially, ask for screenshots and
 | `strip-narrative` | Content is sequential | Horizontal or vertical strip of scenes | Process, walkthrough |
 | `dense-presentation-board` | Reviewer needs many signals on one page | Many modules, tight grid, strict hierarchy | Expert review board |
 | `editorial-longform` | A continuous article needs pacing across portrait pages | Running header, lead image, paired columns, numbered sections, recurring folio | Essays, studio perspectives, bilingual features |
-| `magazine-investigative-spread` | A feature needs high-density reading across facing pages | Narrow multi-column copy, oversized pull statements, alternating image/text spreads, recurring folios | Investigative features, culture and sustainability stories |
+| `portrait-social-feature` | A 4:5 article keeps its copy while adapting source-image crops | Fixed full-width lead image, headline with side deck, three-column body, full-width closing statement | Portrait digital essays and design commentary |
+| `portrait-adaptive-article-3x4` | A taller digital page reflows comparable article content | Lead image, headline, two-column body, closing statement | Portrait articles requiring a 3:4 page |
+| `portrait-image-led-a4` | A print article leads with visual evidence | Running head, headline, image/caption, three-column body, folio | Printed editorial features and journals |
+| `portrait-image-cover-pair` | An uncropped square image needs a dedicated cover role | 1:1 full-width image cover followed by a two-column article page | Image-led stories whose source should not be cropped |
+| `portrait-magazine-essay` | A portrait editorial page leads with a typographic thesis before visual evidence | Running head, bilingual headline, credit row, wide image/caption, three text columns, cross-column quote, folio | Design essays, interviews, cultural features |
+| `magazine-investigative-spread` | A feature needs high-density reading across facing pages | Quiet thesis/image opener, narrow multi-column copy, asymmetrical statement/evidence spreads, recurring folios | Investigative features, culture and sustainability stories |
 | `controlled-masonry-gallery` | Image ratios vary but must remain orderly | Mixed image sizes inside fixed outer frame | Portfolio gallery |
 | `layout-system-sheet` | The reference explains many grid systems | Layout inventory, mini wireframes, numeric modules | Layout grammar reference |
 | `deck-contact-sheet` | The reference shows many complete slides/pages | Multi-slide overview with repeated thumbnails | Rhythm and deck sequencing |
