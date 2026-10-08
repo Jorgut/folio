@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio / Vertical Writing Study</title>
+  <style>
+    @font-face { font-family: "Noto Sans Mongolian"; src: url("fonts/NotoSansMongolian-Regular.ttf") format("truetype"); font-display: block; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e9eded; color: #242622; font-family: Arial, sans-serif; letter-spacing: 0; }
+    header { padding: 24px 32px; border-bottom: 1px solid #bcc5c2; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+    h1 { margin: 0 auto 0 0; font-size: 22px; }
+    .tabs { display: flex; border: 1px solid #8c9692; }
+    button { font: inherit; cursor: pointer; padding: 9px 12px; border: 0; background: transparent; color: inherit; }
+    button[aria-pressed="true"] { background: #254e42; color: white; }
+    label { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+    main { max-width: 1700px; margin: auto; padding: 24px 32px 48px; }
+    section > h2 { font-size: 18px; margin: 8px 0 16px; }
+    .pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-bottom: 32px; }
+    figure { margin: 0; min-width: 0; }
+    figcaption { font-size: 13px; color: #53605b; margin-top: 10px; }
+    .frame { position: relative; width: 100%; aspect-ratio: 794 / 1123; }
+    .page { width: 794px; height: 1123px; position: absolute; top: 0; left: 0; transform-origin: top left; background: #fffefb; border: 1px solid #333; padding: 60px; display: flex; flex-direction: column; gap: 22px; }
+    .page::after { content: ""; position: absolute; inset: 60px; outline: 1px dotted #5877a6; pointer-events: none; display: none; }
+    body.guides .page::after { display: block; }
+    .runhead, .folio { display: flex; justify-content: space-between; align-items: center; font: 12px/1.4 Arial,sans-serif; color: #58655e; }
+    .runhead { border-bottom: 1px solid #bac2bd; padding-bottom: 10px; }
+    .folio { border-top: 1px solid #bac2bd; padding-top: 12px; margin-top: auto; }
+    .hero { height: 280px; display: grid; grid-template-columns: 1fr 108px; gap: 24px; flex: none; }
+    .mn .hero { grid-template-columns: 108px 1fr; }
+    .title { writing-mode: vertical-rl; font: 36px/1.5 "Songti SC", "Noto Serif CJK SC", serif; margin: 0; color: #913c43; }
+    .mn .title { writing-mode: vertical-lr; font: 36px/1.55 "Noto Sans Mongolian",sans-serif; }
+    .mn .hero .title { grid-column: 1; grid-row: 1; }
+    .visual { margin: 0; display: flex; flex-direction: column; gap: 9px; min-height: 0; }
+    .visual img { width: 100%; height: 248px; object-fit: cover; display: block; }
+    .caption { font: 11px/1.4 Arial,sans-serif; color: #657068; }
+    .copy { flex: 1; min-width: 0; min-height: 0; width: 100%; writing-mode: vertical-rl; font: 19px/1.8 "Songti SC", "Noto Serif CJK SC",serif; line-break: strict; }
+    .copy p { margin: 0; margin-block-end: 15px; text-indent: 2em; }
+    .mn .copy { writing-mode: vertical-lr; font-family: "Noto Sans Mongolian",sans-serif; font-size: 23px; line-height: 1.9; }
+    .mn .copy p { text-indent: 0; margin-block-end: 18px; }
+    .combine { text-combine-upright: all; }
+    .reading { display: flex; gap: 24px; flex: 1; min-height: 0; }
+    .reading .copy { flex: 1; }
+    .rail { width: 142px; flex: none; border-left: 1px solid #bcc5c2; padding-left: 18px; display: flex; flex-direction: column; gap: 18px; }
+    .rail img { width: 123px; height: 182px; object-fit: cover; }
+    .rail .note { writing-mode: vertical-rl; height: 360px; font: 17px/1.8 "Songti SC",serif; color: #913c43; }
+    .mn .reading { flex-direction: row-reverse; }
+    .mn .rail { border-left: 0; border-right: 1px solid #bcc5c2; padding-left: 0; padding-right: 18px; }
+    .mn .rail .note { writing-mode: vertical-lr; font-family: "Noto Sans Mongolian",sans-serif; font-size: 23px; }
+    .section-title { font: 27px/1.3 "Songti SC",serif; margin: 0; color: #913c43; }
+    .mn .section-title { writing-mode: vertical-lr; height: 105px; font-family: "Noto Sans Mongolian",sans-serif; font-size: 29px; }
+    [hidden] { display: none !important; }
+    @media (max-width: 800px) { header { padding: 18px; } main { padding: 18px; } .pages { grid-template-columns: 1fr; } h1 { flex-basis: 100%; } }
+    @media print { body { background: white; } header, section > h2, figcaption { display: none; } main { padding: 0; } .pages { display: block; margin: 0; } .frame { width: 210mm; height: 297mm; break-after: page; } .page { transform: scale(.9997) !important; border: 0; } @page { size: A4; margin: 0; } }
+  </style>
+</head>
+<body>
+  <header><h1>Folio / Vertical Writing Study</h1><div class="tabs" aria-label="Script filter"><button data-filter="all" aria-pressed="true">All</button><button data-filter="zh" aria-pressed="false">Chinese</button><button data-filter="mn" aria-pressed="false">Mongolian</button></div><label><input id="guides" type="checkbox">Guides</label></header>
+  <main>
+    <section data-script="zh"><h2>Chinese / right-to-left columns</h2><div class="pages">
+      <figure><div class="frame"><article class="page zh" lang="zh-Hans"><div class="runhead"><span>FOLIO / TYPE STUDY</span><span>中文竖排 · 开篇</span></div><div class="hero"><div class="visual"><img src="../../../demos/distributed-studio/assets/architecture-light.jpg" alt="Architectural facade in sunlight"><div class="caption">FIGURE 01 / IMAGE PLACEHOLDER</div></div><h3 class="title">文字之间<br>阅读的节奏</h3></div><div class="copy" data-fill="zh"></div><div class="folio"><span>CHINESE / OPENER</span><span>01</span></div></article></div><figcaption>A4 / Chinese opener</figcaption></figure>
+      <figure><div class="frame"><article class="page zh" lang="zh-Hans"><div class="runhead"><span>FOLIO / TYPE STUDY</span><span>中文竖排 · 续页</span></div><h3 class="section-title">在行列之间，继续阅读</h3><div class="reading"><div class="copy" data-fill="zh"></div><aside class="rail"><img src="../../../demos/distributed-studio/assets/staircase-shadow.jpg" alt="Staircase detail"><div class="caption">FIGURE 02 / DETAIL</div><div class="note">「标点、数字与图注，都应保留清晰的阅读顺序。」</div></aside></div><div class="folio"><span>CHINESE / CONTINUATION</span><span>02</span></div></article></div><figcaption>A4 / Chinese continuation with image rail</figcaption></figure>
+    </div></section>
+    <section data-script="mn"><h2>Traditional Mongolian / left-to-right columns</h2><div class="pages">
+      <figure><div class="frame"><article class="page mn" lang="mn-Mong"><div class="runhead"><span>FOLIO / TYPE STUDY</span><span>MONGOLIAN / OPENER</span></div><div class="hero"><h3 class="title">ᠮᠣᠩᠭᠤᠯ<br>ᠪᠢᠴᠢᠭ</h3><div class="visual"><img src="../../../demos/distributed-studio/assets/architecture-light.jpg" alt="Architectural facade in sunlight"><div class="caption">FIGURE 01 / IMAGE PLACEHOLDER</div></div></div><div class="copy" data-fill="mn"></div><div class="folio"><span>MONGOLIAN / OPENER</span><span>01</span></div></article></div><figcaption>A4 / Mongolian opener</figcaption></figure>
+      <figure><div class="frame"><article class="page mn" lang="mn-Mong"><div class="runhead"><span>FOLIO / TYPE STUDY</span><span>MONGOLIAN / CONTINUATION</span></div><h3 class="section-title">ᠮᠣᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ</h3><div class="reading"><div class="copy" data-fill="mn"></div><aside class="rail"><img src="../../../demos/distributed-studio/assets/staircase-shadow.jpg" alt="Staircase detail"><div class="caption">FIGURE 02 / DETAIL</div><div class="note">ᠮᠣᠩᠭᠤᠯ ᠪᠢᠴᠢᠭ</div></aside></div><div class="folio"><span>MONGOLIAN / CONTINUATION</span><span>02</span></div></article></div><figcaption>A4 / Mongolian continuation with image rail</figcaption></figure>
+    </div></section>
+  </main>
+  <script>
+    const samples = {
+      zh: '这是一段用于观察中文竖排的占位文字。文字由上而下展开，行列依次向左延续。书页中的标题、图像与正文共同构成阅读的节奏。「引号」、句号，及数字<span class="combine">12</span>，应各自保持清楚的位置。ABC 与二〇二六年也用于检查混排。',
+      mn: 'Android OS ᠳᠠᠭᠡᠷ᠎ᠡ ᠬᠢᠳᠠᠳ ᠮᠣᠩᠭᠤᠯ ᠲᠣᠯᠢ ᠭᠠᠷᠭᠠᠵᠠᠢ ᠁ Apple iOS ᠳᠡᠭᠡᠷ᠎ᠡ ᠬᠢᠳᠠᠳ ᠮᠣᠩᠭᠤᠯ ᠲᠣᠯᠢ ᠭᠠᠷᠭᠠᠵᠠᠢ ᠁'
+    };
+    function fill(copy) {
+      copy.replaceChildren();
+      for (let index = 0; index < 80; index += 1) {
+        const paragraph = document.createElement('p');
+        paragraph.innerHTML = samples[copy.dataset.fill];
+        copy.append(paragraph);
+        if (copy.scrollWidth > copy.clientWidth + 1) {
+          paragraph.textContent = '';
+          const text = new DOMParser().parseFromString(samples[copy.dataset.fill], 'text/html').body.textContent;
+          const tokens = copy.dataset.fill === 'zh' ? Array.from(text) : text.split(' ');
+          for (const token of tokens) {
+            const before = paragraph.textContent;
+            paragraph.textContent += (copy.dataset.fill === 'mn' && before ? ' ' : '') + token;
+            if (copy.scrollWidth > copy.clientWidth + 1) { paragraph.textContent = before; break; }
+          }
+          if (!paragraph.textContent) paragraph.remove();
+          break;
+        }
+      }
+    }
+    function resize(frame) {
+      const page = frame.querySelector('.page');
+      page.style.transform = `scale(${frame.clientWidth / 794})`;
+    }
+    const observer = new ResizeObserver((entries) => entries.forEach(({ target }) => resize(target)));
+    document.fonts.ready.then(() => {
+      document.querySelectorAll('.copy').forEach(fill);
+      document.querySelectorAll('.frame').forEach((frame) => { resize(frame); observer.observe(frame); });
+      document.body.dataset.ready = 'true';
+    });
+    document.querySelector('#guides').addEventListener('change', (event) => document.body.classList.toggle('guides', event.target.checked));
+    document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
+      document.querySelectorAll('[data-filter]').forEach((tab) => tab.setAttribute('aria-pressed', String(tab === button)));
+      document.querySelectorAll('[data-script]').forEach((section) => { section.hidden = button.dataset.filter !== 'all' && button.dataset.filter !== section.dataset.script; });
+    }));
+  </script>
+</body>
+</html>
