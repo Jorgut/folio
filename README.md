@@ -52,14 +52,51 @@ These are **actual exports from the editable [PowerPoint adaptation](demos/distr
 
 ### Wireframe library
 
-The image below is a baseline catalogue snapshot, not an export of the current draft. The updated portrait and facing-page wireframes still need clean, individually reviewed image exports before they can be shown here as an in-README gallery. The [HTML preview](reference-layouts/previews/index.html) contains the working draft.
+The catalogue below shows the current 29 wireframe layouts, exported from the [HTML preview](reference-layouts/previews/index.html) on 2026-10-08. Expand a family to inspect its pages directly in this README. These are structural previews with placeholder copy and imagery.
 
 <details>
-<summary>View the baseline wireframe catalogue</summary>
+<summary>View the current wireframe catalogue</summary>
 
-![Baseline Folio reference layout wireframes, including editorial spreads and portfolio boards](assets/screenshots/reference-layouts-current.png)
+![Current Folio catalogue of 29 portrait, facing-page and presentation layouts](assets/screenshots/reference-layouts-current.png)
 
 </details>
+
+<details>
+<summary>Essay / four-page reading sequence</summary>
+
+![Four A4 essay page roles](assets/screenshots/reference-layouts-essay.png)
+
+</details>
+
+<details>
+<summary>Longform / three structural variants</summary>
+
+![Three A4 longform page structures](assets/screenshots/reference-layouts-longform.png)
+
+</details>
+
+<details>
+<summary>Format adaptation / A4, 4:5 and 3:4 pages</summary>
+
+![Portrait format adaptations and cover with continuation](assets/screenshots/reference-layouts-format-adaptation.png)
+
+</details>
+
+<details>
+<summary>Magazine / facing-page editorial system</summary>
+
+![Five magazine spread structures](assets/screenshots/reference-layouts-magazine.png)
+
+</details>
+
+<details>
+<summary>Portfolio / 16:9, 4:3 and portrait boards</summary>
+
+![Thirteen portfolio and presentation boards](assets/screenshots/reference-layouts-boards.png)
+
+</details>
+
+Rebuild these images with `node scripts/export-layout-catalogue.mjs` (or `FOLIO_BROWSER_CHANNEL=chrome node scripts/export-layout-catalogue.mjs` to use installed Chrome). The separate [Chinese and traditional Mongolian vertical-writing study](reference-layouts/experiments/vertical-writing/index.html) is an experimental browser preview; its [scope and verification notes](reference-layouts/experiments/vertical-writing/README.md) track export and language review still to be completed.
 
 The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
 
@@ -434,7 +471,7 @@ MIT · Copyright (c) 2026 Jorgut
 
 ## 视觉样刊
 
-README 上方直接展示开篇跨页，并可在原页面展开其余四张**PPT 适配版双开页**与三张 **16:9 横版**；它们是实际导出图，不是 HTML 网页截图。[下载可编辑 PPT](demos/distributed-studio/folio-editorial-sample.pptx)、[十页成稿 HTML](demos/distributed-studio/index.html)和[线框库工作稿](reference-layouts/previews/index.html)均可访问。折叠的线框总览图是旧版目录快照；新版单页和跨页尚待无批注、逐张核验的导出图，不能把旧图标为最新版。
+README 上方直接展示开篇跨页，并可在原页面展开其余四张**PPT 适配版双开页**与三张 **16:9 横版**；它们是实际导出图。[下载可编辑 PPT](demos/distributed-studio/folio-editorial-sample.pptx)、[十页占位样刊 HTML](demos/distributed-studio/index.html)和[线框库预览](reference-layouts/previews/index.html)均可访问。线框总览已更新为 2026-10-08 的 29 个当前版式，并提供五组可在 README 内展开的分类展示图。
 
 1.0.16 进一步校准了参考版式预览：出血、裁切、安全区和内容框各自独立，并检查文字是否越过安全线，或与图片占位、标签、色板发生重叠。新增的[编辑设计样刊](demos/distributed-studio/index.html)把这些原则延伸为一组完整的十页杂志，不只是线框缩略图。正文使用 Lorem Ipsum 占位；设计静物、纺织材质和平面印刷三张图像专为样刊生成，建筑摄影在本地打包并署名。开篇图片铺满上方图片区，下方独立白色页脚容纳图注与页码；双开页页码共用基线、置于外侧底角。[打开完整样刊](demos/distributed-studio/index.html)。
 
