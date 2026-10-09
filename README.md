@@ -98,6 +98,19 @@ The catalogue below shows the current 29 wireframe layouts, exported from the [H
 
 Rebuild these images with `node scripts/export-layout-catalogue.mjs` (or `FOLIO_BROWSER_CHANNEL=chrome node scripts/export-layout-catalogue.mjs` to use installed Chrome). The separate [Chinese and traditional Mongolian vertical-writing study](reference-layouts/experiments/vertical-writing/index.html) is an experimental browser preview; its [scope and verification notes](reference-layouts/experiments/vertical-writing/README.md) track export and language review still to be completed.
 
+### Vertical Writing Variants
+
+[Fourteen-page layout study](reference-layouts/experiments/vertical-writing/variants/index.html) · [Readable wireframes](reference-layouts/experiments/vertical-writing/variants/wireframe.html) · [Scope and reuse](reference-layouts/experiments/vertical-writing/variants/README.md)
+
+Traditional Chinese and Mongolian each include a cover, pure-text page, four image/body layouts and a closing page. Chinese paragraph openings use two-character indentation. These remain experimental: Mongolian language review, native-editor acceptance and print production are pending.
+
+<details>
+<summary>View vertical-writing wireframes</summary>
+
+![Fourteen vertical-writing wireframes](reference-layouts/experiments/vertical-writing/variants/wireframe-overview.png)
+
+</details>
+
 The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
 
 The [`magazine-investigative-feature`](reference-layouts/templates.md#magazine-investigative-feature) family adds facing-page layouts for thesis-led openers, dense multi-column reading, and image-evidence spreads. Its preview uses Lorem Ipsum only to demonstrate text flow; replace filler with approved copy before delivery and keep live text clear of the center gutter.
