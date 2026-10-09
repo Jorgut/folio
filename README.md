@@ -54,12 +54,7 @@ These are **actual exports from the editable [PowerPoint adaptation](demos/distr
 
 The catalogue below shows the current 29 wireframe layouts, exported from the [HTML preview](reference-layouts/previews/index.html) on 2026-10-08. Expand a family to inspect its pages directly in this README. These are structural previews with placeholder copy and imagery.
 
-<details>
-<summary>View the current wireframe catalogue</summary>
-
 ![Current Folio catalogue of 29 portrait, facing-page and presentation layouts](assets/screenshots/reference-layouts-current.png)
-
-</details>
 
 <details>
 <summary>Essay / four-page reading sequence</summary>
@@ -104,12 +99,7 @@ Rebuild these images with `node scripts/export-layout-catalogue.mjs` (or `FOLIO_
 
 Traditional Chinese and Mongolian each include a cover, pure-text page, four image/body layouts and a closing page. Chinese paragraph openings use two-character indentation. These remain experimental: Mongolian language review, native-editor acceptance and print production are pending.
 
-<details>
-<summary>View vertical-writing wireframes</summary>
-
 ![Fourteen vertical-writing wireframes](reference-layouts/experiments/vertical-writing/variants/wireframe-overview.png)
-
-</details>
 
 ### Book Material Demonstrations
 
@@ -117,16 +107,107 @@ Traditional Chinese and Mongolian each include a cover, pure-text page, four ima
 
 Two separate eight-page demos use new AI-generated book-material imagery. Chinese progresses right to left; traditional Mongolian progresses left to right. Mongolian copy is an unreviewed thematic adaptation, not a complete translation or publication-ready text. HTML files can be downloaded and opened locally; GitHub repository links do not themselves run the HTML preview.
 
-<details>
-<summary>View Chinese and Mongolian page previews</summary>
-
 ![Chinese book-material cover](demos/vertical-book-study/images/01.png)
 
 ![Mongolian book-material cover](demos/vertical-book-study/mongolian/images/01.png)
 
-[Chinese portrait PDF](demos/vertical-book-study/social.pdf) · [Chinese landscape PDF](demos/vertical-book-study/slides.pdf) · [Mongolian portrait PDF](demos/vertical-book-study/mongolian/social.pdf) · [Mongolian landscape PDF](demos/vertical-book-study/mongolian/slides.pdf)
+<details>
+<summary>Chinese portrait / all eight pages</summary>
+
+<table>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/images/02.png" alt="Chinese portrait / all eight pages: page 02"><br>Page 02</td>
+<td width="50%"><img src="demos/vertical-book-study/images/01.png" alt="Chinese portrait / all eight pages: page 01"><br>Page 01</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/images/04.png" alt="Chinese portrait / all eight pages: page 04"><br>Page 04</td>
+<td width="50%"><img src="demos/vertical-book-study/images/03.png" alt="Chinese portrait / all eight pages: page 03"><br>Page 03</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/images/06.png" alt="Chinese portrait / all eight pages: page 06"><br>Page 06</td>
+<td width="50%"><img src="demos/vertical-book-study/images/05.png" alt="Chinese portrait / all eight pages: page 05"><br>Page 05</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/images/08.png" alt="Chinese portrait / all eight pages: page 08"><br>Page 08</td>
+<td width="50%"><img src="demos/vertical-book-study/images/07.png" alt="Chinese portrait / all eight pages: page 07"><br>Page 07</td>
+</tr>
+</table>
 
 </details>
+
+<details>
+<summary>Chinese landscape / all eight slides</summary>
+
+<table>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/images/slide-02.png" alt="Chinese landscape / all eight slides: page 02"><br>Page 02</td>
+<td width="50%"><img src="demos/vertical-book-study/images/slide-01.png" alt="Chinese landscape / all eight slides: page 01"><br>Page 01</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/images/slide-04.png" alt="Chinese landscape / all eight slides: page 04"><br>Page 04</td>
+<td width="50%"><img src="demos/vertical-book-study/images/slide-03.png" alt="Chinese landscape / all eight slides: page 03"><br>Page 03</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/images/slide-06.png" alt="Chinese landscape / all eight slides: page 06"><br>Page 06</td>
+<td width="50%"><img src="demos/vertical-book-study/images/slide-05.png" alt="Chinese landscape / all eight slides: page 05"><br>Page 05</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/images/slide-08.png" alt="Chinese landscape / all eight slides: page 08"><br>Page 08</td>
+<td width="50%"><img src="demos/vertical-book-study/images/slide-07.png" alt="Chinese landscape / all eight slides: page 07"><br>Page 07</td>
+</tr>
+</table>
+
+</details>
+
+<details>
+<summary>Mongolian portrait / all eight draft pages</summary>
+
+<table>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/01.png" alt="Mongolian portrait / all eight draft pages: page 01"><br>Page 01</td>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/02.png" alt="Mongolian portrait / all eight draft pages: page 02"><br>Page 02</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/03.png" alt="Mongolian portrait / all eight draft pages: page 03"><br>Page 03</td>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/04.png" alt="Mongolian portrait / all eight draft pages: page 04"><br>Page 04</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/05.png" alt="Mongolian portrait / all eight draft pages: page 05"><br>Page 05</td>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/06.png" alt="Mongolian portrait / all eight draft pages: page 06"><br>Page 06</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/07.png" alt="Mongolian portrait / all eight draft pages: page 07"><br>Page 07</td>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/08.png" alt="Mongolian portrait / all eight draft pages: page 08"><br>Page 08</td>
+</tr>
+</table>
+
+</details>
+
+<details>
+<summary>Mongolian landscape / all eight draft slides</summary>
+
+<table>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/slide-01.png" alt="Mongolian landscape / all eight draft slides: page 01"><br>Page 01</td>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/slide-02.png" alt="Mongolian landscape / all eight draft slides: page 02"><br>Page 02</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/slide-03.png" alt="Mongolian landscape / all eight draft slides: page 03"><br>Page 03</td>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/slide-04.png" alt="Mongolian landscape / all eight draft slides: page 04"><br>Page 04</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/slide-05.png" alt="Mongolian landscape / all eight draft slides: page 05"><br>Page 05</td>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/slide-06.png" alt="Mongolian landscape / all eight draft slides: page 06"><br>Page 06</td>
+</tr>
+<tr>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/slide-07.png" alt="Mongolian landscape / all eight draft slides: page 07"><br>Page 07</td>
+<td width="50%"><img src="demos/vertical-book-study/mongolian/images/slide-08.png" alt="Mongolian landscape / all eight draft slides: page 08"><br>Page 08</td>
+</tr>
+</table>
+
+</details>
+
+[Chinese portrait PDF](demos/vertical-book-study/social.pdf) · [Chinese landscape PDF](demos/vertical-book-study/slides.pdf) · [Mongolian portrait PDF](demos/vertical-book-study/mongolian/social.pdf) · [Mongolian landscape PDF](demos/vertical-book-study/mongolian/slides.pdf)
 
 The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
 
