@@ -1,0 +1,7 @@
+# These demonstration assets are intentional review deliverables.
+!*.pdf
+!assets/*.png
+!images/*.png
+!mongolian/*.pdf
+!mongolian/assets/*.png
+!mongolian/images/*.png
