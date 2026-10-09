@@ -111,6 +111,23 @@ Traditional Chinese and Mongolian each include a cover, pure-text page, four ima
 
 </details>
 
+### Book Material Demonstrations
+
+[Chinese gallery](demos/vertical-book-study/index.html) · [Chinese 16:9 presentation](demos/vertical-book-study/index.html?mode=slides) · [Mongolian gallery](demos/vertical-book-study/mongolian/index.html) · [Mongolian 16:9 presentation](demos/vertical-book-study/mongolian/index.html?mode=slides) · [Scope and verification](demos/vertical-book-study/README.md)
+
+Two separate eight-page demos use new AI-generated book-material imagery. Chinese progresses right to left; traditional Mongolian progresses left to right. Mongolian copy is an unreviewed thematic adaptation, not a complete translation or publication-ready text. HTML files can be downloaded and opened locally; GitHub repository links do not themselves run the HTML preview.
+
+<details>
+<summary>View Chinese and Mongolian page previews</summary>
+
+![Chinese book-material cover](demos/vertical-book-study/images/01.png)
+
+![Mongolian book-material cover](demos/vertical-book-study/mongolian/images/01.png)
+
+[Chinese portrait PDF](demos/vertical-book-study/social.pdf) · [Chinese landscape PDF](demos/vertical-book-study/slides.pdf) · [Mongolian portrait PDF](demos/vertical-book-study/mongolian/social.pdf) · [Mongolian landscape PDF](demos/vertical-book-study/mongolian/slides.pdf)
+
+</details>
+
 The [`editorial-longform-feature`](reference-layouts/templates.md#editorial-longform-feature) family includes three placeholder-based wireframes for article openers, image-led section breaks, and narrative pages with a modular side rail. Preview them in [`reference-layouts/previews/index.html`](reference-layouts/previews/index.html); type, color, and bilingual treatment remain project-specific.
 
 The [`magazine-investigative-feature`](reference-layouts/templates.md#magazine-investigative-feature) family adds facing-page layouts for thesis-led openers, dense multi-column reading, and image-evidence spreads. Its preview uses Lorem Ipsum only to demonstrate text flow; replace filler with approved copy before delivery and keep live text clear of the center gutter.
