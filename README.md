@@ -52,6 +52,8 @@ These are **actual exports from the editable [PowerPoint adaptation](demos/distr
 
 ### Wireframe library
 
+**Landscape research v0.4:** [45 original wireframes](reference-layouts/experiments/landscape-research/wireframes.html) · [Catalogue](reference-layouts/experiments/landscape-research/wireframe-catalogue.md) · [QA assessment](reference-layouts/experiments/landscape-research/qa-all-pages-v0.4.md). The 21-reference, 630-page content inventory is complete; rendered visual QA and export validation remain pending. This experimental catalogue supplements, rather than replaces, the production previews below.
+
 The catalogue below shows the current 29 wireframe layouts, exported from the [HTML preview](reference-layouts/previews/index.html) on 2026-10-08. Expand a family to inspect its pages directly in this README. These are structural previews with placeholder copy and imagery.
 
 ![Current Folio catalogue of 29 portrait, facing-page and presentation layouts](assets/screenshots/reference-layouts-current.png)
