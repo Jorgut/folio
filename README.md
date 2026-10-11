@@ -52,7 +52,7 @@ These are **actual exports from the editable [PowerPoint adaptation](demos/distr
 
 ### Wireframe library
 
-**Landscape research v0.4:** [45 original wireframes](reference-layouts/experiments/landscape-research/wireframes.html) · [Catalogue](reference-layouts/experiments/landscape-research/wireframe-catalogue.md) · [QA assessment](reference-layouts/experiments/landscape-research/qa-all-pages-v0.4.md). The 21-reference, 630-page content inventory is complete; rendered visual QA and export validation remain pending. This experimental catalogue supplements, rather than replaces, the production previews below.
+The complete [45-layout research library](reference-layouts/experiments/landscape-research/wireframes.html) is listed separately below. All 45 entries are retained; only portfolio-relevant structures are indexed under Portfolio. These new studies are **16:9 experiments**; 4:3 and portrait adaptations, rendered visual QA and export validation remain pending.
 
 The catalogue below shows the current 29 wireframe layouts, exported from the [HTML preview](reference-layouts/previews/index.html) on 2026-10-08. Expand a family to inspect its pages directly in this README. These are structural previews with placeholder copy and imagery.
 
@@ -90,6 +90,37 @@ The catalogue below shows the current 29 wireframe layouts, exported from the [H
 <summary>Portfolio / 16:9, 4:3 and portrait boards</summary>
 
 ![Thirteen portfolio and presentation boards](assets/screenshots/reference-layouts-boards.png)
+
+**Additional portfolio studies — 16:9 only:**
+
+| Use | Original layout IDs |
+| --- | --- |
+| Project photography and analysis | L01–L06 |
+| Covers and full-image pages | L07–L08, L25–L26 |
+| Team and materials | L20–L21 |
+| Galleries, details and image captions | L27–L33, L38–L39 |
+| Before/after evidence and sources | L35, L37 |
+
+[Browse these layouts in the complete library](reference-layouts/experiments/landscape-research/wireframes.html) · [Layout descriptions](reference-layouts/experiments/landscape-research/wireframe-catalogue.md). The existing boards above keep their current formats; the new studies do not yet extend them to additional aspect ratios.
+
+</details>
+
+<details>
+<summary>Complete landscape research library / 45 original structures and variants</summary>
+
+[Open all 45 wireframes](reference-layouts/experiments/landscape-research/wireframes.html) · [Catalogue](reference-layouts/experiments/landscape-research/wireframe-catalogue.md) · [QA assessment](reference-layouts/experiments/landscape-research/qa-all-pages-v0.4.md)
+
+| Category | Entries | IDs |
+| --- | ---: | --- |
+| Images | 18 | L01–L06, L26–L33, L35, L38–L40 |
+| Covers and navigation | 5 | L07–L10, L25 |
+| Text and viewpoints | 4 | L11–L13, L34 |
+| Data and comparisons | 8 | L14–L16, L36, L41–L43, L45 |
+| Processes and relationships | 3 | L17–L19 |
+| People and materials | 3 | L20–L21, L44 |
+| Business and closing | 4 | L22–L24, L37 |
+
+All entries remain available regardless of their Portfolio relevance. This is an original structural study with placeholder text and imagery, not a set of imported third-party templates. The HTML preview provides category filters, single-column enlargement and optional guides. Logic checks pass; visual and export acceptance are still pending. No new rendered overview image is included yet.
 
 </details>
 
