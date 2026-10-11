@@ -105,6 +105,14 @@ The catalogue below shows the current 29 wireframe layouts, exported from the [H
 
 </details>
 
+### 45 Landscape Layouts / English Native Preview
+
+![All 45 English native layouts](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-overview.png)
+
+[Editable PPTX / 45 pages](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-v1.pptx) · [PDF / 45 pages](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-v1.pdf)
+
+This preview shows independently authored native editions, not exact HTML replicas.
+
 <details>
 <summary>Complete landscape research library / 45 original structures and variants</summary>
 
@@ -123,8 +131,6 @@ The catalogue below shows the current 29 wireframe layouts, exported from the [H
 All entries remain available regardless of their Portfolio relevance. This is an original structural study with placeholder text and imagery, not a set of imported third-party templates. The HTML preview provides category filters, single-column enlargement and optional guides. HTML visual and export acceptance remain pending.
 
 **English native editions / 45 pages / 16:9:** [Editable PPTX](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-v1.pptx) · [PDF](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-v1.pdf). Independently authored in native document APIs, not converted from HTML or verified as exact HTML replicas. All pages rendered for review; PDF text-fit and PPTX package checks passed. PowerPoint, Keynote and Google Slides application rendering remains unverified.
-
-![All 45 English native layouts](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-overview.png)
 
 </details>
 
