@@ -93,6 +93,10 @@ The catalogue below shows the current 29 wireframe layouts, exported from the [H
 
 **Additional portfolio studies — 16:9 only:**
 
+![23 additional Portfolio layouts in the original boards palette](reference-layouts/experiments/landscape-research/native-formats/portfolio-native-en-overview.png)
+
+English native previews use the existing boards' warm-gray image placeholders and light page palette. These are 16:9 studies, not new 4:3 or portrait adaptations.
+
 | Use | Original layout IDs |
 | --- | --- |
 | Project photography and analysis | L01–L06 |
