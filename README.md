@@ -52,7 +52,7 @@ These are **actual exports from the editable [PowerPoint adaptation](demos/distr
 
 ### Wireframe library
 
-The complete [45-layout research library](reference-layouts/experiments/landscape-research/wireframes.html) is listed separately below. All 45 entries are retained; only portfolio-relevant structures are indexed under Portfolio. These new studies are **16:9 experiments**; 4:3 and portrait adaptations, rendered visual QA and export validation remain pending.
+The complete [45-layout research library](reference-layouts/experiments/landscape-research/wireframes.html) is listed separately below. All 45 entries are retained; 23 portfolio-relevant structures are indexed under Portfolio, not added as separate layouts. These new studies are **16:9 experiments**. English native PPTX/PDF editions are published and all pages rendered for review; PDF text-fit and PPTX package/geometry checks passed. Exact HTML parity, application acceptance, and new 4:3 or portrait adaptations remain pending.
 
 The catalogue below shows the current 29 wireframe layouts, exported from the [HTML preview](reference-layouts/previews/index.html) on 2026-10-08. Expand a family to inspect its pages directly in this README. These are structural previews with placeholder copy and imagery.
 
@@ -138,7 +138,7 @@ All entries remain available regardless of their Portfolio relevance. This is an
 
 </details>
 
-Rebuild these images with `node scripts/export-layout-catalogue.mjs` (or `FOLIO_BROWSER_CHANNEL=chrome node scripts/export-layout-catalogue.mjs` to use installed Chrome). The separate [Chinese and traditional Mongolian vertical-writing study](reference-layouts/experiments/vertical-writing/index.html) is an experimental browser preview; its [scope and verification notes](reference-layouts/experiments/vertical-writing/README.md) track export and language review still to be completed.
+Rebuild the original 29-layout catalogue images with `node scripts/export-layout-catalogue.mjs` (or `FOLIO_BROWSER_CHANNEL=chrome node scripts/export-layout-catalogue.mjs` to use installed Chrome). This command does not rebuild the new native 45-page or warm-gray Portfolio previews; their authoring and rendering records are retained locally, not bundled in this release. The separate [Chinese and traditional Mongolian vertical-writing study](reference-layouts/experiments/vertical-writing/index.html) is an experimental browser preview; its [scope and verification notes](reference-layouts/experiments/vertical-writing/README.md) track export and language review still to be completed.
 
 ### Vertical Writing Variants
 
@@ -391,12 +391,12 @@ Template selected → content filled → rendered
     ↓
 ┌─────────┬─────────┬─────────┬─────────┬────────┐
 │ HTML    │ PPTX    │ PDF     │ Figma   │ IDML   │
-│ Present │ Editable│ Print-  │ Editable│ InDesign│
-│ directly│ text    │ ready   │ frames  │ native │
+│ Present │ Editable│ Review  │ Editable│ InDesign│
+│ directly│ text    │ PDF     │ frames  │ import │
 └─────────┴─────────┴─────────┴─────────┴────────┘
 ```
 
-Output formats designed for further editing: PPTX, Figma, and IDML preserve editable text and structure so you can refine in your preferred tool.
+PPTX, Figma and IDML workflows aim to preserve supported editable text and structure. Rendering and fidelity must be checked in the target tool; the new native PDF is a review document, not an approved print master.
 
 ---
 
@@ -405,10 +405,10 @@ Output formats designed for further editing: PPTX, Figma, and IDML preserve edit
 | Format | Description | Best for |
 |--------|-------------|----------|
 | **HTML** | Browser-ready presentation with keyboard nav & transitions | Quick sharing, online viewing |
-| **PPTX** | Fully editable text in PowerPoint / Keynote / Google Slides | Client delivery, team editing |
-| **PDF Print** | 3mm bleed + crop marks, print-shop ready | Catalogues, brochures, print |
-| **Figma** | Pixel-perfect Frames, editable text and images | Design team handoff |
-| **IDML** | InDesign native format, editable text with paragraph/character styles | Print publication, editorial layout |
+| **PPTX** | Editable text and supported native objects; fonts and layout require application checks | Client delivery, team editing |
+| **PDF Print** | Print-oriented workflow with bleed/crop options; printer specifications and preflight required | Catalogues, brochures, print |
+| **Figma** | Editable frames, text and images; fidelity depends on the transfer workflow | Design team handoff |
+| **IDML** | InDesign interchange workflow; supported text/styles require editor acceptance | Print publication, editorial layout |
 | **InDesign PDF** | Lightweight PDF with selectable text, native PDF elements (not PNG overlay) | InDesign placement, light preview |
 
 ---
@@ -424,9 +424,11 @@ Folio supports two InDesign-friendly workflows:
 node scripts/export-idml.mjs path/to/index.html
 ```
 - Editable text frames with font/size/color/alignment preserved
-- 16 slides auto-built as pages, correct page order
+- The published slide-based exporter builds pages from supported `.slide` input; page count depends on the input, not a fixed 16
 - Paragraph & character styles included
 - External image references (`index_images/` folder stays alongside)
+
+Magazine `.spread/.page` pagination changes are still local work in progress, not part of this published update. A4/facing-page acceptance in InDesign remains pending; editable output does not guarantee full HTML fidelity.
 
 **InDesign PDF**
 ```bash
@@ -631,6 +633,25 @@ MIT · Copyright (c) 2026 Jorgut
 
 README 上方直接展示开篇跨页，并可在原页面展开其余四张**PPT 适配版双开页**与三张 **16:9 横版**；它们是实际导出图。[下载可编辑 PPT](demos/distributed-studio/folio-editorial-sample.pptx)、[十页占位样刊 HTML](demos/distributed-studio/index.html)和[线框库预览](reference-layouts/previews/index.html)均可访问。线框总览已更新为 2026-10-08 的 29 个当前版式，并提供五组可在 README 内展开的分类展示图。
 
+### 本次新增 / 2026-10-11
+
+新增 **45 项 16:9 原创布局研究**，与上面的旧 29 项目录分开展示；其中 **23 项 Portfolio 布局是这 45 项的子集**，不是额外新增。英文原生版本独立制作，不是 HTML 转换，也未验证与 HTML 精确一致。
+
+[45 页英文 PPTX](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-v1.pptx) · [45 页英文 PDF](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-v1.pdf)
+
+![45 项英文原生布局总览](reference-layouts/experiments/landscape-research/native-formats/folio-45-native-en-overview.png)
+
+<details>
+<summary>23 项 Portfolio 新布局 / 与原 boards 配色统一</summary>
+
+![23 项暖灰色 Portfolio 布局预览](reference-layouts/experiments/landscape-research/native-formats/portfolio-native-en-overview.png)
+
+</details>
+
+**已完成：** GitHub 发布、全部原生页面渲染检查、PDF 文字框适配检查、PPTX 包结构与几何检查。Portfolio 展示图采用原 boards 的暖灰配色；下载文件保持此前的原生版配色。
+
+**待验收：** HTML 与原生版逐页一致性、PowerPoint / Keynote / Google Slides 实际打开验证，以及新增布局的 4:3、竖版适配。IDML 杂志分页与打印 PDF 导出器改动仍在本地，未随本次发布提交；印厂规格与 InDesign 验收仍待确认。
+
 1.0.16 进一步校准了参考版式预览：出血、裁切、安全区和内容框各自独立，并检查文字是否越过安全线，或与图片占位、标签、色板发生重叠。新增的[编辑设计样刊](demos/distributed-studio/index.html)把这些原则延伸为一组完整的十页杂志，不只是线框缩略图。正文使用 Lorem Ipsum 占位；设计静物、纺织材质和平面印刷三张图像专为样刊生成，建筑摄影在本地打包并署名。开篇图片铺满上方图片区，下方独立白色页脚容纳图注与页码；双开页页码共用基线、置于外侧底角。[打开完整样刊](demos/distributed-studio/index.html)。
 
 样刊附录另有三张基于现有杂志 wireframe 的**16:9 横向成稿示例**：[专题开篇](demos/distributed-studio/index.html#landscape-opener)、[密排阅读](demos/distributed-studio/index.html#landscape-reading)、[图像证据](demos/distributed-studio/index.html#landscape-evidence)。它们是独立的版式研究，不属于前面十页竖版杂志的连续页。
@@ -763,12 +784,12 @@ Folio 确定：平台 → 受众 → 风格 → 交互层级
     ↓
 ┌─────────┬─────────┬─────────┬─────────┬────────┐
 │ HTML    │ PPTX    │ PDF     │ Figma   │ IDML   │
-│ 可直接  │ 可编辑   │ 出版级   │ 可编辑   │ InDesign│
-│ 演示    │ 文字     │ 3mm出血 │ Frame   │ 原生格式│
+│ 可直接  │ 可编辑   │ 待预检   │ 可编辑   │ InDesign│
+│ 演示    │ 文字     │ PDF     │ Frame   │ 交换格式│
 └─────────┴─────────┴─────────┴─────────┴────────┘
 ```
 
-PPTX、Figma、IDML 等格式保持文字和结构的可编辑性，导出后可在熟悉工具中进一步精修。
+PPTX、Figma、IDML 流程尽量保留支持的可编辑文字和结构，仍需在目标软件核验还原效果。本次原生 PDF 是审阅版，不是已验收的印刷母版。
 
 ---
 
@@ -777,10 +798,10 @@ PPTX、Figma、IDML 等格式保持文字和结构的可编辑性，导出后可
 | 格式 | 一句话 | 适合谁 |
 |------|--------|--------|
 | **HTML** | 浏览器打开就能演示，有快捷键和过渡动效 | 快速分享、线上展示 |
-| **PPTX** | 文字完全可编辑，PowerPoint / Keynote / Google Slides 随便改 | 客户交付、团队协作 |
-| **PDF 印刷** | 3mm 出血 + 裁切标记，直接发印刷厂 | 画册、手册、印刷品 |
-| **Figma** | 像素级还原到 Frame，继续精修 | 设计团队接力 |
-| **IDML** | InDesign 原生格式，文字/样式完整保留 | 出版印刷、编辑排版 |
+| **PPTX** | 可编辑文字及支持的原生对象；字体和布局需在目标软件验收 | 客户交付、团队协作 |
+| **PDF 印刷** | 提供出血与裁切配置流程；需按印厂规格预检，不能直接保证可印 | 画册、手册、印刷品 |
+| **Figma** | 可编辑 Frame、文字和图片；还原程度取决于传输流程 | 设计团队接力 |
+| **IDML** | InDesign 交换格式流程；支持的文字与样式需在编辑器验收 | 出版印刷、编辑排版 |
 | **InDesign PDF** | 轻量 PDF，文字可选，原生 PDF 元素（非 PNG 叠加） | InDesign 置入、轻量预览 |
 
 ---
@@ -797,9 +818,11 @@ node scripts/export-idml.mjs 项目路径/index.html
 ```
 - 文字进独立文本框，完全可编辑
 - 字体/字号/颜色/对齐保留
-- 16 页自动建好，页码正确排序
+- 已发布的 slide 导出器按支持的 `.slide` 输入生成页面；页数取决于输入，不固定为 16 页
 - 支持段落样式和字符样式
 - 图片为外部引用（`index_images/` 文件夹需保持同目录）
+
+杂志 `.spread/.page` 分页改动仍为本地未发布工作。A4、对开文档的 InDesign 验收待完成；可编辑输出不代表完整还原 HTML。
 
 **InDesign PDF（备选，置入式）**
 ```bash

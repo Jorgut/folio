@@ -8,7 +8,7 @@
 
 ## 验证状态
 
-`node validate-wireframes.cjs` 检查通过。实际截图、窄屏、PDF 与其他导出视觉验收尚未完成。这里是研究实验，不替代正式布局预览，也不包含第三方模板资产。
+HTML 的 `node validate-wireframes.cjs` 检查通过；HTML 实际截图、窄屏及转换输出验收尚未完成。下方独立原生 PPTX/PDF 的检查状态另列，不能视为 HTML 的验收。这里是研究实验，不替代正式布局预览，也不包含第三方模板资产。
 
 ## English Native Editions / 2026-10-11
 
