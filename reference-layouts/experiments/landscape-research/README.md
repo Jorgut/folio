@@ -9,3 +9,11 @@
 ## 验证状态
 
 `node validate-wireframes.cjs` 检查通过。实际截图、窄屏、PDF 与其他导出视觉验收尚未完成。这里是研究实验，不替代正式布局预览，也不包含第三方模板资产。
+
+## English Native Editions / 2026-10-11
+
+[Editable PPTX / 45 pages](native-formats/folio-45-native-en-v1.pptx) · [PDF / 45 pages](native-formats/folio-45-native-en-v1.pdf)
+
+These independent 16:9 native constructions retain L01-L45 and layout intent, but are not HTML conversions or exact replicas. All native pages were rendered for review; PDF text-fit and PPTX package/geometry checks passed. Four editable native tables and one native chart are included. Text, images and numbers are placeholders; application rendering in PowerPoint, Keynote and Google Slides remains unverified. The HTML validation limitations above are unchanged. Local Chinese editions and build records remain preserved outside this release.
+
+![45 English native layouts](native-formats/folio-45-native-en-overview.png)
