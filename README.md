@@ -140,6 +140,18 @@ All entries remain available regardless of their Portfolio relevance. This is an
 
 Rebuild the original 29-layout catalogue images with `node scripts/export-layout-catalogue.mjs` (or `FOLIO_BROWSER_CHANNEL=chrome node scripts/export-layout-catalogue.mjs` to use installed Chrome). This command does not rebuild the new native 45-page or warm-gray Portfolio previews; their authoring and rendering records are retained locally, not bundled in this release. The separate [Chinese and traditional Mongolian vertical-writing study](reference-layouts/experiments/vertical-writing/index.html) is an experimental browser preview; its [scope and verification notes](reference-layouts/experiments/vertical-writing/README.md) track export and language review still to be completed.
 
+### Illustration / Editorial Portfolio Supplement
+
+Two provisional new structures (L46/L47) and three variants (L09-A, L01-A, L09-B). The original 45-page editions are unchanged. SVG structure and generator syntax checks passed; browser visual acceptance and native PPTX/PDF editions remain pending.
+
+![Central subject and sideways statement](reference-layouts/experiments/illustration-study/L46.svg)
+![Image-led chapter opener](reference-layouts/experiments/illustration-study/L09-A.svg)
+![Sideways title and isolated image](reference-layouts/experiments/illustration-study/L01-A.svg)
+![Central image and paired annotations](reference-layouts/experiments/illustration-study/L47.svg)
+![Chapter rail and edge-cropped image](reference-layouts/experiments/illustration-study/L09-B.svg)
+
+[HTML study](reference-layouts/experiments/illustration-study/index.html) · [Scope](reference-layouts/experiments/illustration-study/README.md)
+
 ### Vertical Writing Variants
 
 [Fourteen-page layout study](reference-layouts/experiments/vertical-writing/variants/index.html) · [Readable wireframes](reference-layouts/experiments/vertical-writing/variants/wireframe.html) · [Scope and reuse](reference-layouts/experiments/vertical-writing/variants/README.md)
