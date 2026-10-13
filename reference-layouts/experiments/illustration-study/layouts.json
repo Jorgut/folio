@@ -1,0 +1,27 @@
+[
+  {
+    "id": "L46",
+    "name": "Central subject and sideways statement",
+    "kind": "New structure"
+  },
+  {
+    "id": "L09-A",
+    "name": "Image-led chapter opener",
+    "kind": "Variant of L09"
+  },
+  {
+    "id": "L01-A",
+    "name": "Sideways title and isolated subject",
+    "kind": "Variant of L01 / L33"
+  },
+  {
+    "id": "L47",
+    "name": "Central subject and paired annotations",
+    "kind": "New structure"
+  },
+  {
+    "id": "L09-B",
+    "name": "Chapter rail and edge-cropped image",
+    "kind": "Variant of L09 / L26 / L32"
+  }
+]
