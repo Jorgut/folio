@@ -142,7 +142,7 @@ Rebuild the original 29-layout catalogue images with `node scripts/export-layout
 
 ### Illustration / Editorial Portfolio Supplement
 
-Two provisional new structures (L46/L47) and three variants (L09-A, L01-A, L09-B). The original 45-page editions are unchanged. All source SVGs and five-page native wireframe editions were rendered and reviewed. [Editable wireframe PPTX](reference-layouts/experiments/illustration-study/deliverables/folio-illustration-study-en-v3.pptx) · [Wireframe PDF](reference-layouts/experiments/illustration-study/deliverables/folio-illustration-study-en-v2.pdf). Browser gallery and target-application acceptance remain pending.
+Two provisional new structures (L46/L47) and three variants (L09-A, L01-A, L09-B). The original 45-page editions are unchanged. All source SVGs and five-page native wireframe editions were rendered and reviewed. [Editable wireframe PPTX](reference-layouts/experiments/illustration-study/deliverables/folio-illustration-study-en-v4.pptx) · [Wireframe PDF](reference-layouts/experiments/illustration-study/deliverables/folio-illustration-study-en-v3.pdf). Browser gallery and target-application acceptance remain pending.
 
 ![Central subject and sideways statement](reference-layouts/experiments/illustration-study/L46.svg)
 ![Image-led chapter opener](reference-layouts/experiments/illustration-study/L09-A.svg)
@@ -152,7 +152,7 @@ Two provisional new structures (L46/L47) and three variants (L09-A, L01-A, L09-B
 
 [HTML study](reference-layouts/experiments/illustration-study/index.html) · [Scope](reference-layouts/experiments/illustration-study/README.md)
 
-**Real-image tests:** left full-height image at 4:5 and right full-height image at 6:5, with footer information inside the text rail. Source scans are proportionally cropped, not stretched; the bird detail excludes the scan's pale side borders. These rendered tests are separate from the native wireframe files above.
+**Matching wireframe and real-image geometry:** L09-A uses a full-height 4:5 image frame; L09-B uses a full-height 6:5 frame. The source SVGs and latest native wireframe files above now share these proportions, with footer information confined to the text rail. Source scans in the real-image tests are proportionally cropped, not stretched; the bird detail excludes the scan's pale side borders. The native files retain placeholders rather than actual images.
 
 ![4:5 full-height botanical image](reference-layouts/experiments/illustration-study/real-image-test/L09-A.png)
 ![6:5 full-height bird detail without side borders](reference-layouts/experiments/illustration-study/real-image-test/L09-B.png)
@@ -659,7 +659,7 @@ MIT · Copyright (c) 2026 Jorgut
 
 ## 视觉样刊
 
-**2026-10-14 补充更新：** 上方已内嵌五页插画型作品集的实图测试，包含全高 4:5 左图、全高 6:5 右图及透明主体排版，鸟图左右扫描纸边已排除。[线框 PPTX](reference-layouts/experiments/illustration-study/deliverables/folio-illustration-study-en-v3.pptx) 和 [线框 PDF](reference-layouts/experiments/illustration-study/deliverables/folio-illustration-study-en-v2.pdf) 已完成逐页渲染检查。实图测试与原生线框是不同交付物，尚未制作实图原生版本；原有 45 项不变。高清素材、旧版及构建记录本地保留，公开目录只含交付与来源记录。
+**2026-10-14 补充更新：** 上方已内嵌五页插画型作品集的实图测试，包含全高 4:5 左图、全高 6:5 右图及透明主体排版，鸟图左右扫描纸边已排除。[线框 PPTX](reference-layouts/experiments/illustration-study/deliverables/folio-illustration-study-en-v4.pptx) 和 [线框 PDF](reference-layouts/experiments/illustration-study/deliverables/folio-illustration-study-en-v3.pdf) 已完成逐页渲染检查。实图测试与原生线框是不同交付物，尚未制作实图原生版本；原有 45 项不变。高清素材、旧版及构建记录本地保留，公开目录只含交付与来源记录。
 
 README 上方直接展示开篇跨页，并可在原页面展开其余四张**PPT 适配版双开页**与三张 **16:9 横版**；它们是实际导出图。[下载可编辑 PPT](demos/distributed-studio/folio-editorial-sample.pptx)、[十页占位样刊 HTML](demos/distributed-studio/index.html)和[线框库预览](reference-layouts/previews/index.html)均可访问。线框总览已更新为 2026-10-08 的 29 个当前版式，并提供五组可在 README 内展开的分类展示图。
 
