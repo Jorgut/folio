@@ -1,0 +1,38 @@
+[
+  {
+    "file": "blue-flower.png",
+    "title": "Blue Flower",
+    "author": "The People's Internet",
+    "source": "https://commons.wikimedia.org/wiki/File:Blue_Flower_Transparent_Background.png",
+    "license": "CC0 1.0",
+    "notes": "Creator hue-shifted original tan-orange flower. Native alpha preserved.",
+    "width": 4608,
+    "height": 3456,
+    "mode": "RGBA",
+    "sha256": "c63e51189db00e15f7a1d47d1171eff54a271172cf600a358a95a2bd43d5a350"
+  },
+  {
+    "file": "arum.png",
+    "title": "Arum italicum",
+    "author": "Samuel Curtis (source attribution)",
+    "source": "https://commons.wikimedia.org/wiki/File:Arum_italicum_CBM.png",
+    "license": "Public Domain Mark",
+    "notes": "1823 botanical plate. Opaque paper background preserved.",
+    "width": 2828,
+    "height": 3332,
+    "mode": "RGB",
+    "sha256": "dbd4b7e1a53d842280cc658e247bde5f097f89504e14343543f21578e5d4c178"
+  },
+  {
+    "file": "bird-wisteria-original.jpg",
+    "title": "Bird and Wisteria",
+    "author": "Utagawa Hiroshige",
+    "source": "https://www.metmuseum.org/art/collection/search/56941",
+    "license": "Public Domain / Met Open Access",
+    "notes": "ca. 1835. Source scan preserved. Detail crop is a layout test, not the complete artwork.",
+    "width": 685,
+    "height": 1954,
+    "mode": "RGB",
+    "sha256": "39c46be861560f4066021245d8f8d8326e5a210aa9a85cdfb7332bf952f60544"
+  }
+]
