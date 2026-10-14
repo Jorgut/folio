@@ -1,0 +1,22 @@
+[
+  {
+    "id": "L46",
+    "image_region_nonblank_fraction": 0.4055
+  },
+  {
+    "id": "L09-A",
+    "image_region_nonblank_fraction": 1.0
+  },
+  {
+    "id": "L01-A",
+    "image_region_nonblank_fraction": 0.3037
+  },
+  {
+    "id": "L47",
+    "image_region_nonblank_fraction": 0.3127
+  },
+  {
+    "id": "L09-B",
+    "image_region_nonblank_fraction": 1.0
+  }
+]
