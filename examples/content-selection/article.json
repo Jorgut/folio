@@ -1,0 +1,11 @@
+{
+  "job": "reading",
+  "direction": "horizontal-ltr",
+  "canvas": {"width": 1280, "height": 720},
+  "blocks": [
+    {"id": "intro", "text": "A grid is useful when it controls the content, not merely when its lines are visible. The title, paragraphs, captions and images should share deliberate edges."},
+    {"id": "body", "text": "Reading pages need a stable rhythm. A longer article may repeat its structure across several pages. Page count follows readable text capacity, rather than a fixed template count."},
+    {"id": "conclusion", "text": "Verify the difficult page with the full source text. If the text does not fit, add a continuation rather than hiding the remainder or shrinking every font."}
+  ],
+  "images": []
+}

@@ -1,0 +1,8 @@
+{
+  "job": "reading",
+  "direction": "vertical-lr",
+  "canvas": {"width": 210, "height": 297},
+  "blocks": [{"id": "source-1", "text": "This fixture requests a vertical composition with synchronized annotations. It must not be passed off as a validated horizontal template."}],
+  "images": [],
+  "requiredFeatures": ["synchronized marginal annotations"]
+}

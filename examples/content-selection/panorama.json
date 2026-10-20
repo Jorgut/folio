@@ -1,0 +1,7 @@
+{
+  "job": "section",
+  "direction": "horizontal-ltr",
+  "canvas": {"width": 1280, "height": 720},
+  "blocks": [{"id": "caption", "text": "Keep the complete panorama visible. This fixture supplies image dimensions only; it does not test a rendered photograph."}],
+  "images": [{"id": "panorama", "width": 9000, "height": 1000, "fit": "contain"}]
+}
