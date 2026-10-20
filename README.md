@@ -346,6 +346,9 @@ Folio's update system is designed in two layers:
   - Hosts without script or network access should skip auto-checking and fall back to manual update
 
 Folio does **not** assume every platform can auto-run scripts at load time.
+Content-led authoring now starts with the supplied article and images, shortlists suitable local layouts, and creates an original composition when hard requirements cannot be met. Supplied articles do not default to eight pages. See [content/layout selection](references/content-layout-selection.md).
+
+Update checks cache successful results for 30 minutes and failures for 5 minutes, with a 3-second remote-check budget. Use `--refresh` to bypass the cache or `--offline` to explicitly skip the remote check (remote status remains unknown). `export-verify.mjs INPUT.html` validates an existing adjacent PPTX without regenerating it; use `--html-only` for HTML or `--export` to explicitly generate PPTX first.
 The `SKILL.md` policy alone does not install a hook. Without the optional Codex hook, the agent must actually run `check-update.mjs` at the start of each Folio task; if it skips the command, no check occurred. An update check never installs an upgrade without user confirmation, and `self-update.mjs` refuses a dirty Git checkout.
 
 When an update is found, Folio should show the **concrete maintained features** from the remote release metadata first, then ask the user whether they want to upgrade.
@@ -740,6 +743,9 @@ Folio 的更新系统分成两层：
   - 没有脚本权限或网络权限的宿主：跳过自动检查，退化为手动更新
 
 Folio **不会假设所有平台都能在加载 skill 时自动执行脚本**。
+内容驱动流程先分析文章与图片，再筛选本地布局；现有布局无法满足硬性要求时，设计原创结构，不把已有文章强制拆成八页。参见[内容与布局选择规则](references/content-layout-selection.md)。
+
+更新检查成功缓存 30 分钟、失败缓存 5 分钟，远端检查预算为 3 秒。`--refresh` 强制重查，`--offline` 明确跳过联网（远端状态仍未知）。`export-verify.mjs INPUT.html` 默认检查已有同名 PPTX，不再隐式重新生成；只检查 HTML 使用 `--html-only`，明确需要先生成 PPTX 时使用 `--export`。
 `SKILL.md` 中的规则本身不会安装 hook。不安装可选的 Codex hook 时，代理必须在每次 Folio 任务开始时真正运行 `check-update.mjs`；若未运行，就没有发生更新检查。检查不会自动升级；`self-update.mjs` 也会拒绝覆盖有未提交改动的 Git 工作区。
 
 当发现新版本时，Folio 应先展示远端版本维护/新增了哪些具体功能，再把“是否升级”的决定交给用户。

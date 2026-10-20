@@ -37,8 +37,14 @@ node <SKILL_ROOT>/scripts/export-native-pptx.mjs index.html
 # PDF（矢量文字，InDesign 可用）
 node <SKILL_ROOT>/scripts/export-print-pdf.mjs index.html
 
-# 验证
+# 验证已有 HTML 与同名 PPTX，不重新生成
 node <SKILL_ROOT>/scripts/export-verify.mjs index.html
+
+# 仅检查 HTML；浏览器检查需要宿主授权
+node <SKILL_ROOT>/scripts/export-verify.mjs index.html --html-only
+
+# 明确要求先生成 PPTX，再验证
+node <SKILL_ROOT>/scripts/export-verify.mjs index.html --export
 ```
 
 ## 导出约束
