@@ -222,8 +222,8 @@ function themeForStyle(styleId) {
 // ─── Call generate-theme.mjs ───────────────────────────────────────
 
 function spawnGenerateTheme(styleId) {
-  return new Promise((resolve, reject) => {
-    const child = spawn('node', [
+  return new Promise((onSuccess, reject) => {
+    const child = spawn(process.execPath, [
       resolve(__dirname, 'generate-theme.mjs'),
       styleId,
     ], { stdio: ['ignore', 'pipe', 'pipe'] });
@@ -232,9 +232,10 @@ function spawnGenerateTheme(styleId) {
     child.stdout.on('data', (chunk) => { output += chunk; });
     child.stderr.on('data', (chunk) => { output += chunk; });
     child.on('close', (code) => {
-      if (code === 0) resolve(output);
+      if (code === 0) onSuccess(output);
       else reject(new Error(`generate-theme exited with code ${code}: ${output}`));
     });
+    child.on('error', reject);
   });
 }
 
@@ -311,13 +312,12 @@ async function interactiveDecision() {
   console.log('');
 
   // Ask if user wants theme code
-  const wantTheme = await new Promise((resolve) => {
-    const rl2 = createInterface({ input: stdin, output: stdout });
-    rl2.question('\n生成对应主题代码 (CSS + Fonts + Effects)? [Y/n] ', (ans) => {
-      rl2.close();
-      resolve(ans.toLowerCase() !== 'n');
-    });
-  });
+  const rl2 = createInterface({ input: stdin, output: stdout });
+  let wantTheme;
+  try {
+    const answer = await rl2.question('\n生成对应主题代码 (CSS + Fonts + Effects)? [Y/n] ');
+    wantTheme = answer.toLowerCase() !== 'n';
+  } finally { rl2.close(); }
 
   if (wantTheme) {
     console.log('\n');
@@ -403,4 +403,8 @@ if (args[0] === '--quick') {
 }
 
 // Interactive (default)
+if (!stdin.isTTY) {
+  console.error('Interactive design decisions require a terminal. Use --quick or --batch for agent execution.');
+  exit(1);
+}
 await interactiveDecision();
