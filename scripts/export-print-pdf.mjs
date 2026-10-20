@@ -4,7 +4,8 @@ import { PDFDocument, rgb } from 'pdf-lib';
 import { mkdtempSync, readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { tmpdir } from 'os';
 import { join, resolve, basename } from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
+import { collectPublicationPageDescriptors, validatePublicationPages, isPublicationDocument, requireDecodedImages } from './publication-pages.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -21,7 +22,7 @@ const BLEED_W_IN = BLEED_W_PT / 72;
 const BLEED_H_IN = BLEED_H_PT / 72;
 const CROP_EXT_PT = 14.17;
 
-function toFileUrl(p) { return `file://${p}`; }
+function toFileUrl(p) { return pathToFileURL(p).href; }
 function toPrintOutputPath(htmlPath) {
   const name = basename(htmlPath, '.html');
   return join(resolve(htmlPath, '..'), `${name}.print.pdf`);
@@ -67,42 +68,6 @@ function createExportStyles() {
   `;
 }
 
-function collectImageUrls(htmlPath) {
-  const html = readFileSync(htmlPath, 'utf-8');
-  const urls = new Set();
-  let m;
-  const re = /src="(https:\/\/images\.unsplash\.com\/[^"]+)"/g;
-  while ((m = re.exec(html)) !== null) urls.add(m[1]);
-  return [...urls];
-}
-
-async function downloadImagesViaBrowser(imageUrls, imagesDir) {
-  const browser = await chromium.launch({ headless: true, channel: 'chrome' });
-  const page = await browser.newPage();
-  const urlToPath = {};
-  for (const url of imageUrls) {
-    const id = url.split('?')[0].split('/').pop();
-    const localPath = join(imagesDir, `${id}.jpg`);
-    urlToPath[url] = localPath;
-    try {
-      const resp = await page.goto(url, { waitUntil: 'load', timeout: 15000 });
-      if (resp && resp.ok()) writeFileSync(localPath, await resp.body());
-    } catch { console.warn(`  Failed: ${id}`); }
-  }
-  await browser.close();
-  return urlToPath;
-}
-
-function rewriteHtmlUrls(htmlPath, urlToPath, imagesDir) {
-  let html = readFileSync(htmlPath, 'utf-8');
-  for (const [url, local] of Object.entries(urlToPath)) {
-    if (existsSync(local)) html = html.replaceAll(url, local);
-  }
-  const out = join(imagesDir, basename(htmlPath));
-  writeFileSync(out, html, 'utf-8');
-  return out;
-}
-
 async function preparePrintableDeck(page) {
   await page.addStyleTag({ content: createExportStyles() });
   await page.evaluate(({ bleedPx, slideWidth, slideHeight }) => {
@@ -122,12 +87,13 @@ async function preparePrintableDeck(page) {
   }, { bleedPx: BLEED_PX, slideWidth: TRIM_W, slideHeight: TRIM_H });
 }
 
-async function renderBleedPdf(fileUrl, tempPdfPath) {
-  const browser = await chromium.launch({ headless: true, channel: 'chrome' });
+export async function renderPrintPdf(fileUrl, tempPdfPath, browserType = chromium) {
+  const browser = await browserType.launch({ headless: true, channel: 'chrome' });
   try {
     const page = await browser.newPage({ viewport: { width: FULL_W_PX, height: FULL_H_PX } });
     await page.emulateMedia({ media: 'screen' });
     await page.goto(fileUrl, { waitUntil: 'networkidle', timeout: 30000 });
+    if (await page.evaluate(isPublicationDocument)) return await renderPublicationPdf(page, tempPdfPath);
     await page.waitForSelector('.slide', { timeout: 10000 });
 
     await page.evaluate(async () => {
@@ -144,13 +110,7 @@ async function renderBleedPdf(fileUrl, tempPdfPath) {
     await preparePrintableDeck(page);
     await page.evaluate(() => document.fonts?.ready ?? Promise.resolve());
 
-    await page.evaluate(async () => {
-      const imgs = Array.from(document.querySelectorAll('img'));
-      await Promise.all(imgs.map(img =>
-        img.complete && img.naturalWidth > 0 ? Promise.resolve() :
-        new Promise(r => { img.onload = r; img.onerror = r; setTimeout(r, 3000); })
-      ));
-    });
+    await page.evaluate(requireDecodedImages);
 
     const slideCount = await page.evaluate(() => document.querySelectorAll('.print-page').length);
 
@@ -189,6 +149,96 @@ async function renderBleedPdf(fileUrl, tempPdfPath) {
   } finally { await browser.close(); }
 }
 
+async function renderPublicationPdf(page, tempPdfPath) {
+    const contract = validatePublicationPages(await page.evaluate(collectPublicationPageDescriptors));
+    const fullWidthMm = contract.widthMm + contract.bleedMm * 2;
+    const fullHeightMm = contract.heightMm + contract.bleedMm * 2;
+    await page.addStyleTag({ content: publicationPrintStyles(contract) });
+    await page.evaluate((sourcePages) => {
+      const root = document.querySelector('[data-document-format="publication"]');
+      const elements = Array.from(root.children).flatMap(child => {
+        if (child.classList.contains('page')) return [child];
+        if (child.classList.contains('spread')) return Array.from(child.children).filter(el => el.classList.contains('page'));
+        return [];
+      });
+      if (elements.length !== sourcePages.length) throw new Error('Publication page count changed during PDF preparation');
+      const exportRoot = document.createElement('div');
+      for (const [index, element] of elements.entries()) {
+        const wrapper = document.createElement('section');
+        wrapper.className = 'publication-print-page';
+        wrapper.dataset.publicationSide = sourcePages[index].side;
+        wrapper.appendChild(element);
+        exportRoot.appendChild(wrapper);
+      }
+      document.body.replaceChildren(exportRoot);
+    }, contract.pages);
+    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(requireDecodedImages);
+    await page.pdf({ path: tempPdfPath, width: `${fullWidthMm}mm`, height: `${fullHeightMm}mm`,
+      printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 }, preferCSSPageSize: true });
+    return contract;
+}
+
+export function publicationPrintStyles(contract) {
+  const fullWidthMm = contract.widthMm + contract.bleedMm * 2;
+  const fullHeightMm = contract.heightMm + contract.bleedMm * 2;
+  return `
+      @page { size: ${fullWidthMm}mm ${fullHeightMm}mm; margin: 0; }
+      html, body { width: ${fullWidthMm}mm !important; margin: 0 !important; padding: 0 !important;
+        background: white !important; print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; }
+      .publication-print-page { width: ${fullWidthMm}mm; height: ${fullHeightMm}mm;
+        padding: ${contract.bleedMm}mm; box-sizing: border-box; background: white;
+        break-after: page; page-break-after: always; overflow: hidden; }
+      .publication-print-page:last-child { break-after: auto; page-break-after: auto; }
+      .publication-print-page > .page { width: ${contract.widthMm}mm !important;
+        height: ${contract.heightMm}mm !important; min-height: 0 !important;
+        aspect-ratio: auto !important; margin: 0 !important; box-shadow: none !important; }
+      .publication-print-page .folio { display: flex !important; }
+      .publication-print-page > .page[data-bleed-mode="edge-bleed"] { overflow: visible !important; }
+      .publication-print-page > .page[data-bleed-mode="edge-bleed"] > img:first-child {
+        margin-top: -${contract.bleedMm}mm; }
+      .publication-print-page[data-publication-side="left"] > .page[data-bleed-mode="edge-bleed"] > img:first-child {
+        margin-left: -${contract.bleedMm}mm; width: calc(100% + ${contract.bleedMm}mm); }
+      .publication-print-page[data-publication-side="right"] > .page[data-bleed-mode="edge-bleed"] > img:first-child {
+        margin-right: -${contract.bleedMm}mm; width: calc(100% + ${contract.bleedMm}mm); }
+      .publication-print-page[data-publication-side="single"] > .page[data-bleed-mode="edge-bleed"] > img:first-child {
+        margin-left: -${contract.bleedMm}mm; margin-right: -${contract.bleedMm}mm;
+        width: calc(100% + ${contract.bleedMm * 2}mm); }
+    `;
+}
+
+export function applyPublicationPageBoxes(pdfDoc, contract) {
+  const pages = pdfDoc.getPages();
+  if (pages.length !== contract.pages.length) {
+    throw new Error(`Expected ${contract.pages.length} A4 pages, got ${pages.length}`);
+  }
+  const bleed = contract.bleedMm * MM_PT;
+  const trimWidth = contract.widthMm * MM_PT;
+  const trimHeight = contract.heightMm * MM_PT;
+  const fullWidth = trimWidth + bleed * 2;
+  const fullHeight = trimHeight + bleed * 2;
+  const black = rgb(0, 0, 0);
+  for (const page of pages) {
+    const { width, height } = page.getSize();
+    if (Math.abs(width - fullWidth) > 0.5 || Math.abs(height - fullHeight) > 0.5) {
+      throw new Error(`Unexpected publication PDF page size: ${width} x ${height} pt`);
+    }
+    page.scale(fullWidth / width, fullHeight / height);
+    const markLength = Math.min(bleed * 0.7, 6);
+    page.setCropBox(0, 0, fullWidth, fullHeight);
+    page.setBleedBox(0, 0, fullWidth, fullHeight);
+    page.setTrimBox(bleed, bleed, trimWidth, trimHeight);
+    for (const x of [bleed, bleed + trimWidth]) {
+      for (const y of [bleed, bleed + trimHeight]) {
+        const dx = x === bleed ? -markLength : markLength;
+        const dy = y === bleed ? -markLength : markLength;
+        page.drawLine({ start: { x, y }, end: { x: x + dx, y }, thickness: 0.5, color: black });
+        page.drawLine({ start: { x, y }, end: { x, y: y + dy }, thickness: 0.5, color: black });
+      }
+    }
+  }
+}
+
 async function main() {
   const htmlPath = process.argv[2];
   if (!htmlPath || !existsSync(htmlPath)) {
@@ -199,19 +249,16 @@ async function main() {
   const outputPath = toPrintOutputPath(absPath);
   const tempDir = mkdtempSync(join(tmpdir(), 'folio-print-pdf-'));
   const tempPdfPath = join(tempDir, 'bleed.pdf');
-  const imagesDir = join(tempDir, 'images');
-  mkdirSync(imagesDir, { recursive: true });
-
-  console.log('[1/4] Downloading images...');
-  const imageUrls = collectImageUrls(absPath);
-  const urlToPath = await downloadImagesViaBrowser(imageUrls, imagesDir);
-  const localCount = Object.values(urlToPath).filter(p => existsSync(p)).length;
-  console.log(`  ${localCount}/${imageUrls.length} downloaded`);
-
-  const tempHtml = rewriteHtmlUrls(absPath, urlToPath, imagesDir);
-
-  console.log('[2/4] Rendering PDF...');
-  const slideCount = await renderBleedPdf(toFileUrl(tempHtml), tempPdfPath);
+  // Keep the original base URL; load and validate assets in the rendering session.
+  console.log('[1/4] Loading source and rendering PDF...');
+  const slideCount = await renderPrintPdf(toFileUrl(absPath), tempPdfPath);
+  if (typeof slideCount === 'object') {
+    const pdfDoc = await PDFDocument.load(readFileSync(tempPdfPath));
+    applyPublicationPageBoxes(pdfDoc, slideCount);
+    writeFileSync(outputPath, await pdfDoc.save());
+    console.log(`${slideCount.pages.length} publication pages saved to ${outputPath}`);
+    return;
+  }
   console.log(`  ${slideCount} slides`);
 
   console.log('[3/4] Adding crop marks...');
@@ -241,4 +288,6 @@ async function main() {
   console.log(`[4/4] Done → ${outputPath}`);
 }
 
-main();
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(err => { console.error('Export failed:', err); process.exitCode = 1; });
+}
