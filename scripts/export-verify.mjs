@@ -5,11 +5,11 @@ import { existsSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { parseVerificationArgs } from './verification-options.mjs';
+import { withVerificationPage } from './verification-session.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const SLIDE_W = 1280;
-const SLIDE_H = 720;
 const PASS = 'PASS';
 const FAIL = 'FAIL';
 const WARN = 'WARN';
@@ -26,18 +26,7 @@ function report(status, check, detail = '') {
   else warnings++;
 }
 
-async function verifyHtml(htmlPath) {
-  const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage({ viewport: { width: SLIDE_W, height: SLIDE_H } });
-
-  const consoleErrors = [];
-  page.on('console', msg => {
-    if (msg.type() === 'error') consoleErrors.push(msg.text());
-  });
-
-  await page.goto(`file://${path.resolve(htmlPath).split(path.sep).join('/')}`, { waitUntil: 'networkidle', timeout: 30000 });
-  await page.waitForSelector('.slide', { timeout: 5000 });
-
+async function verifyHtml(page,consoleErrors) {
   const slideCount = await page.evaluate(() => document.querySelectorAll('.slide').length);
   report(slideCount > 0 ? PASS : FAIL, 'Slide count', `${slideCount} slides found`);
 
@@ -124,7 +113,6 @@ async function verifyHtml(htmlPath) {
     report(WARN, 'Navigation', JSON.stringify(navElements));
   }
 
-  await browser.close();
   return { slideCount, layouts };
 }
 
@@ -173,14 +161,7 @@ async function verifyPptx(pptxPath) {
   }
 }
 
-async function verifyTextContent(htmlPath) {
-  const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage({ viewport: { width: SLIDE_W, height: SLIDE_H } });
-
-  page.on('console', () => {});
-  await page.goto(`file://${path.resolve(htmlPath).split(path.sep).join('/')}`, { waitUntil: 'networkidle', timeout: 30000 });
-  await page.waitForSelector('.slide', { timeout: 5000 });
-
+async function verifyTextContent(page) {
   const textStats = await page.evaluate(() => {
     const selectors = 'h1, h2, h3, h4, h5, h6, p, blockquote, li, .display-hero, .display-1, .display-2, .lead, .body, .caption, .meta, .pull-quote, .subtitle, .kicker, .attribution, .stat-nb, .stat-label, .closing-quote';
     return Array.from(document.querySelectorAll('.slide')).map((slide, i) => {
@@ -208,7 +189,6 @@ async function verifyTextContent(htmlPath) {
     report(PASS, 'Slide text density', 'All slides have 2+ text elements');
   }
 
-  await browser.close();
   return textStats;
 }
 
@@ -246,9 +226,14 @@ function printReport(htmlPath, textStats) {
 }
 
 async function main() {
-  const htmlPath = process.argv[2];
-  if (!htmlPath || !existsSync(htmlPath)) {
-    console.error('Usage: node scripts/export-verify.mjs <path/to/index.html>');
+  if (process.argv.includes('--help')) {
+    console.log('Usage: export-verify.mjs INPUT.html [--html-only | --pptx EXISTING.pptx | --export]\nDefault verifies existing output without regenerating it. --export explicitly runs the legacy exporter.');
+    return;
+  }
+  const options = parseVerificationArgs(process.argv.slice(2));
+  const htmlPath = options.input;
+  if (!existsSync(htmlPath)) {
+    console.error('HTML input not found');
     process.exit(1);
   }
 
@@ -257,16 +242,20 @@ async function main() {
   console.log('');
 
   console.log('[1/4] Verifying HTML structure...');
-  const htmlResult = await verifyHtml(absPath);
+  const textStats = await withVerificationPage(chromium,absPath,async (page,consoleErrors) => {
+    await verifyHtml(page,consoleErrors);
+    console.log('Checking text in the same browser session...');
+    return verifyTextContent(page);
+  });
 
-  console.log('[2/4] Running PPTX export...');
-  const pptxPath = await runExport(absPath);
+  console.log('[2/4] Selecting PPTX validation mode...');
+  const pptxPath = options.htmlOnly ? null : options.regenerate ? await runExport(absPath) : options.pptx;
 
-  console.log('[3/4] Verifying PPTX output...');
-  if (pptxPath) await verifyPptx(pptxPath);
+  console.log('[3/4] Verifying existing PPTX output...');
+  if (!options.htmlOnly && pptxPath) await verifyPptx(pptxPath);
+  else if (options.htmlOnly) console.log('Skipped: HTML-only mode.');
 
-  console.log('[4/4] Verifying text content...');
-  const textStats = await verifyTextContent(absPath);
+  console.log('[4/4] Text verification completed in the shared HTML session.');
 
   printReport(absPath, textStats);
 
