@@ -1,0 +1,9 @@
+{
+  "stages": [
+    {"name": "article-selection", "command": ["node", "../../scripts/layout-selection.mjs", "article.json"], "timeoutMs": 3000},
+    {"name": "panorama-selection", "command": ["node", "../../scripts/layout-selection.mjs", "panorama.json"], "timeoutMs": 3000},
+    {"name": "original-fallback", "command": ["node", "../../scripts/layout-selection.mjs", "original.json"], "timeoutMs": 3000},
+    {"name": "offline-update", "command": ["node", "../../scripts/check-update.mjs", "--offline"], "timeoutMs": 3000},
+    {"name": "regression-tests", "command": ["node", "--test", "../../scripts/layout-selection.test.mjs", "../../scripts/profile-stages.test.mjs", "../../scripts/verification-session.test.mjs", "../../scripts/check-update.test.mjs", "../../scripts/verification-options.test.mjs"], "timeoutMs": 10000}
+  ]
+}
