@@ -2,6 +2,14 @@
 
 All notable changes to Folio should be recorded in this file.
 
+## Unreleased
+
+- Clarify conversational continuity: follow-up edits do not need another skill invocation; preserve accepted specifications without treating unrelated tasks or publication as implicitly authorized.
+
+- Add publication-brief confirmation before layout selection: destination, explicit page dimensions and units, type roles/sizes/units, and body columns.
+- Separate magazine styling from social/print canvas requirements; preserve fixed type and columns through continuation and format-specific QA.
+- Remove the typography engine's mandatory title/body size multiplier. Planning shortlist and web-editor support are not overstated.
+
 ## 1.0.17 - 2026-10-03
 
 - Added an optional Codex `UserPromptSubmit` hook for explicit `/folio` and `$folio` calls; it checks the version and asks before any upgrade
