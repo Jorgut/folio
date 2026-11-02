@@ -2,6 +2,8 @@
 
 ## Intake and Selection Receipt
 
+First resolve the [publication brief](publication-brief.md): destination, canvas dimensions/unit/orientation, type sizes/unit by role and body columns. Preserve these in the selection receipt as hard constraints. A candidate matching orientation and image count still fails if it needs different body type or columns; adapt or create a new composition instead.
+
 For a supplied article, make a concise page plan before composition. Record source section/paragraph IDs, text role and approximate length, image IDs with dimensions and crop constraints, page job, reading direction, selected structure, why it fits, and required adaptations. Link every required source block to a page or continuation. This is a traceability record, not permission to summarize an article without asking.
 
 Separate hard constraints (complete copy, no-crop image, language direction, page format, chronological order, comparison relationships, caption/credit) from preferences (style, whitespace, approximate picture share). Reject a candidate that violates a hard constraint before comparing its appearance. Word/character counts are planning signals, not evidence of actual font fit.

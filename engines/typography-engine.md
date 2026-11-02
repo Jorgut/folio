@@ -4,9 +4,9 @@
 
 ## 核心原则
 
-1. **对比大于一致** — 标题与正文字号比 ≥ 6:1
+1. **已确认规格优先** — 标题、正文及各级文字遵守用户确认的字号和单位；不强制标题／正文倍率。先按 `references/publication-brief.md` 确定用途、页面尺寸和正文栏数。
 2. **字体分工明确** — 标题 / 正文 / 元数据各有专用字体
-3. **行距与行长** — 正文 1.5-1.8 行距，每行 ≤ 80 字符
+3. **行距与行长** — 按语言、字体、栏宽和阅读场景确定；1.5-1.8 行距与每行 ≤ 80 字符仅是可调整的参考，不覆盖已确认规格。
 4. **层级清晰** — 标题 → 副标题 → 正文 → 元数据 → 标注
 
 ## Text Fit QA
@@ -31,7 +31,7 @@ Severity:
 - `P1`: readable only through excessive shrink, unsafe footer collision, or too-small body/table text.
 - `P2`: awkward line breaks, widows/orphans, weak rhythm, or overlong metadata.
 
-Do not use shrink-to-fit as the default fix. Prefer reducing copy, splitting the slide, changing to a denser page type, or moving secondary information into notes/appendix.
+Do not use shrink-to-fit as the default fix. Preserve confirmed type sizes and columns; redistribute or add continuation pages. Reducing copy, moving required text into notes, or changing the agreed specifications requires permission.
 
 
 ## 字体配对矩阵
@@ -50,6 +50,8 @@ Do not use shrink-to-fit as the default fix. Prefer reducing copy, splitting the
 > 模板内置 Google Fonts 加载，按需引入。
 
 ## 排版层级
+
+以下仅为未指定字号的屏幕演示参考，不适用于固定 A4／杂志／社交图片规格。已确认字号须使用固定 pt／px 及明确转换，不能由 viewport 或模板自动覆盖。
 
 ```
 H1: 封面标题     → clamp(3rem, 6vw, 6rem)   字重 700-900
