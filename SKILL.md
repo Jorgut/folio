@@ -9,7 +9,15 @@ metadata:
 
 Turn supplied content and images into an appropriate publication or presentation. Choose structure before styling. Existing layouts are starting points, not a reason to remove content, distort images or force a fixed slide count.
 
+## Continue an Existing Task
+
+Once Folio is established for a task, follow-up revisions in the same conversation do not require another `/folio`, `$folio` or explicit skill mention. Continue the accepted workflow while that context remains available. Preserve the accepted publication brief, geometry, assets, reading direction and delivery requirements; ask only about changed or genuinely missing constraints. Edit affected regions/pages and run proportionate regression checks rather than restarting the whole publication.
+
+For another article or destination in the same conversation, reuse only the specifications the user explicitly carries forward or that clearly belong to the same series; resolve any consequential ambiguity. Do not apply Folio to unrelated work simply because it was invoked earlier. After a new session or lost context, recover the existing project brief/state before asking the user to repeat it. Do not claim host-level automatic activation or persistent memory: the skill guides behavior when available, while host loading and update hooks are separate mechanisms. Revision of a published artifact does not authorize republishing it. Update checks are not required for every revision, page or export.
+
 ## Start With the Material
+
+Before selecting a layout or authoring a new publication, confirm its production brief using [publication specifications](references/publication-brief.md): destination/reading context, exact page dimensions and units, orientation, type sizes and units by role, and body column count. Reuse specifications already supplied or accepted; ask only for missing consequential values in one compact question. A magazine-like social post is a visual treatment, not an A4 size requirement. For an existing-document edit, preserve its established specifications unless changing them is requested. Explicit dimensions, type sizes and columns are hard constraints, not suggestions a template may override. If the user delegates these decisions, propose a concrete brief and get acceptance before full composition.
 
 1. Read the supplied article/copy and inspect its images. Identify reading mode (continuous article, live presentation, reference deck or image collection), requested page size, language/direction, hierarchy, section relationships, image roles, captions/credits, crop restrictions and required output formats. Preserve source files and factual meaning. Do not invent quotations, evidence or translations to fill a template.
 2. Define page jobs from that content: opening, continuous reading, comparison, evidence, sequence, gallery or closing. Derive page count from readable capacity. Eight slides is only a provisional option when the user supplies a topic without material or length requirements; it is not the default for an existing article.
@@ -42,6 +50,7 @@ For a clear brief, start without a style questionnaire. Ask only about a consequ
 
 | Task | Resource |
 |---|---|
+| Confirm destination, page size, type sizes and columns | `references/publication-brief.md` |
 | Match content or design a missing layout | `references/content-layout-selection.md` |
 | Reusable editorial/portfolio structures | Relevant heading in `reference-layouts/templates.md` |
 | Presentation composition | `engines/layout-engine.md` |

@@ -9,6 +9,10 @@ metadata:
 
 Use when prompt budget is limited. The normal entrypoint is SKILL.md.
 
+Continue an established Folio task on ordinary follow-ups without demanding another skill mention or slash command. Preserve the accepted brief/assets/geometry/output requirements, change only affected pages and verify proportionately. A new article inherits specs only when carried forward or clearly part of the same series; unrelated work does not inherit Folio automatically. Recover project state after context loss; do not promise host auto-loading or permanent memory. Revisions do not authorize republication, and update checks are not per revision.
+
+For a new publication, confirm destination, exact canvas dimensions/unit/orientation, type sizes/unit by role and body columns before layout selection. Reuse known values and ask only about missing consequential fields together; delegated choices need an accepted brief. Magazine styling does not imply A4. Preserve established specs for local edits. Explicit sizes/columns override template defaults; use `references/publication-brief.md` for unit mapping, overflow and social-view QA.
+
 1. Read supplied articles/copy and inspect images first. Identify complete-content requirements, page format, reading mode, language/direction, image roles, crop restrictions, credits and requested outputs. Do not force supplied material into eight slides. For a topic-only request without length constraints, eight is a provisional starting point only.
 2. Define page jobs and map source blocks to pages. Compare a small relevant set of local layouts. Use `references/content-layout-selection.md` when available; do not load the whole catalogue or browse external inspiration by default.
 3. Choose reuse, adaptation or original composition. Reject candidates violating hard constraints. When none fits, design a project-local original layout from the content, rather than removing paragraphs, stretching imagery or claiming an unsuitable nearest match is best. Do not automatically add project experiments to the public library.
